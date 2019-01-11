@@ -24,83 +24,78 @@ class VendorSignup extends Component {
   }
 
   handleSubmit(event) {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
+    event.preventDefault();
+    const newVendor = this.state;
+    console.log(newVendor);
   }
 
   render() {
     return (
-      <div class="main">
+      <div className="main">
         <h1>Vendor Signup</h1>
-        <div class="form-group">
-          <form onSubmit={this.handleSubmit}> 
-          <p class='form-label'>Name:</p>
+        <div className="form-group">
+          <form onSubmit={this.handleSubmit}>
+          <p className='form-label'>Name:</p>
             <input
               name="name"
-              class="form-control"
+              className="form-control"
               type="text"
               value={this.state.name}
               placeholder="First Lasterson"
               onChange={this.handleChange}
             />
             <br />
-            <p class='form-label'>Company:</p>
+            <p className='form-label'>Company:</p>
             <input
               name="company"
-              class="form-control"
+              className="form-control"
               type="text"
               value={this.state.company}
               placeholder="Company Name"
               onChange={this.handleChange}
             />
             <br />
-            <p class='form-label'>Email:</p>
+            <p className='form-label'>Email:</p>
             <input
               name="email"
-              class="form-control"
+              className="form-control"
               type="text"
               value={this.state.email}
               placeholder="me@me.com"
               onChange={this.handleChange}
             />
             <br />
-            <p class='form-label'>Mobile:</p>
+            <p className='form-label'>Mobile:</p>
             <input
               name="mobile"
-              class="form-control"
+              className="form-control"
               type="text"
               value={this.state.mobile}
               placeholder="789-123-4560"
               onChange={this.handleChange}
             />
             <br />
-            <p class='form-label'>User Name:</p>
+            <p className='form-label'>User Name:</p>
             <input
               name="username"
-              class='form-control'
+              className='form-control'
               type='text'
               value={this.state.username}
               placeholder="username"
               onChange={this.handleChange}
             />
             <br />
-            <p class='form-label'>Password:</p>
+            <p className='form-label'>Password:</p>
             <input
               name="password"
-              class='form-control'
+              className='form-control'
               type='password'
               value={this.state.password}
               placeholder="password"
               onChange={this.handleChange}
             />
             <br />
-            <button
-              class='btn btn-dark'
-            >
-              Submit
-            </button>
+            <input className='btn btn-dark' name="submit" value="Submit" />
           </form>
         </div>
       </div>
