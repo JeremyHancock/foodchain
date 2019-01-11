@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import ConsumerSignup from './components/ConsumerSignup';
 import VendorSignup from './components/VendorSignup';
