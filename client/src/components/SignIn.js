@@ -1,16 +1,11 @@
 import React, { Component } from "react";
 // import "./style.css"
 
-class VendorSignup extends Component {
+class SignIn extends Component {
   constructor() {
     super();
     this.state = {
-      name: "",
-      company: "",
-      email: "",
-      mobile: "",
-      username: "",
-      password: ""
+      isLoggedIn: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -25,59 +20,20 @@ class VendorSignup extends Component {
 
   handleFormSubmit(event) {
     event.preventDefault();
-    const newVendor = this.state;
-    console.log(newVendor);
+    const newCustomer = this.state;
+    console.log(newCustomer);
   }
 
   render() {
     return (
       <div className="main">
-        <h1>Vendor Signup</h1>
+        <h2>Customer Sign In</h2>
+        <a href="#">Or Sign Up</a>
         <div className="form-group">
           <form onSubmit={this.handleFormSubmit}>
-            <p className="form-label">Name:</p>
-            <input
-              name="name"
-              className="form-control"
-              type="text"
-              value={this.state.name}
-              placeholder="First Lasterson"
-              onChange={this.handleChange}
-            />
-            <br />
-            <p className="form-label">Company:</p>
-            <input
-              name="company"
-              className="form-control"
-              type="text"
-              value={this.state.company}
-              placeholder="Company Name"
-              onChange={this.handleChange}
-            />
-            <br />
-            <p className="form-label">Email:</p>
-            <input
-              name="email"
-              className="form-control"
-              type="text"
-              value={this.state.email}
-              placeholder="me@me.com"
-              onChange={this.handleChange}
-            />
-            <br />
-            <p className="form-label">Mobile:</p>
-            <input
-              name="mobile"
-              className="form-control"
-              type="text"
-              value={this.state.mobile}
-              placeholder="789-123-4560"
-              onChange={this.handleChange}
-            />
-            <br />
             <p className="form-label">User Name:</p>
             <input
-              name="username"
+              name="cust-username"
               className="form-control"
               type="text"
               value={this.state.username}
@@ -87,7 +43,7 @@ class VendorSignup extends Component {
             <br />
             <p className="form-label">Password:</p>
             <input
-              name="password"
+              name="cust-password"
               className="form-control"
               type="password"
               value={this.state.password}
@@ -98,9 +54,41 @@ class VendorSignup extends Component {
             <button className="btn btn-dark">Submit</button>
           </form>
         </div>
+        <br />
+        <h2>Vendor Sign In</h2>
+        <a href="#">Or Sign Up</a>
+        <div className="form-group">
+          <form onSubmit={this.handleFormSubmit}>
+            <p className="form-label">User Name:</p>
+            <input
+              name="vendor-username"
+              className="form-control"
+              type="text"
+              value={this.state.username}
+              placeholder="username"
+              onChange={this.handleChange}
+            />
+            <br />
+            <p className="form-label">Password:</p>
+            <input
+              name="vendor-password"
+              className="form-control"
+              type="password"
+              value={this.state.password}
+              placeholder="password"
+              onChange={this.handleChange}
+            />
+            <br />
+            <button className="btn btn-dark">Submit</button>
+          </form>
+          <br /><br />
+          <p>
+            Food Chain is a farm-to-table app to track how far local food travels from growers to consumers.
+          </p>
+        </div>
       </div>
     );
   }
 }
 
-export default VendorSignup;
+export default SignIn;
