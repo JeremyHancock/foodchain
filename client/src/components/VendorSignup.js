@@ -6,14 +6,14 @@ class VendorSignup extends Component {
     super();
     this.state = {
       name: "",
-      company: '',
+      company: "",
       email: "",
       mobile: "",
       username: "",
       password: ""
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -23,7 +23,7 @@ class VendorSignup extends Component {
     });
   }
 
-  handleSubmit(event) {
+  handleFormSubmit(event) {
     event.preventDefault();
     const newVendor = this.state;
     console.log(newVendor);
@@ -34,8 +34,8 @@ class VendorSignup extends Component {
       <div className="main">
         <h1>Vendor Signup</h1>
         <div className="form-group">
-          <form onSubmit={this.handleSubmit}>
-          <p className='form-label'>Name:</p>
+          <form onSubmit={this.handleFormSubmit}>
+            <p className="form-label">Name:</p>
             <input
               name="name"
               className="form-control"
@@ -45,7 +45,7 @@ class VendorSignup extends Component {
               onChange={this.handleChange}
             />
             <br />
-            <p className='form-label'>Company:</p>
+            <p className="form-label">Company:</p>
             <input
               name="company"
               className="form-control"
@@ -55,7 +55,7 @@ class VendorSignup extends Component {
               onChange={this.handleChange}
             />
             <br />
-            <p className='form-label'>Email:</p>
+            <p className="form-label">Email:</p>
             <input
               name="email"
               className="form-control"
@@ -65,7 +65,7 @@ class VendorSignup extends Component {
               onChange={this.handleChange}
             />
             <br />
-            <p className='form-label'>Mobile:</p>
+            <p className="form-label">Mobile:</p>
             <input
               name="mobile"
               className="form-control"
@@ -75,27 +75,27 @@ class VendorSignup extends Component {
               onChange={this.handleChange}
             />
             <br />
-            <p className='form-label'>User Name:</p>
+            <p className="form-label">User Name:</p>
             <input
               name="username"
-              className='form-control'
-              type='text'
+              className="form-control"
+              type="text"
               value={this.state.username}
               placeholder="username"
               onChange={this.handleChange}
             />
             <br />
-            <p className='form-label'>Password:</p>
+            <p className="form-label">Password:</p>
             <input
               name="password"
-              className='form-control'
-              type='password'
+              className="form-control"
+              type="password"
               value={this.state.password}
               placeholder="password"
               onChange={this.handleChange}
             />
             <br />
-            <input className='btn btn-dark' name="submit" value="Submit" />
+            <button className="btn btn-dark">Submit</button>
           </form>
         </div>
       </div>
