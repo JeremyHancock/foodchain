@@ -25,7 +25,7 @@ class ConsumerSignup extends Component {
   handleFormSubmit(event) {
     event.preventDefault();
     const newCustomer = this.state;
-    console.log(newCustomer)
+    console.log(newCustomer);
   }
 
   render() {
@@ -34,7 +34,7 @@ class ConsumerSignup extends Component {
         <h1>Customer Signup</h1>
         <div className="form-group">
           <form onSubmit={this.handleFormSubmit}>
-            <p className='form-label'>Name:</p>
+            <p className="form-label">Name:</p>
             <input
               name="name"
               className="form-control"
@@ -44,7 +44,7 @@ class ConsumerSignup extends Component {
               onChange={this.handleChange}
             />
             <br />
-            <p className='form-label'>Email:</p>
+            <p className="form-label">Email:</p>
             <input
               name="email"
               className="form-control"
@@ -54,7 +54,7 @@ class ConsumerSignup extends Component {
               onChange={this.handleChange}
             />
             <br />
-            <p className='form-label'>Mobile:</p>
+            <p className="form-label">Mobile:</p>
             <input
               name="mobile"
               className="form-control"
@@ -64,32 +64,28 @@ class ConsumerSignup extends Component {
               onChange={this.handleChange}
             />
             <br />
-            <p className='form-label'>User Name:</p>
+            <p className="form-label">User Name:</p>
             <input
               name="username"
-              className='form-control'
-              type='text'
+              className="form-control"
+              type="text"
               value={this.state.username}
               placeholder="username"
               onChange={this.handleChange}
             />
             <br />
-            <p className='form-label'>Password:</p>
+            <p className="form-label">Password:</p>
             <input
               name="password"
-              className='form-control'
-              type='password'
+              className="form-control"
+              type="password"
               value={this.state.password}
               placeholder="password"
               onChange={this.handleChange}
             />
-          <br />
-          <input className="btn btn-dark" type='submit' value="Submit" />
+            <br />
+            <button className="btn btn-dark">Submit</button>
           </form>
-          {/* <button 
-            className='btn btn-dark'
-            
-          >Submit</button> */}
         </div>
       </div>
     );
