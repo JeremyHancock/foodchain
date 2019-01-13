@@ -17,14 +17,6 @@ class ConsumerSignup extends Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
-  // postConsumer = id => {
-  //   API.postConsumer(id)
-  //     .then(res => {
-  //       console.log("Consumer saved! " + res);
-  //     })
-  //     .catch(err => console.log(err));
-  // };
-
   handleChange(event) {
     const { name, value } = event.target;
     this.setState({

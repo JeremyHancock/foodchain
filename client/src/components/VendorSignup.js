@@ -1,16 +1,18 @@
 import React, { Component } from "react";
+import API from "../utils/api";
 // import "./style.css"
 
 class VendorSignup extends Component {
   constructor() {
     super();
     this.state = {
-      name: "",
-      company: "",
+      company_name: "",
       email: "",
-      mobile: "",
-      username: "",
-      password: ""
+      phone_number: "",
+      website: "",
+      location: "",
+      user_name: "",
+      user_password: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -26,8 +28,12 @@ class VendorSignup extends Component {
   handleFormSubmit(event) {
     event.preventDefault();
     const newVendor = this.state;
-    console.log(newVendor);
-  }
+    API.postVendor(newVendor)
+      .then(res => {
+        console.log("Vendor saved! " + res);
+      })
+      .catch(err => console.log(err));
+  };
 
   render() {
     return (
@@ -35,23 +41,23 @@ class VendorSignup extends Component {
         <h1>Vendor Signup</h1>
         <div className="form-group">
           <form onSubmit={this.handleFormSubmit}>
-            <p className="form-label">Name:</p>
+            <p className="form-label">Company Name:</p>
             <input
-              name="name"
+              name="company_name"
               className="form-control"
               type="text"
-              value={this.state.name}
-              placeholder="First Lasterson"
+              value={this.state.company_name}
+              placeholder="Good Business, Inc."
               onChange={this.handleChange}
             />
             <br />
-            <p className="form-label">Company:</p>
+            <p className="form-label">Location:</p>
             <input
-              name="company"
+              name="location"
               className="form-control"
               type="text"
-              value={this.state.company}
-              placeholder="Company Name"
+              value={this.state.location}
+              placeholder="City, State/Province, Country"
               onChange={this.handleChange}
             />
             <br />
@@ -61,36 +67,46 @@ class VendorSignup extends Component {
               className="form-control"
               type="text"
               value={this.state.email}
-              placeholder="me@me.com"
+              placeholder="me@goodbusiness.com"
               onChange={this.handleChange}
             />
             <br />
-            <p className="form-label">Mobile:</p>
+            <p className="form-label">Phone Number:</p>
             <input
-              name="mobile"
+              name="phone_number"
               className="form-control"
               type="text"
-              value={this.state.mobile}
+              value={this.state.phone_number}
               placeholder="789-123-4560"
+              onChange={this.handleChange}
+            />
+            <br />
+            <p className="form-label">Website:</p>
+            <input
+              name="website"
+              className="form-control"
+              type="text"
+              value={this.state.website}
+              placeholder="www.goodbusiness.com"
               onChange={this.handleChange}
             />
             <br />
             <p className="form-label">User Name:</p>
             <input
-              name="username"
+              name="user_name"
               className="form-control"
               type="text"
-              value={this.state.username}
+              value={this.state.user_name}
               placeholder="username"
               onChange={this.handleChange}
             />
             <br />
             <p className="form-label">Password:</p>
             <input
-              name="password"
+              name="user_password"
               className="form-control"
               type="password"
-              value={this.state.password}
+              value={this.state.user_password}
               placeholder="password"
               onChange={this.handleChange}
             />
