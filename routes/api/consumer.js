@@ -46,7 +46,6 @@ module.exports = function(app) {
 
   // POST route for saving a new consumer
   app.post("/api/consumers", function(req, res) {
-    console.log("HERE ->>>> api-routes.js line 49: " + JSON.stringify(req.body));
     db.Consumer.create({
       user_name: req.body.user_name,
       user_password: req.body.user_password,
@@ -55,7 +54,7 @@ module.exports = function(app) {
       phone_number: req.body.phone_number
     })
       .then(function(dbConsumer) {
-        console.log("HERE ->>>> api-routes.js line 58: " + dbConsumer)
+        console.log("HERE ->>>> routes/api/consumer.js line 58: " + JSON.stringify(dbConsumer))
         res.json(dbConsumer);
       });
   });
