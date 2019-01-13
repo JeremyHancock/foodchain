@@ -28,6 +28,9 @@ class VendorSignup extends Component {
   handleFormSubmit(event) {
     event.preventDefault();
     const newVendor = this.state;
+    !(newVendor.user_name) || (!(newVendor.email)) || (!(newVendor.phone_number)) || (!(newVendor.user_password)) || (!(newVendor.person_name)) ? 
+    alert("You must fill in all fields to create a profile.") : console.log("good entry");
+
     API.postVendor(newVendor)
       .then(res => {
         console.log("Vendor saved! " + res);

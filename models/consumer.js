@@ -4,27 +4,28 @@ module.exports = function(sequelize, DataTypes) {
       user_name: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
         validate: {
           len: [1]
         }
       },
       user_password: {
         type: DataTypes.STRING.BINARY,
-        // allowNull: false,
+        allowNull: false,
         validate: {
           len: [1]
         }
       },
       person_name: {
         type: DataTypes.STRING,
-        // allowNull: false,
+        allowNull: false,
         validate: {
             len: [1]
           }
       },
       email: {
         type: DataTypes.STRING,
-        // allowNull: false,
+        allowNull: false,
         validate: {
             len: [1]
           }

@@ -15,6 +15,7 @@ class ConsumerSignup extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+
   }
 
   handleChange(event) {
@@ -27,11 +28,14 @@ class ConsumerSignup extends Component {
   handleFormSubmit(event) {
     event.preventDefault();
     const newConsumer = this.state;
+    !(newConsumer.user_name) || (!(newConsumer.email)) || (!(newConsumer.phone_number)) || (!(newConsumer.user_password)) || (!(newConsumer.person_name)) ? 
+    alert("You must fill in all fields to create a profile.") : console.log("good entry");
+
     API.postConsumer(newConsumer)
       .then(res => {
         console.log("Consumer saved! " + res);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log("ERR--->>> src/components/ConsumerSignup.js line 34: " + err));
   };
 
   render() {

@@ -21,7 +21,7 @@ USE `foodchain_db` ;
 DROP TABLE IF EXISTS `foodchain_db`.`Vendors` ;
 
 CREATE TABLE IF NOT EXISTS `foodchain_db`.`Vendors` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `user_name` VARCHAR(45) NOT NULL,
   `user_password` VARCHAR(45) NOT NULL,
   `company_name` VARCHAR(45) NOT NULL,
@@ -31,7 +31,8 @@ CREATE TABLE IF NOT EXISTS `foodchain_db`.`Vendors` (
   `location` VARCHAR(45) NOT NULL,
   `createdAt` VARCHAR(45) NULL,
   `updatedAt` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `user_name_UNIQUE` (`user_name` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
@@ -60,6 +61,19 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `foodchain_db`.`Codes`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `foodchain_db`.`Codes` ;
+
+CREATE TABLE IF NOT EXISTS `foodchain_db`.`Codes` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `createdAt` VARCHAR(45) NULL,
+  `updatedAt` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `foodchain_db`.`Links`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `foodchain_db`.`Links` ;
@@ -69,13 +83,13 @@ CREATE TABLE IF NOT EXISTS `foodchain_db`.`Links` (
   `Products_id` INT NOT NULL,
   `Vendors_id` INT NOT NULL,
   `location` VARCHAR(45) NOT NULL,
-  `code` VARCHAR(45) NOT NULL,
   `createdAt` VARCHAR(45) NULL,
   `updatedAt` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`, `Products_id`, `Vendors_id`),
+  `Codes_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `Products_id`, `Vendors_id`, `Codes_id`),
   INDEX `fk_Links_Products1_idx` (`Products_id` ASC) VISIBLE,
   INDEX `fk_Links_Vendors1_idx` (`Vendors_id` ASC) VISIBLE,
-  UNIQUE INDEX `code_UNIQUE` (`code` ASC) VISIBLE,
+  INDEX `fk_Links_Codes1_idx` (`Codes_id` ASC) VISIBLE,
   CONSTRAINT `fk_Links_Products1`
     FOREIGN KEY (`Products_id`)
     REFERENCES `foodchain_db`.`Products` (`id`)
@@ -85,16 +99,21 @@ CREATE TABLE IF NOT EXISTS `foodchain_db`.`Links` (
     FOREIGN KEY (`Vendors_id`)
     REFERENCES `foodchain_db`.`Vendors` (`id`)
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Links_Codes1`
+    FOREIGN KEY (`Codes_id`)
+    REFERENCES `foodchain_db`.`Codes` (`id`)
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `foodchain_db`.`Consumer`
+-- Table `foodchain_db`.`Consumers`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `foodchain_db`.`Consumer` ;
+DROP TABLE IF EXISTS `foodchain_db`.`Consumers` ;
 
-CREATE TABLE IF NOT EXISTS `foodchain_db`.`Consumer` (
+CREATE TABLE IF NOT EXISTS `foodchain_db`.`Consumers` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_name` VARCHAR(45) NOT NULL,
   `user_password` VARCHAR(45) NOT NULL,
@@ -103,7 +122,8 @@ CREATE TABLE IF NOT EXISTS `foodchain_db`.`Consumer` (
   `phone_number` VARCHAR(45) NOT NULL,
   `createdAt` VARCHAR(45) NULL,
   `updatedAt` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `user_name_UNIQUE` (`user_name` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
