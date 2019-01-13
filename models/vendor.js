@@ -38,9 +38,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     website: {
       type: DataTypes.STRING,
-      validate: {
-        len: [1]
-      }
+      allowNull: true
     },
     location: {
       type: DataTypes.STRING,

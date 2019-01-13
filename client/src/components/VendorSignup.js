@@ -28,12 +28,29 @@ class VendorSignup extends Component {
   handleFormSubmit(event) {
     event.preventDefault();
     const newVendor = this.state;
-    !(newVendor.user_name) || (!(newVendor.email)) || (!(newVendor.phone_number)) || (!(newVendor.user_password)) || (!(newVendor.person_name)) ? 
-    alert("You must fill in all fields to create a profile.") : console.log("good entry");
-
+    API.getVendors()
+      .then(res => {
+        res.data.map(vendor => (
+          vendor.user_name === newVendor.user_name ? alert("That user name is already in use. Please select something else.") : console.log("not a match")
+        )
+        )
+      })
+    !(newVendor.company_name) || !(newVendor.email) || !(newVendor.phone_number) || !(newVendor.user_password) || !(newVendor.location) || !(newVendor.user_name) ?
+      alert("You must fill in all fields to create a profile.") : console.log("good entry")
     API.postVendor(newVendor)
       .then(res => {
-        console.log("Vendor saved! " + res);
+        console.log("Vendor saved! " + JSON.stringify(res.data));
+        this.setState(
+          {
+            company_name: "",
+            email: "",
+            phone_number: "",
+            website: "",
+            location: "",
+            user_name: "",
+            user_password: ""
+          }
+        )
       })
       .catch(err => console.log(err));
   };

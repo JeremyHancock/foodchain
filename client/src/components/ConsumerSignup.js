@@ -28,12 +28,28 @@ class ConsumerSignup extends Component {
   handleFormSubmit(event) {
     event.preventDefault();
     const newConsumer = this.state;
-    !(newConsumer.user_name) || (!(newConsumer.email)) || (!(newConsumer.phone_number)) || (!(newConsumer.user_password)) || (!(newConsumer.person_name)) ? 
-    alert("You must fill in all fields to create a profile.") : console.log("good entry");
+    API.getConsumers()
+      .then(res => {
+        res.data.map(consumer => (
+          consumer.user_name === newConsumer.user_name ? alert("That user name is already in use. Please select something else.") : console.log("not a match")
+        )
+        )
+      })
+    !(newConsumer.user_name) || (!(newConsumer.email)) || (!(newConsumer.phone_number)) || (!(newConsumer.user_password)) || (!(newConsumer.person_name)) ?
+      alert("You must fill in all fields to create a profile.") : console.log("good entry");
 
     API.postConsumer(newConsumer)
       .then(res => {
-        console.log("Consumer saved! " + res);
+        console.log("Consumer saved! " + JSON.stringify(res.data));
+        this.setState(
+          {
+            user_name: "",
+            email: "",
+            phone_number: "",
+            user_password: "",
+            person_name: ""
+          }
+        )
       })
       .catch(err => console.log("ERR--->>> src/components/ConsumerSignup.js line 34: " + err));
   };
