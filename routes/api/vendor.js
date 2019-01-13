@@ -52,7 +52,9 @@ module.exports = function(app) {
       user_password: req.body.user_password,
       company_name: req.body.company_name,
       email: req.body.email,
-      phone_number: req.body.phone_number
+      phone_number: req.body.phone_number,
+      website: req.body.website,
+      location: req.body.location
     })
       .then(function(dbVendor) {
         console.log("HERE ->>>> api-routes.js line 58: " + dbVendor)

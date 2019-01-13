@@ -83,7 +83,7 @@ class SignIn extends Component {
           </form>
           <br /><br />
           <p>
-            Food Chain is a farm-to-table app to track how far local food travels from growers to consumers.
+            Food Chain is a farm-to-table app to track how food travels from growers to consumers.
           </p>
         </div>
       </div>

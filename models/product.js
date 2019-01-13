@@ -1,43 +1,42 @@
 module.exports = function(sequelize, DataTypes) {
-    var Consumer = sequelize.define("Consumer", {
+    var Product = sequelize.define("Product", {
     
-      user_name: {
+      Vendors_id: {
         type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-          len: [1]
-        }
-      },
-      user_password: {
-        type: DataTypes.STRING.BINARY,
         allowNull: false,
         validate: {
           len: [1]
         }
       },
-      person_name: {
+      harvest_date: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        validate: {
+          len: [1]
+        }
+      },
+      chemicals_used: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-            len: [1]
-          }
+          len: [1]
+        }
       },
-      email: {
+      certified_organic: {
+        type: DataTypes.TINYINT,
+        allowNull: false,
+        validate: {
+          len: [1]
+        }
+      },
+      vendors_notes: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-            len: [1]
-          }
+          len: [1]
+        }
       },
-      phone_number: {
-        type: DataTypes.STRING,
-        validate: {
-            len: [1]
-          }
-      }
-
     });
-    return Consumer;
+    return Product;
   };
   

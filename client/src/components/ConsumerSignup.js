@@ -1,18 +1,21 @@
 import React, { Component } from "react";
+import API from "../utils/api";
+
 // import "./style.css"
 
 class ConsumerSignup extends Component {
   constructor() {
     super();
     this.state = {
-      name: "",
+      user_name: "",
       email: "",
-      mobile: "",
-      username: "",
-      password: ""
+      phone_number: "",
+      user_password: "",
+      person_name: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+
   }
 
   handleChange(event) {
@@ -20,13 +23,36 @@ class ConsumerSignup extends Component {
     this.setState({
       [name]: value
     });
-  }
+  };
 
   handleFormSubmit(event) {
     event.preventDefault();
-    const newCustomer = this.state;
-    console.log(newCustomer);
-  }
+    const newConsumer = this.state;
+    API.getConsumers()
+      .then(res => {
+        res.data.map(consumer => (
+          consumer.user_name === newConsumer.user_name ? alert("That user name is already in use. Please select something else.") : console.log("not a match")
+        )
+        )
+      })
+    !(newConsumer.user_name) || (!(newConsumer.email)) || (!(newConsumer.phone_number)) || (!(newConsumer.user_password)) || (!(newConsumer.person_name)) ?
+      alert("You must fill in all fields to create a profile.") : console.log("good entry");
+
+    API.postConsumer(newConsumer)
+      .then(res => {
+        console.log("Consumer saved! " + JSON.stringify(res.data));
+        this.setState(
+          {
+            user_name: "",
+            email: "",
+            phone_number: "",
+            user_password: "",
+            person_name: ""
+          }
+        )
+      })
+      .catch(err => console.log("ERR--->>> src/components/ConsumerSignup.js line 34: " + err));
+  };
 
   render() {
     return (
@@ -36,10 +62,10 @@ class ConsumerSignup extends Component {
           <form onSubmit={this.handleFormSubmit}>
             <p className="form-label">Name:</p>
             <input
-              name="name"
+              name="person_name"
               className="form-control"
               type="text"
-              value={this.state.name}
+              value={this.state.person_name}
               placeholder="First Lasterson"
               onChange={this.handleChange}
             />
@@ -56,30 +82,30 @@ class ConsumerSignup extends Component {
             <br />
             <p className="form-label">Mobile:</p>
             <input
-              name="mobile"
+              name="phone_number"
               className="form-control"
               type="text"
-              value={this.state.mobile}
+              value={this.state.phone_number}
               placeholder="789-123-4560"
               onChange={this.handleChange}
             />
             <br />
             <p className="form-label">User Name:</p>
             <input
-              name="username"
+              name="user_name"
               className="form-control"
               type="text"
-              value={this.state.username}
+              value={this.state.user_name}
               placeholder="username"
               onChange={this.handleChange}
             />
             <br />
             <p className="form-label">Password:</p>
             <input
-              name="password"
+              name="user_password"
               className="form-control"
               type="password"
-              value={this.state.password}
+              value={this.state.user_password}
               placeholder="password"
               onChange={this.handleChange}
             />
