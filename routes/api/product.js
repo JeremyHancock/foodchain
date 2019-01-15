@@ -48,11 +48,11 @@ module.exports = function(app) {
   app.post("/api/products", function(req, res) {
     console.log("HERE ->>>> api-routes.js line 49: " + JSON.stringify(req.body));
     db.Product.create({
-      user_name: req.body.user_name,
-      user_password: req.body.user_password,
-      person_name: req.body.person_name,
-      email: req.body.email,
-      phone_number: req.body.phone_number
+      Vendors_id: req.body.Vendors_id, // see models/products.js, line 4
+      harvest_date: req.body.harvest_date,
+      chemicals_used: req.body.chemicals_used,
+      certified_organic: req.body.certified_organic,
+      vendors_notes: req.body.vendors_notes
     })
       .then(function(dbProduct) {
         console.log("HERE ->>>> api-routes.js line 58: " + dbProduct)
