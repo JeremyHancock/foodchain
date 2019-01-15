@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { QRCode } from 'react-qr-svg';
 
 //https://www.npmjs.com/package/react-qr-svg
@@ -9,14 +9,21 @@ import { QRCode } from 'react-qr-svg';
 // fgColor: '#000000',  Color of the dark squares
 
 class QRMaker extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            code_value: "1a2a3a4a"
+        };
+
+    }
     render() {
         return (<QRCode
-                    bgColor="#FFFFFF"
-                    fgColor="#000000"
-                    level="Q"
-                    style={{ width: 200 }}
-                    value="a lot more text than before should change the code!"
-                />);
+            bgColor="#FFFFFF"
+            fgColor="#000000"
+            level="Q"
+            style={{ width: 200 }}
+            value={this.state.code_value}
+        />);
     }
 }
 export default QRMaker;

@@ -2,15 +2,18 @@ import React, { Component } from "react";
 import API from "../utils/api";
 // import "./style.css"
 
+var d = new Date();
+var date = d.toLocaleDateString();
+
 class CreateProduct extends Component {
   constructor() {
     super();
     this.state = {
-      Vendors_id: "", // see models/product.js
-      harvest_date: "",
+      vendor_id: "", 
+      harvest_date: date,
       chemicals_used: "",
       certified_organic: "",
-      vendors_notes: ""
+      vendor_notes: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -67,7 +70,7 @@ class CreateProduct extends Component {
               className="form-control"
               type="text"
               value={this.state.harvest_date}
-              placeholder="01/23/2019" /*would be cool to have it auto-populate with the current date and then be editable as needed*/
+              // placeholder={"01/23/2019"} /*would be cool to have it auto-populate with the current date and then be editable as needed*/
               onChange={this.handleChange}
             />
             <br />
