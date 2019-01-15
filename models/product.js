@@ -1,11 +1,11 @@
 module.exports = function(sequelize, DataTypes) {
     var Product = sequelize.define("Product", {
     
-      Vendors_id: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      Vendors_id: { // this should probably be vendor_id to keep consistent with the other column names
+        type: DataTypes.TINYINT,
+        allowNull: true, // change to false
         validate: {
-          len: [1]
+          // len: [1]
         }
       },
       harvest_date: {
@@ -31,7 +31,7 @@ module.exports = function(sequelize, DataTypes) {
       },
       vendors_notes: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         validate: {
           len: [1]
         }
