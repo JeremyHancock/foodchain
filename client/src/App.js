@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import './App.css';
-import SignIn from './components/SignIn';
-import ConsumerSignup from './components/ConsumerSignup';
-import VendorSignup from './components/VendorSignup';
-import CreateProduct from "./components/CreateProduct";
-import QRMaker from './components/QRMaker';
-import QRReader from './components/QRReader';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import SignInPage from './pages/SignIn';
+import ConsumerPage from './pages/Consumer';
+import VendorPage from './pages/Vendor'; 
+import NoMatch from './pages/NoMatch';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <QRReader />
-        <QRMaker />
-        <VendorSignup />
-        {/* <SignIn />
-        <ConsumerSignup /> */}
-        <CreateProduct />
-      </div>
+      <Router>
+          <Switch>
+            <Route exact path="/" component={SignInPage} />
+            <Route exact path="/consumer" component={ConsumerPage} />
+            <Route exact path="/vendor" component={VendorPage} />
+            <Route component={NoMatch} />
+          </Switch>
+      </Router>
     );
   }
 }

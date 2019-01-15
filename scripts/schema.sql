@@ -43,17 +43,17 @@ DROP TABLE IF EXISTS `foodchain_db`.`Products` ;
 
 CREATE TABLE IF NOT EXISTS `foodchain_db`.`Products` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `Vendors_id` INT NOT NULL,
+  `vendor_id` INT NOT NULL,
   `harvest_date` DATE NOT NULL,
   `chemicals_used` VARCHAR(45) NOT NULL,
   `certified_organic` TINYINT NOT NULL,
-  `vendors_notes` VARCHAR(45) NOT NULL,
+  `vendor_notes` VARCHAR(45) NOT NULL,
   `createdAt` VARCHAR(45) NULL,
   `updatedAt` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`, `Vendors_id`),
-  INDEX `fk_Products_Vendors1_idx` (`Vendors_id` ASC) VISIBLE,
+  PRIMARY KEY (`id`, `vendor_id`),
+  INDEX `fk_Products_Vendors1_idx` (`vendor_id` ASC) VISIBLE,
   CONSTRAINT `fk_Products_Vendors1`
-    FOREIGN KEY (`Vendors_id`)
+    FOREIGN KEY (`vendor_id`)
     REFERENCES `foodchain_db`.`Vendors` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -80,28 +80,28 @@ DROP TABLE IF EXISTS `foodchain_db`.`Links` ;
 
 CREATE TABLE IF NOT EXISTS `foodchain_db`.`Links` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `Products_id` INT NOT NULL,
-  `Vendors_id` INT NOT NULL,
+  `product_id` INT NOT NULL,
+  `vendor_id` INT NOT NULL,
+  `code_id` INT NOT NULL,
   `location` VARCHAR(45) NOT NULL,
   `createdAt` VARCHAR(45) NULL,
   `updatedAt` VARCHAR(45) NULL,
-  `Codes_id` INT NOT NULL,
-  PRIMARY KEY (`id`, `Products_id`, `Vendors_id`, `Codes_id`),
-  INDEX `fk_Links_Products1_idx` (`Products_id` ASC) VISIBLE,
-  INDEX `fk_Links_Vendors1_idx` (`Vendors_id` ASC) VISIBLE,
-  INDEX `fk_Links_Codes1_idx` (`Codes_id` ASC) VISIBLE,
+  PRIMARY KEY (`id`, `product_id`, `vendor_id`, `code_id`),
+  INDEX `fk_Links_Products1_idx` (`product_id` ASC) VISIBLE,
+  INDEX `fk_Links_Vendors1_idx` (`vendor_id` ASC) VISIBLE,
+  INDEX `fk_Links_Codes1_idx` (`code_id` ASC) VISIBLE,
   CONSTRAINT `fk_Links_Products1`
-    FOREIGN KEY (`Products_id`)
+    FOREIGN KEY (`product_id`)
     REFERENCES `foodchain_db`.`Products` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Links_Vendors1`
-    FOREIGN KEY (`Vendors_id`)
+    FOREIGN KEY (`vendor_id`)
     REFERENCES `foodchain_db`.`Vendors` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Links_Codes1`
-    FOREIGN KEY (`Codes_id`)
+    FOREIGN KEY (`code_id`)
     REFERENCES `foodchain_db`.`Codes` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)

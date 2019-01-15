@@ -2,15 +2,18 @@ import React, { Component } from "react";
 import API from "../utils/api";
 // import "./style.css"
 
+var d = new Date();
+var date = d.toLocaleDateString();
+
 class CreateProduct extends Component {
   constructor() {
     super();
     this.state = {
-      Vendors_id: "", // see models/product.js
-      harvest_date: "",
+      vendor_id: "", 
+      harvest_date: date,
       chemicals_used: "",
       certified_organic: "",
-      vendors_notes: ""
+      vendor_notes: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -35,11 +38,11 @@ class CreateProduct extends Component {
       .then(res => {
         console.log("Product saved! " + JSON.stringify(res.data));
         this.setState({
-          Vendors_id: "",
+          vendor_id: "",
           harvest_date: "",
           chemicals_used: "",
           certified_organic: "",
-          vendors_notes: ""
+          vendor_notes: ""
         });
       })
       .catch(err => console.log(err));
@@ -53,10 +56,10 @@ class CreateProduct extends Component {
           <form onSubmit={this.handleFormSubmit}>
             <p className="form-label">Vendor ID:</p>
             <input
-              name="Vendors_id"
+              name="vendor_id"
               className="form-control"
               type="text"
-              value={this.state.Vendors_id}
+              value={this.state.vendor_id}
               placeholder="This should auto-populate"
               onChange={this.handleChange}
             />
@@ -67,7 +70,7 @@ class CreateProduct extends Component {
               className="form-control"
               type="text"
               value={this.state.harvest_date}
-              placeholder="01/23/2019" /*would be cool to have it auto-populate with the current date and then be editable as needed*/
+              // placeholder={"01/23/2019"} /*would be cool to have it auto-populate with the current date and then be editable as needed*/
               onChange={this.handleChange}
             />
             <br />
@@ -93,10 +96,10 @@ class CreateProduct extends Component {
             <br />
             <p className="form-label">Notes / Comments:</p>
             <input
-              name="vendors_notes"
+              name="vendor_notes"
               className="form-control"
               type="text"
-              value={this.state.vendors_notes}
+              value={this.state.vendor_notes}
               placeholder="Additional details..."
               onChange={this.handleChange}
             />

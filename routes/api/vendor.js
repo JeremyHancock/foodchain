@@ -46,7 +46,7 @@ module.exports = function(app) {
 
   // POST route for saving a new Vendor
   app.post("/api/vendors", function(req, res) {
-    console.log("HERE ->>>> api-routes.js line 49: " + JSON.stringify(req.body));
+    console.log("HERE ->>>> /routes/api/vendor.js line 49: " + JSON.stringify(req.body));
     db.Vendor.create({
       user_name: req.body.user_name,
       user_password: req.body.user_password,
@@ -57,7 +57,7 @@ module.exports = function(app) {
       location: req.body.location
     })
       .then(function(dbVendor) {
-        console.log("HERE ->>>> api-routes.js line 58: " + dbVendor)
+        console.log("HERE ->>>> /routes/api/vendor.js line 58: " + dbVendor)
         res.json(dbVendor);
       });
   });
