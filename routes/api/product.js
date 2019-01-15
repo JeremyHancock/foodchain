@@ -46,16 +46,16 @@ module.exports = function(app) {
 
   // POST route for saving a new Product
   app.post("/api/products", function(req, res) {
-    console.log("HERE ->>>> api-routes.js line 49: " + JSON.stringify(req.body));
+    console.log("HERE ->>>> /routes/api/product.js line 49: " + JSON.stringify(req.body));
     db.Product.create({
-      Vendors_id: req.body.Vendors_id, // see models/products.js, line 4
+      vendor_id: req.body.vendor_id, // see models/products.js, line 4
       harvest_date: req.body.harvest_date,
       chemicals_used: req.body.chemicals_used,
       certified_organic: req.body.certified_organic,
-      vendors_notes: req.body.vendors_notes
+      vendor_notes: req.body.vendor_notes
     })
       .then(function(dbProduct) {
-        console.log("HERE ->>>> api-routes.js line 58: " + dbProduct)
+        console.log("HERE ->>>> /routes/api/product.js line 58: " + dbProduct)
         res.json(dbProduct);
       });
   });

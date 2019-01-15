@@ -46,16 +46,12 @@ module.exports = function(app) {
 
   // POST route for saving a new Code
   app.post("/api/codes", function(req, res) {
-    console.log("HERE ->>>> api-routes.js line 49: " + JSON.stringify(req.body));
+    console.log("HERE ->>>> /routes/api/code.js line 49: " + JSON.stringify(req.body));
     db.Code.create({
-      user_name: req.body.user_name,
-      user_password: req.body.user_password,
-      person_name: req.body.person_name,
-      email: req.body.email,
-      phone_number: req.body.phone_number
+
     })
       .then(function(dbCode) {
-        console.log("HERE ->>>> api-routes.js line 58: " + dbCode)
+        console.log("HERE ->>>> /routes/api/code.js line 58: " + dbCode)
         res.json(dbCode);
       });
   });

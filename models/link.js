@@ -1,19 +1,19 @@
 module.exports = function(sequelize, DataTypes) {
     var Link = sequelize.define("Link", {
     
-      Products_id: {
+      product_id: {
         type: DataTypes.STRING,
         validate: {
             len: [1]
           }
       },
-      Vendors_id: {
+      vendor_id: {
         type: DataTypes.STRING,
         validate: {
             len: [1]
           }
       },
-      Codes_id: {
+      code_id: {
         type: DataTypes.STRING,
         validate: {
             len: [1]

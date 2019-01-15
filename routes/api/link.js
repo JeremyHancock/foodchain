@@ -46,16 +46,15 @@ module.exports = function(app) {
 
   // POST route for saving a new Link
   app.post("/api/links", function(req, res) {
-    console.log("HERE ->>>> api-routes.js line 49: " + JSON.stringify(req.body));
+    console.log("HERE ->>>> /routes/api/link.js line 49: " + JSON.stringify(req.body));
     db.Link.create({
-      user_name: req.body.user_name,
-      user_password: req.body.user_password,
-      person_name: req.body.person_name,
-      email: req.body.email,
-      phone_number: req.body.phone_number
+      product_id: req.body.product_id,
+      vendor_id: req.body.vendor_id,
+      code_id: req.body.code_id,
+      location: req.body.location
     })
       .then(function(dbLink) {
-        console.log("HERE ->>>> api-routes.js line 58: " + dbLink)
+        console.log("HERE ->>>> /routes/api/link.js line 58: " + dbLink)
         res.json(dbLink);
       });
   });

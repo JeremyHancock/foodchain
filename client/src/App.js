@@ -11,11 +11,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <QRReader />
+        {/* <QRReader /> */}
         <QRMaker />
-        <VendorSignup />
-        {/* <SignIn />
-        <ConsumerSignup /> */}
+        {/* <VendorSignup /> */}
+        {/* <SignIn /> */}
+        <ConsumerSignup />
         <CreateProduct />
       </div>
     );

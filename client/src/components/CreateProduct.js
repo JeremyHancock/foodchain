@@ -35,11 +35,11 @@ class CreateProduct extends Component {
       .then(res => {
         console.log("Product saved! " + JSON.stringify(res.data));
         this.setState({
-          Vendors_id: "",
+          vendor_id: "",
           harvest_date: "",
           chemicals_used: "",
           certified_organic: "",
-          vendors_notes: ""
+          vendor_notes: ""
         });
       })
       .catch(err => console.log(err));
@@ -53,10 +53,10 @@ class CreateProduct extends Component {
           <form onSubmit={this.handleFormSubmit}>
             <p className="form-label">Vendor ID:</p>
             <input
-              name="Vendors_id"
+              name="vendor_id"
               className="form-control"
               type="text"
-              value={this.state.Vendors_id}
+              value={this.state.vendor_id}
               placeholder="This should auto-populate"
               onChange={this.handleChange}
             />
@@ -93,10 +93,10 @@ class CreateProduct extends Component {
             <br />
             <p className="form-label">Notes / Comments:</p>
             <input
-              name="vendors_notes"
+              name="vendor_notes"
               className="form-control"
               type="text"
-              value={this.state.vendors_notes}
+              value={this.state.vendor_notes}
               placeholder="Additional details..."
               onChange={this.handleChange}
             />
