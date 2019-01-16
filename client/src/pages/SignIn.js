@@ -33,39 +33,17 @@ class SignInPage extends Component {
         this.handleNewConsumerSubmit = this.handleNewConsumerSubmit.bind(this)
     }
 
-    isVendor(event) {
-        if (this.state.isVendor) {
-            this.setState({
-                isVendor: false
-            })
-            console.log("isVendor = " + this.state.isVendor + "\nisNew = " + this.state.isNew)
-        }
-        else {
-            this.setState({
-                isVendor: true
-            })
-            console.log("isVendor = " + this.state.isVendor + "\nisNew = " + this.state.isNew)
-        }
+    isVendor() {
+        if (this.state.isVendor) { this.setState({ isVendor: false }) }
+        else { this.setState({ isVendor: true }) }
     }
-    isNew(event) {
-        if (this.state.isNew) {
-            this.setState({
-                isNew: false
-            })
-            console.log("isVendor = " + this.state.isVendor + "\nisNew = " + this.state.isNew)
-        }
-        else {
-            this.setState({
-                isNew: true
-            })
-            console.log("isVendor = " + this.state.isVendor + "\nisNew = " + this.state.isNew)
-        }
+    isNew() {
+        if (this.state.isNew) { this.setState({ isNew: false }) }
+        else { this.setState({ isNew: true }) }
     }
     handleChange(event) {
         const { name, value } = event.target;
-        this.setState({
-            [name]: value
-        });
+        this.setState({[name]: value});
     }
     checkConsumerLogIn(newLogin, consumer) {
         if (newLogin.user_name === consumer.user_name && newLogin.user_password === consumer.user_password) {
@@ -88,10 +66,8 @@ class SignInPage extends Component {
                 this.state.isLoggedIn ?
                     window.location.pathname = `/consumer/${this.state.user_name}`
                     : alert("Username or password is incorrect. Please try again or sign up.")
-
             })
             .catch(err => console.log(err));
-
     };
     checkVendorLogIn(newLogin, vendor) {
         if (newLogin.user_name === vendor.user_name && newLogin.user_password === vendor.user_password) {
@@ -114,10 +90,8 @@ class SignInPage extends Component {
                 this.state.isLoggedIn ?
                     window.location.pathname = `/vendor/${this.state.user_name}`
                     : alert("Username or password is incorrect. Please try again or sign up.")
-
             })
             .catch(err => console.log(err));
-
     };
     handleNewVendorSubmit(event) {
         event.preventDefault();
@@ -126,8 +100,7 @@ class SignInPage extends Component {
             .then(res => {
                 res.data.map(vendor => (
                     vendor.user_name === newVendor.user_name ? alert("That username is already in use. Please select something else.") : console.log("not a match")
-                )
-                )
+                ))
             })
         !(newVendor.company_name) || !(newVendor.email) || !(newVendor.phone_number) || !(newVendor.user_password) || !(newVendor.location) || !(newVendor.user_name) ?
             alert("You must fill in all fields to create a profile.") : console.log("good entry")
@@ -145,8 +118,7 @@ class SignInPage extends Component {
             .then(res => {
                 res.data.map(consumer => (
                     consumer.user_name === newConsumer.user_name ? alert("That user name is already in use. Please select something else.") : console.log("Unique!")
-                )
-                )
+                ))
             })
         !(newConsumer.user_name) || (!(newConsumer.email)) || (!(newConsumer.phone_number)) || (!(newConsumer.user_password)) || (!(newConsumer.person_name)) ?
             alert("You must fill in all fields to create a profile.") : console.log("All fields found!");
@@ -163,7 +135,7 @@ class SignInPage extends Component {
             <div>
                 <div className="form-group">
                     <form>
-                        <p className="form-label">Are you a produce/vendor?</p>
+                        <p className="form-label">Are you a producer/vendor?</p>
                         <input
                             name="isVendor"
                             className="form-control"

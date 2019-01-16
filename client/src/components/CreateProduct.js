@@ -70,7 +70,6 @@ class CreateProduct extends Component {
               className="form-control"
               type="text"
               value={this.state.harvest_date}
-              // placeholder={"01/23/2019"} /*would be cool to have it auto-populate with the current date and then be editable as needed*/
               onChange={this.handleChange}
             />
             <br />
