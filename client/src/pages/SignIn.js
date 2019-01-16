@@ -134,17 +134,7 @@ class SignInPage extends Component {
         API.postVendor(newVendor)
             .then(res => {
                 console.log("Vendor saved! " + JSON.stringify(res.data));
-                this.setState(
-                    {
-                        company_name: "",
-                        email: "",
-                        phone_number: "",
-                        website: "",
-                        location: "",
-                        user_name: "",
-                        user_password: ""
-                    }
-                )
+                window.location.pathname = `/vendor/${this.state.user_name}`;
             })
             .catch(err => console.log(err));
     };
@@ -152,30 +142,22 @@ class SignInPage extends Component {
         event.preventDefault();
         const newConsumer = this.state;
         API.getConsumers()
-          .then(res => {
-            res.data.map(consumer => (
-              consumer.user_name === newConsumer.user_name ? alert("That user name is already in use. Please select something else.") : console.log("Unique!")
-            )
-            )
-          })
+            .then(res => {
+                res.data.map(consumer => (
+                    consumer.user_name === newConsumer.user_name ? alert("That user name is already in use. Please select something else.") : console.log("Unique!")
+                )
+                )
+            })
         !(newConsumer.user_name) || (!(newConsumer.email)) || (!(newConsumer.phone_number)) || (!(newConsumer.user_password)) || (!(newConsumer.person_name)) ?
-          alert("You must fill in all fields to create a profile.") : console.log("All fields found!");
-    
+            alert("You must fill in all fields to create a profile.") : console.log("All fields found!");
+
         API.postConsumer(newConsumer)
-          .then(res => {
-            console.log("Consumer saved! " + JSON.stringify(res.data));
-            this.setState(
-              {
-                user_name: "",
-                email: "",
-                phone_number: "",
-                user_password: "",
-                person_name: ""
-              }
-            )
-          })
-          .catch(err => console.log(err));
-      };
+            .then(res => {
+                console.log("Consumer saved! " + JSON.stringify(res.data));
+                window.location.pathname = `/consumer/${this.state.user_name}`;
+            })
+            .catch(err => console.log(err));
+    };
     render() {
         return (
             <div>
