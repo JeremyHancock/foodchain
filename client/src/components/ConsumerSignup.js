@@ -110,7 +110,7 @@ class ConsumerSignup extends Component {
               onChange={this.handleChange}
             />
             <br />
-            <button className="btn btn-success">Submit</button>
+            <button type="button" className="btn btn-dark">Submit</button>
           </form>
         </div>
       </div>

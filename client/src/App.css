@@ -12,7 +12,7 @@ body {
   margin: auto;
   border-radius: 8px;
   padding: 20px 20px 20px 20px;
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.85);
 }
 
 .form-label {
@@ -32,7 +32,7 @@ button {
 
 @media (min-width: 1281px) {
   /* //CSS */
-  body, p {
+  body, p, .form-control, .btn {
     /* color: orange;  */
     font-size: 155%;
   }
@@ -48,7 +48,7 @@ button {
 
 @media (min-width: 1025px) and (max-width: 1280px) {
   /* //CSS */
-  body, p {
+  body, p, .form-control, .btn {
     /* color: green;  */
     font-size: 135%;
   }
@@ -73,7 +73,7 @@ button {
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
   /* //CSS */
-  body, p {
+  body, p, .form-control, .btn {
     /* color: purple; /* comment out later */
     font-size: 145%;
   }
@@ -89,7 +89,7 @@ button {
 
 @media (min-width: 481px) and (max-width: 767px) {
   /* //CSS */
-  body, p {
+  body, p, .form-control, .btn {
     /* color: blue; /* comment out later */
     font-size: 145%;
   }
@@ -105,7 +105,7 @@ button {
 
 @media (min-width: 320px) and (max-width: 480px) {
   /* //CSS */
-  body, p {
+  body, p, .form-control, .btn {
     /* color: red; /* comment out later */
     font-size: 138%;
   }
