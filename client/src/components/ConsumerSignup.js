@@ -1,9 +1,8 @@
-import React, { Component } from "react";
-import API from "../utils/api";
+import React from "react";
 
 // import "./style.css"
 
-class ConsumerSignup extends Component {
+function ConsumerSignup(props) {
   constructor() {
     super();
     this.state = {

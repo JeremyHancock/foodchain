@@ -1,27 +1,40 @@
 import React, { Component } from "react";
 import API from "../utils/api";
 
-import SignIn from "../components/SignIn";
-import ConsumerSignUp from "../components/ConsumerSignup";
-import VendorSignUp from "../components/VendorSignup";
+import ConsumerSignIn from "../components/ConsumerSignIn";
+import VendorSignIn from "../components/VendorSignIn";
+
+// import ConsumerSignUp from "../components/ConsumerSignup";
+// import VendorSignUp from "../components/VendorSignup";
 
 class SignInPage extends Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             isLoggedIn: false,
             isVendor: false,
-            isConsumer: false,
-            cust_username: "",
-            cust_password: "",
-            vendor_username: "",
-            vendor_password: ""
+            username: "",
+            password: ""
         };
         this.handleChange = this.handleChange.bind(this);
         this.checkVendorLogIn = this.checkVendorLogIn.bind(this);
         this.checkConsumerLogIn = this.checkConsumerLogIn.bind(this);
         this.handleConsumerFormSubmit = this.handleConsumerFormSubmit.bind(this);
         this.handleVendorFormSubmit = this.handleVendorFormSubmit.bind(this);
+        this.whichForm = this.whichForm.bind(this);
+    }
+    whichForm(event) {
+        console.log(this.state.isVendor)
+        if (this.state.isVendor) {
+            this.setState({
+                isVendor: false
+            })
+        }
+        else {
+            this.setState({
+                isVendor: true
+            })
+        }
     }
     handleChange(event) {
         const { name, value } = event.target;
@@ -30,10 +43,10 @@ class SignInPage extends Component {
         });
     }
     checkConsumerLogIn(newLogin, consumer) {
-        if (newLogin.cust_username === consumer.user_name && newLogin.cust_password === consumer.user_password) {
+        if (newLogin.username === consumer.user_name && newLogin.password === consumer.user_password) {
             this.setState({
                 isLoggedIn: true,
-                cust_username: newLogin.cust_username,
+                username: newLogin.username,
             })
         }
     }
@@ -48,7 +61,7 @@ class SignInPage extends Component {
             })
             .then(res => {
                 this.state.isLoggedIn ?
-                    window.location.pathname = `/consumer/${this.state.consumer_username}`
+                    window.location.pathname = `/consumer/${this.state.username}`
                     : alert("Username or password is incorrect. Please try again or sign up.")
 
             })
@@ -56,10 +69,10 @@ class SignInPage extends Component {
 
     };
     checkVendorLogIn(newLogin, vendor) {
-        if (newLogin.vendor_username === vendor.user_name && newLogin.vendor_password === vendor.user_password) {
+        if (newLogin.username === vendor.user_name && newLogin.password === vendor.user_password) {
             this.setState({
                 isLoggedIn: true,
-                vendor_username: newLogin.vendor_username,
+                vendor_username: newLogin.username,
             })
         }
     }
@@ -74,7 +87,7 @@ class SignInPage extends Component {
             })
             .then(res => {
                 this.state.isLoggedIn ?
-                    window.location.pathname = `/vendor/${this.state.vendor_username}`
+                    window.location.pathname = `/vendor/${this.state.username}`
                     : alert("Username or password is incorrect. Please try again or sign up.")
 
             })
@@ -85,13 +98,30 @@ class SignInPage extends Component {
     render() {
         return (
             <div>
-
-                <SignIn
-                    {...this.state}
-                    handleChange={this.handleChange}
-                    handleConsumerFormSubmit={this.handleConsumerFormSubmit}
-                    handleVendorFormSubmit={this.handleVendorFormSubmit}
-                />
+                <div className="form-group">
+                    <form>
+                        <p className="form-label">Are you a produce/vendor?</p>
+                        <input
+                            name="isVendor"
+                            className="form-control"
+                            type="radio"
+                            onClick={this.whichForm}
+                        />
+                    </form>
+                </div>
+                {this.state.isVendor ?
+                    <VendorSignIn
+                        {...this.state}
+                        handleChange={this.handleChange}
+                        handleVendorFormSubmit={this.handleVendorFormSubmit}
+                    />
+                    :
+                    <ConsumerSignIn
+                        {...this.state}
+                        handleChange={this.handleChange}
+                        handleConsumerFormSubmit={this.handleConsumerFormSubmit}
+                    />
+                }
             </div>
         );
     }
