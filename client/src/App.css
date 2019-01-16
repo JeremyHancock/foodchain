@@ -1,6 +1,18 @@
+body {
+  background-image: url("images/produce.jpg");
+  background-size: 2160px;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  font-family: 'Questrial', 'Arial', 'Helvetica', sans-serif;
+}
+
 .main {
   width: 75%;
   margin: auto;
+  border-radius: 8px;
+  padding: 20px 20px 20px 20px;
+  background: rgba(255, 255, 255, 0.75);
 }
 
 .form-label {

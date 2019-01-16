@@ -2067,6 +2067,11 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-geolocation@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-geolocation/-/react-geolocation-1.0.4.tgz#493f3ff1b8f89398cad0fb1001672a9611438e3d"
+  integrity sha512-4j5vejxE5wvELp/L+024FX9xYF6lC+gc/PPPsptHGQIJtrGYpvbAEOlmApwUlBV+H+1dG8CjL339kflXxBTBcg==
+
 react-qr-reader@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/react-qr-reader/-/react-qr-reader-2.1.2.tgz#ff3d7d377d3ffbd9d78a0947ca04221c2f180e15"
