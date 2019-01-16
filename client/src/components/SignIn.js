@@ -94,7 +94,7 @@ class SignIn extends Component {
               onChange={this.handleChange}
             />
             <br />
-            <button className="btn btn-dark">Submit</button>
+            <button className="btn btn-success">Submit</button>
           </form>
         </div>
         <br />
@@ -122,9 +122,9 @@ class SignIn extends Component {
               onChange={this.handleChange}
             />
             <br />
-            <button className="btn btn-dark">Submit</button>
+            <button type="button" className="btn btn-success">Submit</button>
           </form>
-          <br /><br />
+          <br /><br /><br />
           <p>
             Food Chain is a farm-to-table app to track how food travels from growers to consumers.
           </p>
