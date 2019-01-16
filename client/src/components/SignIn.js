@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 // import "./style.css"
 
+
 function SignIn(props) {
   return (
     <div className="main">
@@ -28,7 +29,7 @@ function SignIn(props) {
             onChange={props.handleChange}
           />
           <br />
-          <button className="btn btn-dark">Submit</button>
+            <button className="btn btn-success">Submit</button>
         </form>
       </div>
       <br />
@@ -56,11 +57,12 @@ function SignIn(props) {
             onChange={props.handleChange}
           />
           <br />
-          <button className="btn btn-dark">Submit</button>
+            <button type="button" className="btn btn-success">Submit</button>
         </form>
         <br /><br />
         <p>
           Food Chain is a farm-to-table app to track how food travels from growers to consumers.
+
           </p>
       </div>
     </div>
