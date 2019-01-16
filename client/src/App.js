@@ -13,8 +13,8 @@ class App extends Component {
       <Router>
           <Switch>
             <Route exact path="/" component={SignInPage} />
-            <Route exact path="/consumer" component={ConsumerPage} />
-            <Route exact path="/vendor" component={VendorPage} />
+            <Route path="/consumer" component={ConsumerPage} />
+            <Route path="/vendor" component={VendorPage} />
             <Route component={NoMatch} />
           </Switch>
       </Router>
