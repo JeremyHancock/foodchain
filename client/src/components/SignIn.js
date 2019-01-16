@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 // import "./style.css"
 
 
@@ -57,7 +57,7 @@ function SignIn(props) {
             onChange={props.handleChange}
           />
           <br />
-            <button type="button" className="btn btn-success">Submit</button>
+            <button className="btn btn-success">Submit</button>
         </form>
         <br /><br />
         <p>
