@@ -1,19 +1,23 @@
 import React, { Component } from "react";
 import API from "../utils/api";
+import UUID from "uuid/v1";
+import CreateCode from "../components/CreateCode";
+
 // import "./style.css"
 
 var d = new Date();
 var date = d.toLocaleDateString();
 
 class CreateProduct extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      vendor_id: "", 
+      vendor_id: "",
       harvest_date: date,
       chemicals_used: "",
       certified_organic: "",
-      vendor_notes: ""
+      vendor_notes: "",
+      code_value: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -28,24 +32,25 @@ class CreateProduct extends Component {
 
   handleFormSubmit(event) {
     event.preventDefault();
+    this.setState({ code_value: `https://foodchains.herokuapp.com/consumer/${UUID()}`})
     const newProduct = this.state;
-    !newProduct.harvest_date ||
-    !newProduct.chemicals_used ||
-    !newProduct.certified_organic
-      ? alert("You must fill in all required fields to create a new product.")
+    !newProduct.harvest_date || !newProduct.chemicals_used || !newProduct.certified_organic ?
+      alert("You must fill in all required fields to create a new product.")
       : console.log("good entry");
     API.postProduct(newProduct)
       .then(res => {
         console.log("Product saved! " + JSON.stringify(res.data));
-        this.setState({
-          vendor_id: "",
-          harvest_date: "",
-          chemicals_used: "",
-          certified_organic: "",
-          vendor_notes: ""
-        });
       })
       .catch(err => console.log(err));
+    // const newLink = this.state;
+    // API.postLink(newLink)
+    //   .then(res => {
+    //     this.setState({
+    //       code_value: `https://foodchains.herokuapp.com/consumer/${this.state.code_value}`
+    //     });
+    //   })
+    //   .catch(err => console.log(err));
+
   }
 
   render() {
@@ -104,9 +109,16 @@ class CreateProduct extends Component {
             />
             <br />
             <button className="btn btn-dark">Submit</button>{" "}
-            {/* this should generate the QR code */}
           </form>
         </div>
+        <div>
+          {/* Render the CreateCode component if code_value is truthy (has a value) */}
+          {this.state.code_value ?
+            <CreateCode code_value={this.state.code_value} />
+            : null
+          }
+        </div>
+        <p>{this.state.code_value}</p>
       </div>
     );
   }
