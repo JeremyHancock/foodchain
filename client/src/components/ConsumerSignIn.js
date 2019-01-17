@@ -4,7 +4,7 @@ import React from "react";
 
 function ConsumerSignIn(props) {
   return (
-    <div className="main">
+    <div>
       <h2>Customer Sign In</h2>
       <p onClick={props.isNew}>Or Sign Up</p>
       <div className="form-group">
