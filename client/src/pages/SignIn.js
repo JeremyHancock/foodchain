@@ -161,32 +161,25 @@ class SignInPage extends Component {
   }
   render() {
     return (
-      <div class="main">
+      <div className="main">
         <div className="form-group">
           <form>
             <h3>I am a{"  "}
               <input
                 type="radio"
-                name="isVendor"
+                name="isConsumer"
                 value="consumer"
-                checked={this.state.isVendor === false}
-                onChange={this.handleChange}
+                checked={!this.state.isVendor}
+                onChange={this.isVendor}
               /> Consumer{"  "}
               <input
                 type="radio"
                 name="isVendor"
                 value="vendor"
-                checked={this.state.isVendor === true}
-                onChange={this.handleChange}
+                checked={this.state.isVendor}
+                onChange={this.isVendor}
               /> Producer 
             </h3>
-            {/* <p className="form-label">Are you a producer/vendor?</p>
-            <input
-              name="isVendor"
-              className="form-control"
-              type="radio"
-              onClick={this.isVendor}
-            /> */}
           </form>
         </div>
         {!this.state.isNew && this.state.isVendor ? (

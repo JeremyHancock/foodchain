@@ -31,11 +31,6 @@ function VendorSignIn(props) {
           <br />
             <button className="btn btn-success">Submit</button>
         </form>
-        <br /><br />
-        <p>
-          Food Chain is a farm-to-table app to track how food travels from growers to consumers.
-
-          </p>
       </div>
     </div>
   );

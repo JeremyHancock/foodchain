@@ -32,10 +32,6 @@ function ConsumerSignIn(props) {
           <button className="btn btn-success">Submit</button>
         </form>
       </div>
-      <br /><br />
-      <p>
-        Food Chain is a farm-to-table app to track how food travels from growers to consumers.
-      </p>
     </div >
   );
 }

@@ -55,7 +55,6 @@ module.exports = function(app) {
       vendor_notes: req.body.vendor_notes
     })
       .then(function(dbProduct) {
-        console.log("HERE ->>>> /routes/api/product.js line 58: " + dbProduct)
         res.json(dbProduct);
       });
   });
