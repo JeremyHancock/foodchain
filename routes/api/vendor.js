@@ -20,11 +20,11 @@ module.exports = function(app) {
       });
   });
 
-  // Get route for returning vendors of a specific category
-  app.get("/api/vendors/category/:category", function(req, res) {
+  // Get route for returning vendors of a specific username
+  app.get("/api/vendors/:user_name", function(req, res) {
     db.Vendor.findAll({
       where: {
-        category: req.params.category
+        user_name: req.params.user_name
       }
     })
       .then(function(dbVendor) {

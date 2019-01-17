@@ -5,22 +5,36 @@ import CreateCode from "../components/CreateCode";
 
 // import "./style.css"
 
-var d = new Date();
-var date = d.toLocaleDateString();
+const d = new Date();
+const date = d.toLocaleDateString();
+const url = window.location.href;
+const urlPieces = url.split("/");
+const userIdFromUrl = urlPieces[4];
 
 class CreateProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      vendor_id: "",
+      vendor_id: 1,
       harvest_date: date,
       chemicals_used: "",
       certified_organic: "",
       vendor_notes: "",
-      code_value: ""
+      code_value: "",
+      product_id: 1,
+      code_id: 1,
+      location: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.getVendorInfo = this.getVendorInfo.bind(this);
+  }
+  getVendorInfo() {
+    API.getVendor(userIdFromUrl)
+    .then(res => {
+      this.setState({vendor_id: res.data[0].id})
+      console.log(`Got vendor info from the url: ${res.data[0].user_name} - ${this.state.vendor_id}`)
+    })
   }
 
   handleChange(event) {
@@ -32,25 +46,34 @@ class CreateProduct extends Component {
 
   handleFormSubmit(event) {
     event.preventDefault();
-    this.setState({ code_value: `https://foodchains.herokuapp.com/consumer/${UUID()}`})
+    this.setState({ code_value: `${UUID()}` })
     const newProduct = this.state;
     !newProduct.harvest_date || !newProduct.chemicals_used || !newProduct.certified_organic ?
       alert("You must fill in all required fields to create a new product.")
       : console.log("good entry");
+
     API.postProduct(newProduct)
       .then(res => {
         console.log("Product saved! " + JSON.stringify(res.data));
       })
+      .then(res => {
+        API.postCode(newProduct)
+          .then(res => {
+            console.log("Code saved! " + JSON.stringify(res.data));
+          })
+          .catch(err => console.log(err));
+      })
+      .then(res => {
+        API.postLink(newProduct)
+          .then(res => {
+            console.log("Link saved! " + JSON.stringify(res.data));
+          })
+          .catch(err => console.log(err));
+      })
       .catch(err => console.log(err));
-    // const newLink = this.state;
-    // API.postLink(newLink)
-    //   .then(res => {
-    //     this.setState({
-    //       code_value: `https://foodchains.herokuapp.com/consumer/${this.state.code_value}`
-    //     });
-    //   })
-    //   .catch(err => console.log(err));
-
+  }
+  componentDidMount(){
+  this.getVendorInfo();
   }
 
   render() {
@@ -59,7 +82,7 @@ class CreateProduct extends Component {
         <h1>Create Product</h1>
         <div className="form-group">
           <form onSubmit={this.handleFormSubmit}>
-            <p className="form-label">Vendor ID:</p>
+            {/* <p className="form-label">Vendor ID:</p>
             <input
               name="vendor_id"
               className="form-control"
@@ -68,7 +91,7 @@ class CreateProduct extends Component {
               placeholder="This should auto-populate"
               onChange={this.handleChange}
             />
-            <br />
+            <br /> */}
             <p className="form-label">Harvest Date:</p>
             <input
               name="harvest_date"

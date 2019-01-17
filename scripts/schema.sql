@@ -29,8 +29,8 @@ CREATE TABLE IF NOT EXISTS `foodchain_db`.`Vendors` (
   `phone_number` VARCHAR(45) NOT NULL,
   `website` VARCHAR(45) NULL,
   `location` VARCHAR(45) NOT NULL,
-  `createdAt` VARCHAR(45) NULL,
-  `updatedAt` VARCHAR(45) NULL,
+  `createdAt` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `user_name_UNIQUE` (`user_name` ASC) VISIBLE)
 ENGINE = InnoDB;
@@ -48,8 +48,8 @@ CREATE TABLE IF NOT EXISTS `foodchain_db`.`Products` (
   `chemicals_used` VARCHAR(45) NOT NULL,
   `certified_organic` TINYINT NOT NULL,
   `vendor_notes` VARCHAR(45) NOT NULL,
-  `createdAt` VARCHAR(45) NULL,
-  `updatedAt` VARCHAR(45) NULL,
+  `createdAt` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`, `vendor_id`),
   INDEX `fk_Products_Vendors1_idx` (`vendor_id` ASC) VISIBLE,
   CONSTRAINT `fk_Products_Vendors1`
@@ -67,8 +67,9 @@ DROP TABLE IF EXISTS `foodchain_db`.`Codes` ;
 
 CREATE TABLE IF NOT EXISTS `foodchain_db`.`Codes` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `createdAt` VARCHAR(45) NULL,
-  `updatedAt` VARCHAR(45) NULL,
+  `code_value` VARCHAR(200) NULL,
+  `createdAt` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -84,8 +85,8 @@ CREATE TABLE IF NOT EXISTS `foodchain_db`.`Links` (
   `vendor_id` INT NOT NULL,
   `code_id` INT NOT NULL,
   `location` VARCHAR(45) NOT NULL,
-  `createdAt` VARCHAR(45) NULL,
-  `updatedAt` VARCHAR(45) NULL,
+  `createdAt` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`, `product_id`, `vendor_id`, `code_id`),
   INDEX `fk_Links_Products1_idx` (`product_id` ASC) VISIBLE,
   INDEX `fk_Links_Vendors1_idx` (`vendor_id` ASC) VISIBLE,
@@ -120,8 +121,8 @@ CREATE TABLE IF NOT EXISTS `foodchain_db`.`Consumers` (
   `person_name` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `phone_number` VARCHAR(45) NOT NULL,
-  `createdAt` VARCHAR(45) NULL,
-  `updatedAt` VARCHAR(45) NULL,
+  `createdAt` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `user_name_UNIQUE` (`user_name` ASC) VISIBLE)
 ENGINE = InnoDB;

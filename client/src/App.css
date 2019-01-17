@@ -8,13 +8,14 @@ body {
 }
 
 .navbar {
-  background-color: #86592d;
+  background-color: #774517cc;
+  padding: 30px;
 }
 
 .navbar-brand {
   color: white;
   font-family: 'Righteous', cursive;
-  font-size: 200%;
+  font-size: 250%;
 }
 
 .navbar-text { /* would like to center the main page title */
