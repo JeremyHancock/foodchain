@@ -31,7 +31,7 @@ body {
   width: 75%;
   margin: auto;
   border-radius: 8px;
-  padding: 20px 20px 20px 20px;
+  padding: 20px;
   background: rgba(255, 255, 255, 0.85);
 }
 
@@ -52,8 +52,16 @@ button {
   padding: 15px;
   margin-top: 10px;
   color: black;
-}
 
+}
+.scanner{
+  width: 30%;
+  margin: auto;
+  border-radius: 8px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.85);
+  color: white;
+}
 /* Media Queries - I started with the file at the end of this github link: https://gist.github.com/gokulkrishh/242e68d1ee94ad05f488#file-media-query-css */
 
 /* 
