@@ -1,10 +1,24 @@
 body {
   background-image: url("images/produce.jpg");
-  background-size: 2160px;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
+  background-size: 2560px;
   font-family: 'Questrial', 'Arial', 'Helvetica', sans-serif;
+}
+
+.navbar {
+  background-color: #86592d;
+}
+
+.navbar-brand {
+  color: white;
+  font-family: 'Righteous', cursive;
+  font-size: 200%;
+}
+
+.navbar-text { /* would like to center the main page title */
+  text-align: center;
 }
 
 .main {
@@ -94,7 +108,7 @@ button {
     font-size: 145%;
   }
   #chart_div, #line_chart_div {
-    width: 466px;
+    width: 767px;
   }
 }
 
