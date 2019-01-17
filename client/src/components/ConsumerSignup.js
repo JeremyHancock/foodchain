@@ -1,73 +1,23 @@
-import React, { Component } from "react";
-import API from "../utils/api";
+import React from "react";
 
 // import "./style.css"
 
-class ConsumerSignup extends Component {
-  constructor() {
-    super();
-    this.state = {
-      user_name: "",
-      email: "",
-      phone_number: "",
-      user_password: "",
-      person_name: ""
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+function ConsumerSignup(props) {
 
-  }
-
-  handleChange(event) {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  };
-
-  handleFormSubmit(event) {
-    event.preventDefault();
-    const newConsumer = this.state;
-    API.getConsumers()
-      .then(res => {
-        res.data.map(consumer => (
-          consumer.user_name === newConsumer.user_name ? alert("That user name is already in use. Please select something else.") : console.log("not a match")
-        )
-        )
-      })
-    !(newConsumer.user_name) || (!(newConsumer.email)) || (!(newConsumer.phone_number)) || (!(newConsumer.user_password)) || (!(newConsumer.person_name)) ?
-      alert("You must fill in all fields to create a profile.") : console.log("good entry");
-
-    API.postConsumer(newConsumer)
-      .then(res => {
-        console.log("Consumer saved! " + JSON.stringify(res.data));
-        this.setState(
-          {
-            user_name: "",
-            email: "",
-            phone_number: "",
-            user_password: "",
-            person_name: ""
-          }
-        )
-      })
-      .catch(err => console.log("ERR--->>> src/components/ConsumerSignup.js line 34: " + err));
-  };
-
-  render() {
     return (
       <div className="main">
         <h1>Customer Signup</h1>
+        <p onClick={props.isNew}>Or Sign In</p>
         <div className="form-group">
-          <form onSubmit={this.handleFormSubmit}>
+          <form onSubmit={props.handleNewConsumerSubmit}>
             <p className="form-label">Name:</p>
             <input
               name="person_name"
               className="form-control"
               type="text"
-              value={this.state.person_name}
+              value={props.person_name}
               placeholder="First Lasterson"
-              onChange={this.handleChange}
+              onChange={props.handleChange}
             />
             <br />
             <p className="form-label">Email:</p>
@@ -75,9 +25,9 @@ class ConsumerSignup extends Component {
               name="email"
               className="form-control"
               type="text"
-              value={this.state.email}
+              value={props.email}
               placeholder="me@me.com"
-              onChange={this.handleChange}
+              onChange={props.handleChange}
             />
             <br />
             <p className="form-label">Mobile:</p>
@@ -85,9 +35,9 @@ class ConsumerSignup extends Component {
               name="phone_number"
               className="form-control"
               type="text"
-              value={this.state.phone_number}
+              value={props.phone_number}
               placeholder="789-123-4560"
-              onChange={this.handleChange}
+              onChange={props.handleChange}
             />
             <br />
             <p className="form-label">User Name:</p>
@@ -95,9 +45,9 @@ class ConsumerSignup extends Component {
               name="user_name"
               className="form-control"
               type="text"
-              value={this.state.user_name}
+              value={props.user_name}
               placeholder="username"
-              onChange={this.handleChange}
+              onChange={props.handleChange}
             />
             <br />
             <p className="form-label">Password:</p>
@@ -105,17 +55,16 @@ class ConsumerSignup extends Component {
               name="user_password"
               className="form-control"
               type="password"
-              value={this.state.user_password}
+              value={props.user_password}
               placeholder="password"
-              onChange={this.handleChange}
+              onChange={props.handleChange}
             />
             <br />
-            <button type="button" className="btn btn-dark">Submit</button>
+            <button className="btn btn-dark">Submit</button>
           </form>
         </div>
       </div>
     );
   }
-}
 
 export default ConsumerSignup;
