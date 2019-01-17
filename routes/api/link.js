@@ -50,11 +50,10 @@ module.exports = function(app) {
     db.Link.create({
       product_id: req.body.product_id,
       vendor_id: req.body.vendor_id,
-      code_id: req.body.code_id,
+      code_value: req.body.code_value,
       location: req.body.location
     })
       .then(function(dbLink) {
-        console.log("HERE ->>>> /routes/api/link.js line 58: " + dbLink)
         res.json(dbLink);
       });
   });

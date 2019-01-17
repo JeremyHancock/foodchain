@@ -30,20 +30,11 @@ values(1, 1/16/2019, 'manure', 1, 'Best. Strawberries. Ever'),
 (4, 12/06/2018, 'manure', 1, 'Headed to market tomorrow');
 
 INSERT INTO
-codes ()
-values(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-()
+codes (code_value)
+values(1),(2),(3),(4),(5),(6),(7),(8),(9),(10)
 
 INSERT INTO
-links (product_id, vendor_id, code_id, location)
+links (product_id, vendor_id, code_value, location)
 values(1, 1, 1, 'El Paso, TX, USA'),
 (1, 2, 2, 'El Paso, TX, USA'),
 (1, 3, 3, 'New York, NY, USA'),

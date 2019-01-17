@@ -8,18 +8,23 @@ body {
 }
 
 .navbar {
-  background-color: #774517cc;
+  background-color: #774517e8;
   padding: 30px;
+  text-align: center;
+  align-content: center;
 }
 
 .navbar-brand {
   color: white;
   font-family: 'Righteous', cursive;
   font-size: 250%;
+  text-align: center;
+  align-content: center;
 }
 
 .navbar-text { /* would like to center the main page title */
   text-align: center;
+  align-content: center;
 }
 
 .main {
@@ -30,12 +35,23 @@ body {
   background: rgba(255, 255, 255, 0.85);
 }
 
+.form-group {
+  padding-bottom: 20px;
+}
+
 .form-label {
   text-align: left;
 }
 
 button {
   float: left;
+}
+
+.footer {
+  background-color: #774517e8;
+  padding: 15px;
+  margin-top: 10px;
+  color: black;
 }
 
 /* Media Queries - I started with the file at the end of this github link: https://gist.github.com/gokulkrishh/242e68d1ee94ad05f488#file-media-query-css */

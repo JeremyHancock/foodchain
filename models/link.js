@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
         //     len: [1]
         //   }
       },
-      code_id: {
+      code_value: {
         type: DataTypes.STRING,
         // validate: {
         //     len: [1]

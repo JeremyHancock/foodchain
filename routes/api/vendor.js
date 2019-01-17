@@ -57,7 +57,6 @@ module.exports = function(app) {
       location: req.body.location
     })
       .then(function(dbVendor) {
-        console.log("HERE ->>>> /routes/api/vendor.js line 58: " + dbVendor)
         res.json(dbVendor);
       });
   });

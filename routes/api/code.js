@@ -48,10 +48,9 @@ module.exports = function(app) {
   app.post("/api/codes", function(req, res) {
     console.log("HERE ->>>> /routes/api/code.js line 49: " + JSON.stringify(req.body));
     db.Code.create({
-
+      code_value: req.body.code_value
     })
       .then(function(dbCode) {
-        console.log("HERE ->>>> /routes/api/code.js line 58: " + dbCode)
         res.json(dbCode);
       });
   });

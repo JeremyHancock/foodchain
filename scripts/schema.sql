@@ -67,10 +67,12 @@ DROP TABLE IF EXISTS `foodchain_db`.`Codes` ;
 
 CREATE TABLE IF NOT EXISTS `foodchain_db`.`Codes` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `code_value` VARCHAR(200) NULL,
+  `code_value` VARCHAR(200) NOT NULL,
   `createdAt` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`, `code_value`),
+    UNIQUE INDEX `code_value_UNIQUE` (`code_value` ASC) VISIBLE)
+
 ENGINE = InnoDB;
 
 
@@ -83,14 +85,14 @@ CREATE TABLE IF NOT EXISTS `foodchain_db`.`Links` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `product_id` INT NOT NULL,
   `vendor_id` INT NOT NULL,
-  `code_id` INT NOT NULL,
+  `code_value` VARCHAR(45),
   `location` VARCHAR(45) NOT NULL,
   `createdAt` DATETIME DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` DATETIME DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`, `product_id`, `vendor_id`, `code_id`),
+  PRIMARY KEY (`id`, `product_id`, `vendor_id`, `code_value`),
   INDEX `fk_Links_Products1_idx` (`product_id` ASC) VISIBLE,
   INDEX `fk_Links_Vendors1_idx` (`vendor_id` ASC) VISIBLE,
-  INDEX `fk_Links_Codes1_idx` (`code_id` ASC) VISIBLE,
+  INDEX `fk_Links_Codes1_idx` (`code_value` ASC) VISIBLE,
   CONSTRAINT `fk_Links_Products1`
     FOREIGN KEY (`product_id`)
     REFERENCES `foodchain_db`.`Products` (`id`)
@@ -102,8 +104,8 @@ CREATE TABLE IF NOT EXISTS `foodchain_db`.`Links` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Links_Codes1`
-    FOREIGN KEY (`code_id`)
-    REFERENCES `foodchain_db`.`Codes` (`id`)
+    FOREIGN KEY (`code_value`)
+    REFERENCES `foodchain_db`.`Codes` (`code_value`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

@@ -7,6 +7,7 @@ import ConsumerPage from "./pages/Consumer";
 import VendorPage from "./pages/Vendor";
 import NoMatch from "./pages/NoMatch";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 class App extends Component {
   render() {
@@ -21,6 +22,7 @@ class App extends Component {
             <Route component={NoMatch} />
           </Switch>
         </Router>
+        <Footer />
       </div>
     );
   }

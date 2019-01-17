@@ -16,25 +16,33 @@ class CreateProduct extends Component {
     super(props);
     this.state = {
       vendor_id: 1,
+      product_id: 1,
+      link_id: 1,
       harvest_date: date,
       chemicals_used: "",
       certified_organic: "",
       vendor_notes: "",
       code_value: "",
-      product_id: 1,
-      code_id: 1,
+      codedUrl: "",
       location: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.getVendorInfo = this.getVendorInfo.bind(this);
   }
+  componentDidMount() {
+    this.getVendorInfo();
+  }
+
   getVendorInfo() {
     API.getVendor(userIdFromUrl)
-    .then(res => {
-      this.setState({vendor_id: res.data[0].id})
-      console.log(`Got vendor info from the url: ${res.data[0].user_name} - ${this.state.vendor_id}`)
-    })
+      .then(res => {
+        this.setState({
+          vendor_id: res.data[0].id,
+          code_value: `${UUID()}`
+        })
+        console.log(`Got vendor info from the url: ${res.data[0].user_name} - ${this.state.vendor_id}`)
+      })
   }
 
   handleChange(event) {
@@ -46,7 +54,6 @@ class CreateProduct extends Component {
 
   handleFormSubmit(event) {
     event.preventDefault();
-    this.setState({ code_value: `${UUID()}` })
     const newProduct = this.state;
     !newProduct.harvest_date || !newProduct.chemicals_used || !newProduct.certified_organic ?
       alert("You must fill in all required fields to create a new product.")
@@ -55,25 +62,31 @@ class CreateProduct extends Component {
     API.postProduct(newProduct)
       .then(res => {
         console.log("Product saved! " + JSON.stringify(res.data));
+        this.setState({ product_id: res.data.id });
+        console.log("New product's id: " + this.state.product_id);
       })
       .then(res => {
-        API.postCode(newProduct)
+        const newCode = this.state;
+        API.postCode(newCode)
           .then(res => {
             console.log("Code saved! " + JSON.stringify(res.data));
           })
-          .catch(err => console.log(err));
-      })
-      .then(res => {
-        API.postLink(newProduct)
           .then(res => {
-            console.log("Link saved! " + JSON.stringify(res.data));
+            const newLink = this.state;
+            API.postLink(newLink)
+              .then(res => {
+                console.log("Link saved! " + JSON.stringify(res.data));
+                this.setState({ 
+                  link_id: res.data.id,
+                  codedUrl: `https://foodchains.herokuapp.com/consumer/${newLink.code_value}sirlinksalot${res.data.id}` 
+                });
+                console.log("New link's id: " + this.state.link_id);
+              })
+              .catch(err => console.log(err));
           })
           .catch(err => console.log(err));
       })
       .catch(err => console.log(err));
-  }
-  componentDidMount(){
-  this.getVendorInfo();
   }
 
   render() {
@@ -135,13 +148,13 @@ class CreateProduct extends Component {
           </form>
         </div>
         <div>
-          {/* Render the CreateCode component if code_value is truthy (has a value) */}
-          {this.state.code_value ?
-            <CreateCode code_value={this.state.code_value} />
+          {/* Render the CreateCode component if codedUrl is truthy (has a value) */}
+          {this.state.codedUrl ?
+            <CreateCode codedUrl={this.state.codedUrl} />
             : null
           }
         </div>
-        <p>{this.state.code_value}</p>
+        <p>{this.state.codedUrl}</p>
       </div>
     );
   }

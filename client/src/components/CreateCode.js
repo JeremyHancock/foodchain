@@ -16,7 +16,7 @@ function QRMaker(props) {
             fgColor="#000000"
             level="Q"
             style={{ width: 200 }}
-            value={props.code_value}
+            value={props.codedUrl}
         />
         );
 }
