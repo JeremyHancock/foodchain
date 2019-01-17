@@ -5,7 +5,7 @@ import DisplayCodeData from '../components/DisplayCodeData'
 const url = window.location.href;
 const urlChunks = url.split("/");
 console.log(urlChunks);
-const urlPieces = urlChunks[4] ? urlChunks.split("sirlinksalot") : "";
+const urlPieces = urlChunks[4] ? urlChunks[4].split("sirlinksalot") : [];
 console.log(urlPieces)
 
 //urlPieces[0] === code_data
@@ -16,7 +16,7 @@ console.log(urlPieces)
 class ConsumerPage extends Component {
     state = {
         result: 'Please scan a product',
-        scannerOn: true,
+        scannerOn: false,
         code_data: urlPieces[0],
         product_id: urlPieces[1],
         link_id: urlPieces.slice(2)
