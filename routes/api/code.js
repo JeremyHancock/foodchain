@@ -33,10 +33,10 @@ module.exports = function(app) {
   // });
 
   // Get route for retrieving a single Code
-  app.get("/api/codes/:id", function(req, res) {
+  app.get("/api/codes/:code_value", function(req, res) {
     db.Code.findOne({
       where: {
-        id: req.params.id
+        code_value: req.params.code_value
       }
     })
       .then(function(dbCode) {

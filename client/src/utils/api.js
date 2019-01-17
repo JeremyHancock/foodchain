@@ -70,8 +70,8 @@ export default {
   },
 
     // Gets the Code with the given id
-    getCode: function (id) {
-      return axios.get("/api/codes/" + id);
+    getCode: function (code_data) {
+      return axios.get("/api/codes/" + code_data);
     },
     // Gets all Codes
     getCodes: function () {
