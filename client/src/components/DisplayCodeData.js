@@ -31,7 +31,6 @@ class DisplayCodeData extends Component {
                         harvest: res.data.harvest_date,
                         grower: res.data.vendor_id
                     })
-                        .catch(err => console.log(err));
                 }
             });
 
