@@ -19,8 +19,14 @@ class CreateProduct extends Component {
       product_id: 1,
       link_id: 1,
       harvest_date: date,
-      chemicals_used: "",
-      certified_organic: "",
+      chemicals_used: {
+        glyphosphate: false,
+        atrazine: false,
+        metolachlorS: false,
+        dichloropropene: false,
+        twoFourD: false
+      },
+      certified_organic: false,
       vendor_notes: "",
       code_value: "",
       codedUrl: "",
@@ -35,28 +41,33 @@ class CreateProduct extends Component {
   }
 
   getVendorInfo() {
-    API.getVendor(userIdFromUrl)
-      .then(res => {
-        this.setState({
-          vendor_id: res.data[0].id,
-          code_value: `${UUID()}`
-        })
-        console.log(`Got vendor info from the url: ${res.data[0].user_name} - ${this.state.vendor_id}`)
-      })
+    API.getVendor(userIdFromUrl).then(res => {
+      this.setState({
+        vendor_id: res.data[0].id,
+        code_value: `${UUID()}`
+      });
+      console.log(
+        `Got vendor info from the url: ${res.data[0].user_name} - ${
+          this.state.vendor_id
+        }`
+      );
+    });
   }
 
   handleChange(event) {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
+    const { name, value, type, checked } = event.target;
+    type === "checkbox"
+      ? this.setState({ [name]: checked })
+      : this.setState({ [name]: value });
   }
 
   handleFormSubmit(event) {
     event.preventDefault();
     const newProduct = this.state;
-    !newProduct.harvest_date || !newProduct.chemicals_used || !newProduct.certified_organic ?
-      alert("You must fill in all required fields to create a new product.")
+    !newProduct.harvest_date ||
+    !newProduct.chemicals_used ||
+    !newProduct.certified_organic
+      ? alert("You must fill in all required fields to create a new product.")
       : console.log("good entry");
 
     API.postProduct(newProduct)
@@ -76,9 +87,11 @@ class CreateProduct extends Component {
             API.postLink(newLink)
               .then(res => {
                 console.log("Link saved! " + JSON.stringify(res.data));
-                this.setState({ 
+                this.setState({
                   link_id: res.data.id,
-                  codedUrl: `https://foodchains.herokuapp.com/consumer/${newLink.code_value}sirlinksalot${res.data.id}` 
+                  codedUrl: `https://foodchains.herokuapp.com/consumer/${
+                    newLink.code_value
+                  }sirlinksalot${res.data.id}`
                 });
                 console.log("New link's id: " + this.state.link_id);
               })
@@ -91,7 +104,7 @@ class CreateProduct extends Component {
 
   render() {
     return (
-      <div className="main">
+      <div>
         <h1>Create Product</h1>
         <div className="form-group">
           <form onSubmit={this.handleFormSubmit}>
@@ -114,25 +127,59 @@ class CreateProduct extends Component {
               onChange={this.handleChange}
             />
             <br />
-            <p className="form-label">What Chemicals Were Used?</p>
+            <p className="form-label">Chemicals Used?</p>
             <input
-              name="chemicals_used"
-              className="form-control"
-              type="text"
-              value={this.state.chemicals_used}
-              placeholder="fertilizer name, pesticide name"
+              type="checkbox"
+              name="glyphosphate"
+              checked={this.state.glyphosphate}
               onChange={this.handleChange}
-            />
-            <br />
+            />{" "}
+            Glyphosphate{" "}
+            <input
+              type="checkbox"
+              name="atrazine"
+              checked={this.state.atrazine}
+              onChange={this.handleChange}
+            />{" "}
+            Atrazine{" "}
+            <input
+              type="checkbox"
+              name="metolachlorS"
+              checked={this.state.metolachlorS}
+              onChange={this.handleChange}
+            />{" "}
+            Metolchlor-S{" "}
+            <input
+              type="checkbox"
+              name="dichloropropene"
+              checked={this.state.dichloropropene}
+              onChange={this.handleChange}
+            />{" "}
+            Dichloropropene{" "}
+            <input
+              type="checkbox"
+              name="twoFourD"
+              checked={this.state.twoFourD}
+              onChange={this.handleChange}
+            />{" "}
+            2,4-D <br />
             <p className="form-label">Is This Product Certified Organic?</p>
             <input
+              type="radio"
               name="certified_organic"
-              className="form-control"
-              type="text"
-              value={this.state.certified_organic}
-              placeholder="I'll make this a pair of radios with a boolean switch"
+              value="true"
+              checked={this.state.certified_organic === true}
               onChange={this.handleChange}
-            />
+            />{" "}
+            Yes
+            <input
+              type="radio"
+              name="certified_organic"
+              value="false"
+              checked={this.state.certified_organic === false}
+              onChange={this.handleChange}
+            />{" "}
+            No
             <br />
             <p className="form-label">Notes / Comments:</p>
             <input
@@ -144,15 +191,14 @@ class CreateProduct extends Component {
               onChange={this.handleChange}
             />
             <br />
-            <button className="btn btn-dark">Submit</button>{" "}
+            <button className="btn btn-success">Submit</button>{" "}
           </form>
         </div>
         <div>
           {/* Render the CreateCode component if codedUrl is truthy (has a value) */}
-          {this.state.codedUrl ?
+          {this.state.codedUrl ? (
             <CreateCode codedUrl={this.state.codedUrl} />
-            : null
-          }
+          ) : null}
         </div>
         <p>{this.state.codedUrl}</p>
       </div>
