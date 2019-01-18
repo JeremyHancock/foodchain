@@ -122,9 +122,7 @@ class CreateProduct extends Component {
                 console.log("Link saved! " + JSON.stringify(res.data));
                 this.setState({
                   link_id: res.data.id,
-                  codedUrl: `https://foodchains.herokuapp.com/consumer/${
-                    newLink.code_value
-                  }sirlinksalot${res.data.id}`
+                  codedUrl: `https://foodchains.herokuapp.com/scan/${newLink.code_value}sirlinksalot${res.data.id}` 
                 });
                 console.log("New link's id: " + this.state.link_id);
               })
