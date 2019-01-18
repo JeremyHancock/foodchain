@@ -1,25 +1,12 @@
 import React, { Component } from 'react'
 import QrReader from 'react-qr-reader'
-import DisplayCodeData from '../components/DisplayCodeData'
 
-const url = window.location.href;
-const urlChunks = url.split("/");
-console.log(urlChunks);
-const urlPieces = urlChunks[4] ? urlChunks[4].split("sirlinksalot") : [];
-console.log(urlPieces)
 
-//urlPieces[0] === code_data
-//urlPieces[1] === product_id
-//urlPieces[2] === first link_id
-//urlPieces[3] === second link_id ...
 
 class ConsumerPage extends Component {
     state = {
         result: 'Please scan a product',
         scannerOn: true,
-        code_data: urlPieces[0],
-        product_id: urlPieces[1],
-        link_id: urlPieces.slice(2)
     }
 
     handleScan = data => {
@@ -30,7 +17,7 @@ class ConsumerPage extends Component {
                 result: data,
                 scannerOn: false
             })
-            window.location.pathname = `consumer${cutUrl[1]}`;
+            window.location.pathname = `scan${cutUrl[1]}`;
         }
     }
     handleError = err => { console.error(err) }
@@ -39,22 +26,14 @@ class ConsumerPage extends Component {
         return (
             <div className="main">
                 <div className="scanner">
-                    {this.state.scannerOn ?
-                        <QrReader
-                            delay={300}
-                            onError={this.handleError}
-                            onScan={this.handleScan}
-                            style={{ width: '100%' }}
-                        />
-                        : null
-                    }
+                    <QrReader
+                        delay={300}
+                        onError={this.handleError}
+                        onScan={this.handleScan}
+                        style={{ width: '100%' }}
+                    />
                 </div>
                 <p>{this.state.result}</p>
-                {this.state.scannerOn ? null :
-                    <DisplayCodeData
-                        {...this.state}
-                    />
-                }
             </div>
         )
     }

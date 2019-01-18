@@ -78,8 +78,7 @@ class CreateProduct extends Component {
                 console.log("Link saved! " + JSON.stringify(res.data));
                 this.setState({ 
                   link_id: res.data.id,
-                  codedUrl: `http://localhost:3000/consumer/89d1cba0-1a7e-11e9-8f4a-312bb1b0bd75sirlinksalot28sirlinksalot14sirlinksalot13sirlinksalot4sirlinksalot3sirlinksalot1`
-                  // `https://foodchains.herokuapp.com/consumer/${newLink.code_value}sirlinksalot${res.data.id}` 
+                  codedUrl: `https://foodchains.herokuapp.com/scan/${newLink.code_value}sirlinksalot${res.data.id}` 
                 });
                 console.log("New link's id: " + this.state.link_id);
               })

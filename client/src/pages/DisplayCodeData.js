@@ -1,30 +1,46 @@
+//////////////////////////////////////////////////////////////////////
 import React, { Component } from "react";
 import API from "../utils/api";
 
-class DisplayCodeData extends Component {
-    constructor(props) {
-        super(props);
+const url = window.location.href;
+const urlChunks = url.split("/");
+// console.log(urlChunks);
+const urlPieces = urlChunks[4] ? urlChunks[4].split("sirlinksalot") : [];
+// console.log(urlPieces)
+
+//urlPieces[0] === code_data
+//urlPieces[1] === product_id
+//urlPieces[2] === first link_id
+//urlPieces[3] === second link_id ...
+
+class DisplayCodeDataPage extends Component {
+    constructor() {
+        super();
         this.state = {
             organic: false,
             chemicals: "",
             harvest: "",
             grower: "",
             createdAt: "",
-            link_id: [],
-            vendor_id: []
+            vendor_id: [],
+            code_data: urlPieces[0],
+            product_id: urlPieces[1],
+            link_id: urlPieces.slice(2)
 
         };
         this.getInfo = this.getInfo.bind(this);
     }
-    componentWillMount() {
-        console.log(JSON.stringify(this.state))
+    componentDidMount() {
+        // console.log("Line 34: " + JSON.stringify(this.state))
         this.getInfo();
-    }; 
+    };
 
-    getInfo() {
-        API.getProduct(this.props.product_id)
+    async getInfo() {
+        const linkVendors = [];
+
+        API.getProduct(this.state.product_id)
             .then(res => {
-                console.log(res.data)
+                // console.log(res.data)
                 if (res.data) {
                     this.setState({
                         organic: res.data.certified_organic,
@@ -36,19 +52,20 @@ class DisplayCodeData extends Component {
                     })
                 }
             });
-        const linkVendors = [];
-        console.log("Line 42 :" + this.props.link_id);
-        this.props.link_id.map(function (value, i) {
+        // console.log("Line 53 :" + this.state.link_id);
+        this.state.link_id.map(function (value, i) {
             API.getLink(value)
                 .then(res => {
                     linkVendors.push(res.data);
-                    console.log("Line 46: " + JSON.stringify(res.data));
-                    console.log(linkVendors);
+                    // console.log("Line 58: " + JSON.stringify(res.data));
+                    // console.log("Line 60: " + JSON.stringify(linkVendors));
+                    return linkVendors
                 });
         });
-        this.setState({
-            link_id: linkVendors
-        })
+        // this.setState({ link_id: 'loading...' });
+        // let d = await this.state.link_id.map(function (value, i);
+        // this.setState({ link_id: d })
+        // console.log("Line 64: " + this.state.link_id);
     }
 
     render() {
@@ -66,8 +83,8 @@ class DisplayCodeData extends Component {
 
                     </ul>
                 </p>
-            </div>
+            </div >
         );
     }
 }
-export default DisplayCodeData;
+export default DisplayCodeDataPage;
