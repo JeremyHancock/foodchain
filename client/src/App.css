@@ -20,12 +20,12 @@ body {
   font-size: 250%;
   /* text-align: center;
   align-content: center; */
-  margin-left: 12.5%;
+  /* margin-left: 12.5%; */
 }
 
 .navbar-text { /* would like to center the main page title */
-  text-align: center;
-  align-content: center;
+  width: 75%;
+  margin: auto;
 }
 
 .main {
@@ -33,6 +33,7 @@ body {
   margin: auto;
   border-radius: 8px;
   margin-top: 90px;
+  margin-bottom: 90px;
   padding: 20px;
   background: rgba(255, 255, 255, 0.85);
 }
@@ -45,6 +46,10 @@ body {
   text-align: left;
 }
 
+#other {
+  float: left;
+}
+
 button {
   float: left;
 }
@@ -55,10 +60,15 @@ button {
   margin-top: 10px;
   color: white;
   font-size: 115%;
+  width: 100%;
+  bottom: 0;
+  position: fixed;
 }
 
 .footer-text {
-  margin-left: 12.5px;
+  /* margin-left: 12.5px; */
+  width: 75%;
+  margin: auto;
 }
 
 .scanner{

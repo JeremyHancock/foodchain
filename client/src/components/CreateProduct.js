@@ -19,13 +19,12 @@ class CreateProduct extends Component {
       product_id: 1,
       link_id: 1,
       harvest_date: date,
-      chemicals_used: {
-        glyphosphate: false,
-        atrazine: false,
-        metolachlorS: false,
-        dichloropropene: false,
-        twoFourD: false
-      },
+      chemicals_used: "",
+      glyphosphate: false,
+      atrazine: false,
+      metolachlorS: false,
+      dichloropropene: false,
+      twoFourD: false,
       certified_organic: false,
       vendor_notes: "",
       code_value: "",
@@ -35,6 +34,7 @@ class CreateProduct extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.getVendorInfo = this.getVendorInfo.bind(this);
+    this.isOrganic = this.isOrganic.bind(this);
   }
   componentDidMount() {
     this.getVendorInfo();
@@ -54,6 +54,20 @@ class CreateProduct extends Component {
     });
   }
 
+  isOrganic() {
+    if (this.state.certified_organic) {
+      this.setState({ certified_organic: false });
+    } else {
+      this.setState({ certified_organic: true });
+    }
+  }
+
+  hasChemicals() { //push chemical into this.state.chemicals_used if (this.state.[chemical]) === true
+    if (this.state.dichloropropene) {
+      
+    }
+  }
+
   handleChange(event) {
     const { name, value, type, checked } = event.target;
     type === "checkbox"
@@ -64,9 +78,9 @@ class CreateProduct extends Component {
   handleFormSubmit(event) {
     event.preventDefault();
     const newProduct = this.state;
-    !newProduct.harvest_date ||
-    !newProduct.chemicals_used ||
-    !newProduct.certified_organic
+    !newProduct.harvest_date //||
+    // !newProduct.chemicals_used ||
+    // !newProduct.certified_organic
       ? alert("You must fill in all required fields to create a new product.")
       : console.log("good entry");
 
@@ -128,59 +142,93 @@ class CreateProduct extends Component {
             />
             <br />
             <p className="form-label">Chemicals Used?</p>
-            <input
-              type="checkbox"
-              name="glyphosphate"
-              checked={this.state.glyphosphate}
+            <p>
+              <input
+                type="checkbox"
+                name="glyphosphate"
+                checked={this.state.glyphosphate}
+                onChange={this.handleChange}
+              />
+              {"  "}
+              Glyphosphate{"  "}
+            </p>
+            <p>
+              <input
+                type="checkbox"
+                name="atrazine"
+                checked={this.state.atrazine}
+                onChange={this.handleChange}
+              />
+              {"  "}
+              Atrazine{"  "}
+            </p>
+            <p>
+              <input
+                type="checkbox"
+                name="metolachlorS"
+                checked={this.state.metolachlorS}
+                onChange={this.handleChange}
+              />
+              {"  "}
+              Metolchlor-S{"  "}
+            </p>
+            <p>
+              <input
+                type="checkbox"
+                name="dichloropropene"
+                checked={this.state.dichloropropene}
+                onChange={this.handleChange}
+              />
+              {"  "}
+              Dichloropropene{"  "}
+            </p>
+            <p>
+              <input
+                type="checkbox"
+                name="twoFourD"
+                checked={this.state.twoFourD}
+                onChange={this.handleChange}
+              />
+              {"  "}
+              2,4-D <br />
+              <input
+                type="checkbox"
+                name="other"
+                checked={this.state.other}
+                onChange={this.handleChange}
+              />
+              {"  "}
+              Other (list):{" "} 
+              <input
+              id="other"
+              name="other"
+              className="form-control"
+              type="text"
+              value={this.state.other}
               onChange={this.handleChange}
-            />{" "}
-            Glyphosphate{" "}
-            <input
-              type="checkbox"
-              name="atrazine"
-              checked={this.state.atrazine}
-              onChange={this.handleChange}
-            />{" "}
-            Atrazine{" "}
-            <input
-              type="checkbox"
-              name="metolachlorS"
-              checked={this.state.metolachlorS}
-              onChange={this.handleChange}
-            />{" "}
-            Metolchlor-S{" "}
-            <input
-              type="checkbox"
-              name="dichloropropene"
-              checked={this.state.dichloropropene}
-              onChange={this.handleChange}
-            />{" "}
-            Dichloropropene{" "}
-            <input
-              type="checkbox"
-              name="twoFourD"
-              checked={this.state.twoFourD}
-              onChange={this.handleChange}
-            />{" "}
-            2,4-D <br />
-            <p className="form-label">Is This Product Certified Organic?</p>
-            <input
-              type="radio"
-              name="certified_organic"
-              value="true"
-              checked={this.state.certified_organic === true}
-              onChange={this.handleChange}
-            />{" "}
-            Yes
-            <input
-              type="radio"
-              name="certified_organic"
-              value="false"
-              checked={this.state.certified_organic === false}
-              onChange={this.handleChange}
-            />{" "}
-            No
-            <br />
+            />
+              <br /><br />
+            </p>
+            <p>Is This Product Certified Organic?</p>
+            <p>
+              <input
+                type="radio"
+                name="certified_organic"
+                value="true"
+                checked={this.state.certified_organic === true}
+                onChange={this.isOrganic}
+              />
+              Yes{" "}
+              <input
+                type="radio"
+                name="certified_organic"
+                value="false"
+                checked={this.state.certified_organic === false}
+                onChange={this.isOrganic}
+              />
+              {"  "}
+              No
+            </p>
             <p className="form-label">Notes / Comments:</p>
             <input
               name="vendor_notes"
