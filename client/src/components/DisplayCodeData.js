@@ -8,18 +8,20 @@ class DisplayCodeData extends Component {
             organic: false,
             chemicals: "",
             harvest: "",
-            grower: ""
+            grower: "",
+            createdAt: "",
+            link_id: [],
+            vendor_id: []
+
         };
         this.getInfo = this.getInfo.bind(this);
     }
-    componentDidMount() {
+    componentWillMount() {
+        console.log(JSON.stringify(this.state))
         this.getInfo();
-    };
+    }; 
 
     getInfo() {
-        API.getCode(this.props.code_data)
-            .then(res => { console.log(res.data) });
-
         API.getProduct(this.props.product_id)
             .then(res => {
                 console.log(res.data)
@@ -29,27 +31,40 @@ class DisplayCodeData extends Component {
                         chemicals: res.data.chemicals_used,
                         createdAt: res.data.createdAt,
                         harvest: res.data.harvest_date,
-                        grower: res.data.vendor_id
+                        grower: res.data.vendor_id,
+                        notes: res.data.vendor_notes
                     })
                 }
             });
-
-        [...this.props.link_id].forEach(function (value, i) {
+        const linkVendors = [];
+        console.log("Line 42 :" + this.props.link_id);
+        this.props.link_id.map(function (value, i) {
             API.getLink(value)
                 .then(res => {
-                    console.log(res.data)
-
+                    linkVendors.push(res.data);
+                    console.log("Line 46: " + JSON.stringify(res.data));
+                    console.log(linkVendors);
                 });
         });
+        this.setState({
+            link_id: linkVendors
+        })
     }
 
     render() {
         return (
             <div>
                 <p className="main">
-                    {`This was harvested on ${this.harvest} by ${this.grower}.\n
-                ${this.organic ? 'It is certified organic.' : null}\n
-                ${this.chemicals ? `These pesticides and fertilizers were used: ${this.chemicals}` : `No pesticides or fertilizers were used!`}`}
+                    <ul>
+                        <li>{this.state.harvest}</li>
+                        <li>{this.state.grower}</li>
+                        <li>{this.state.organic}</li>
+                        <li>{this.state.chemicals}</li>
+                        {this.state.link_id.map(item => (
+                            <li>{`this ${item.location}`}</li>
+                        ))}
+
+                    </ul>
                 </p>
             </div>
         );

@@ -16,7 +16,7 @@ console.log(urlPieces)
 class ConsumerPage extends Component {
     state = {
         result: 'Please scan a product',
-        scannerOn: false,
+        scannerOn: true,
         code_data: urlPieces[0],
         product_id: urlPieces[1],
         link_id: urlPieces.slice(2)
@@ -24,7 +24,13 @@ class ConsumerPage extends Component {
 
     handleScan = data => {
         if (data) {
-            this.setState({ result: data })
+            const cutUrl = data.split("consumer");
+            console.log(cutUrl);
+            this.setState({
+                result: data,
+                scannerOn: false
+            })
+            window.location.pathname = `consumer${cutUrl[1]}`;
         }
     }
     handleError = err => { console.error(err) }
