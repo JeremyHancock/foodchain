@@ -46,7 +46,7 @@ class DisplayCodeData extends Component {
     render() {
         return (
             <div>
-                <p className="main">
+                <p >
                     {`This was harvested on ${this.harvest} by ${this.grower}.\n
                 ${this.organic ? 'It is certified organic.' : null}\n
                 ${this.chemicals ? `These pesticides and fertilizers were used: ${this.chemicals}` : `No pesticides or fertilizers were used!`}`}

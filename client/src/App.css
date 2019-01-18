@@ -9,7 +9,7 @@ body {
 
 .navbar {
   background-color: #774517e8;
-  padding: 30px;
+  padding: 0px;
   text-align: center;
   align-content: center;
 }
@@ -18,8 +18,9 @@ body {
   color: white;
   font-family: 'Righteous', cursive;
   font-size: 250%;
-  text-align: center;
-  align-content: center;
+  /* text-align: center;
+  align-content: center; */
+  margin-left: 12.5%;
 }
 
 .navbar-text { /* would like to center the main page title */
@@ -31,6 +32,7 @@ body {
   width: 75%;
   margin: auto;
   border-radius: 8px;
+  margin-top: 90px;
   padding: 20px;
   background: rgba(255, 255, 255, 0.85);
 }
@@ -49,19 +51,30 @@ button {
 
 .footer {
   background-color: #774517e8;
-  padding: 15px;
+  padding: 10px;
   margin-top: 10px;
-  color: black;
-
+  color: white;
+  font-size: 115%;
 }
+
+.footer-text {
+  margin-left: 12.5px;
+}
+
 .scanner{
   width: 60%;
   margin: auto;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   padding: 10px;
-  background: rgba(255, 255, 255, 0.85);
+  /* background: rgba(255, 255, 255, 0.85); */
   color: white;
 }
+
+#map {
+  height: 100%;
+}
+
+
 /* Media Queries - I started with the file at the end of this github link: https://gist.github.com/gokulkrishh/242e68d1ee94ad05f488#file-media-query-css */
 
 /* 

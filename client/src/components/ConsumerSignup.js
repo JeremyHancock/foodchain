@@ -60,7 +60,7 @@ function ConsumerSignup(props) {
               onChange={props.handleChange}
             />
             <br />
-            <button className="btn btn-dark">Submit</button>
+            <button className="btn btn-success">Submit</button>
           </form>
         </div>
       </div>
