@@ -161,7 +161,7 @@ class SignInPage extends Component {
   }
   render() {
     return (
-      <div className="main">
+      <div>
         <div className="form-group">
           <form>
             <h3>I am a{"  "}

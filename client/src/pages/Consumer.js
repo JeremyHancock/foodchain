@@ -24,7 +24,7 @@ class ConsumerPage extends Component {
 
     render() {
         return (
-            <div className="main">
+            <div>
                 <div className="scanner">
                     <QrReader
                         delay={300}
