@@ -16,7 +16,7 @@ console.log(urlPieces)
 class ConsumerPage extends Component {
     state = {
         result: 'Please scan a product',
-        scannerOn: false,
+        scannerOn: true,
         code_data: urlPieces[0],
         product_id: urlPieces[1],
         link_id: urlPieces.slice(2)
@@ -31,7 +31,7 @@ class ConsumerPage extends Component {
 
     render() {
         return (
-            <div className="main">
+            <div>
                 <div className="scanner">
                     {this.state.scannerOn ?
                         <QrReader

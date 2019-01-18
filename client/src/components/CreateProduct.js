@@ -10,6 +10,7 @@ const date = d.toLocaleDateString();
 const url = window.location.href;
 const urlPieces = url.split("/");
 const userIdFromUrl = urlPieces[4];
+let chemicals = [];
 
 class CreateProduct extends Component {
   constructor(props) {
@@ -17,10 +18,16 @@ class CreateProduct extends Component {
     this.state = {
       vendor_id: 1,
       product_id: 1,
+      product_name: "",
       link_id: 1,
       harvest_date: date,
       chemicals_used: "",
-      certified_organic: "",
+      glyphosphate: false,
+      atrazine: false,
+      metolachlorS: false,
+      dichloropropene: false,
+      twoFourD: false,
+      certified_organic: false,
       vendor_notes: "",
       code_value: "",
       codedUrl: "",
@@ -29,36 +36,73 @@ class CreateProduct extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.getVendorInfo = this.getVendorInfo.bind(this);
+    this.isOrganic = this.isOrganic.bind(this);
+    this.hasChemicals = this.hasChemicals.bind(this);
   }
   componentDidMount() {
     this.getVendorInfo();
   }
 
   getVendorInfo() {
-    API.getVendor(userIdFromUrl)
-      .then(res => {
-        this.setState({
-          vendor_id: res.data[0].id,
-          code_value: `${UUID()}`
-        })
-        console.log(`Got vendor info from the url: ${res.data[0].user_name} - ${this.state.vendor_id}`)
-      })
+    API.getVendor(userIdFromUrl).then(res => {
+      this.setState({
+        vendor_id: res.data[0].id,
+        code_value: `${UUID()}`
+      });
+      console.log(
+        `Got vendor info from the url: ${res.data[0].user_name} - ${
+          this.state.vendor_id
+        }`
+      );
+    });
+  }
+
+  isOrganic() {
+    if (this.state.certified_organic) {
+      this.setState({ certified_organic: false });
+    } else {
+      this.setState({ certified_organic: true });
+    }
+  }
+
+  hasChemicals() {
+    //push chemical into this.state.chemicals_used if (this.state.[chemical]) === true
+    if (this.state.glyphosphate) {
+      chemicals.push("Glyphosphate");
+    }
+    if (this.state.atrazine) {
+      chemicals.push("Atrazine");
+    }
+    if (this.state.metolachlorS) {
+      chemicals.push("Metolachlor-S");
+    }
+    if (this.state.dichloropropene) {
+      chemicals.push("Dichloropropene");
+    }
+    if (this.state.twoFourD) {
+      chemicals.push("2,4-D");
+    }
+    console.log(chemicals);
+    this.setState({ chemicals_used: chemicals.toString() });
+    console.log(chemicals.toString());
   }
 
   handleChange(event) {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
+    const { name, value, type, checked } = event.target;
+    type === "checkbox"
+      ? this.setState({ [name]: checked })
+      : this.setState({ [name]: value });
   }
 
   handleFormSubmit(event) {
     event.preventDefault();
     const newProduct = this.state;
-    !newProduct.harvest_date || !newProduct.chemicals_used || !newProduct.certified_organic ?
-      alert("You must fill in all required fields to create a new product.")
+    !newProduct.harvest_date //||
+      ? // !newProduct.chemicals_used ||
+        // !newProduct.certified_organic
+        alert("You must fill in all required fields to create a new product.")
       : console.log("good entry");
-
+    this.hasChemicals();
     API.postProduct(newProduct)
       .then(res => {
         console.log("Product saved! " + JSON.stringify(res.data));
@@ -76,9 +120,11 @@ class CreateProduct extends Component {
             API.postLink(newLink)
               .then(res => {
                 console.log("Link saved! " + JSON.stringify(res.data));
-                this.setState({ 
+                this.setState({
                   link_id: res.data.id,
-                  codedUrl: `https://foodchains.herokuapp.com/consumer/${newLink.code_value}sirlinksalot${res.data.id}` 
+                  codedUrl: `https://foodchains.herokuapp.com/consumer/${
+                    newLink.code_value
+                  }sirlinksalot${res.data.id}`
                 });
                 console.log("New link's id: " + this.state.link_id);
               })
@@ -91,7 +137,7 @@ class CreateProduct extends Component {
 
   render() {
     return (
-      <div className="main">
+      <div>
         <h1>Create Product</h1>
         <div className="form-group">
           <form onSubmit={this.handleFormSubmit}>
@@ -105,6 +151,15 @@ class CreateProduct extends Component {
               onChange={this.handleChange}
             />
             <br /> */}
+            <p className="form-label">Product Name:</p>
+            <input
+              name="product_name"
+              className="form-control"
+              type="text"
+              value={this.state.product_name}
+              onChange={this.handleChange}
+            />
+            <br />
             <p className="form-label">Harvest Date:</p>
             <input
               name="harvest_date"
@@ -114,26 +169,95 @@ class CreateProduct extends Component {
               onChange={this.handleChange}
             />
             <br />
-            <p className="form-label">What Chemicals Were Used?</p>
-            <input
-              name="chemicals_used"
-              className="form-control"
-              type="text"
-              value={this.state.chemicals_used}
-              placeholder="fertilizer name, pesticide name"
-              onChange={this.handleChange}
-            />
-            <br />
-            <p className="form-label">Is This Product Certified Organic?</p>
-            <input
-              name="certified_organic"
-              className="form-control"
-              type="text"
-              value={this.state.certified_organic}
-              placeholder="I'll make this a pair of radios with a boolean switch"
-              onChange={this.handleChange}
-            />
-            <br />
+            <p className="form-label">Chemicals Used?</p>
+            <p>
+              <input
+                type="checkbox"
+                name="glyphosphate"
+                checked={this.state.glyphosphate}
+                onChange={this.handleChange}
+              />
+              {"  "}
+              Glyphosphate{"  "}
+            </p>
+            <p>
+              <input
+                type="checkbox"
+                name="atrazine"
+                checked={this.state.atrazine}
+                onChange={this.handleChange}
+              />
+              {"  "}
+              Atrazine{"  "}
+            </p>
+            <p>
+              <input
+                type="checkbox"
+                name="metolachlorS"
+                checked={this.state.metolachlorS}
+                onChange={this.handleChange}
+              />
+              {"  "}
+              Metolchlor-S{"  "}
+            </p>
+            <p>
+              <input
+                type="checkbox"
+                name="dichloropropene"
+                checked={this.state.dichloropropene}
+                onChange={this.handleChange}
+              />
+              {"  "}
+              Dichloropropene{"  "}
+            </p>
+            <p>
+              <input
+                type="checkbox"
+                name="twoFourD"
+                checked={this.state.twoFourD}
+                onChange={this.handleChange}
+              />
+              {"  "}
+              2,4-D <br />
+              <input
+                type="checkbox"
+                name="other"
+                checked={this.state.other}
+                onChange={this.handleChange}
+              />
+              {"  "}
+              Other (list):{" "}
+              <input
+                id="other"
+                name="other"
+                className="form-control"
+                type="text"
+                value={this.state.other}
+                onChange={this.handleChange}
+              />
+              <br />
+              <br />
+            </p>
+            <p>Is This Product Certified Organic?</p>
+            <p>
+              <input
+                type="radio"
+                name="certified_organic"
+                value="true"
+                checked={this.state.certified_organic === true}
+                onChange={this.isOrganic}
+              />
+              Yes{" "}
+              <input
+                type="radio"
+                name="certified_organic"
+                value="false"
+                checked={this.state.certified_organic === false}
+                onChange={this.isOrganic}
+              />
+              {"  "}
+              No
+            </p>
             <p className="form-label">Notes / Comments:</p>
             <input
               name="vendor_notes"
@@ -144,15 +268,14 @@ class CreateProduct extends Component {
               onChange={this.handleChange}
             />
             <br />
-            <button className="btn btn-dark">Submit</button>{" "}
+            <button className="btn btn-success">Submit</button>{" "}
           </form>
         </div>
         <div>
           {/* Render the CreateCode component if codedUrl is truthy (has a value) */}
-          {this.state.codedUrl ?
+          {this.state.codedUrl ? (
             <CreateCode codedUrl={this.state.codedUrl} />
-            : null
-          }
+          ) : null}
         </div>
         <p>{this.state.codedUrl}</p>
       </div>

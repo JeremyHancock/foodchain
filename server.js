@@ -10,6 +10,7 @@ var express = require("express");
 // =============================================================
 var app = express();
 var PORT = process.env.PORT || 8080;
+// var maps = process.env.GOOGLE_MAPS_API; <-- may use this here, may not
 
 // Requiring our models for syncing
 var db = require("./models");
