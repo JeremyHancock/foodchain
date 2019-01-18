@@ -10,6 +10,7 @@ const date = d.toLocaleDateString();
 const url = window.location.href;
 const urlPieces = url.split("/");
 const userIdFromUrl = urlPieces[4];
+let chemicals = [];
 
 class CreateProduct extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class CreateProduct extends Component {
     this.state = {
       vendor_id: 1,
       product_id: 1,
+      product_name: "",
       link_id: 1,
       harvest_date: date,
       chemicals_used: "",
@@ -35,6 +37,7 @@ class CreateProduct extends Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.getVendorInfo = this.getVendorInfo.bind(this);
     this.isOrganic = this.isOrganic.bind(this);
+    this.hasChemicals = this.hasChemicals.bind(this);
   }
   componentDidMount() {
     this.getVendorInfo();
@@ -62,10 +65,26 @@ class CreateProduct extends Component {
     }
   }
 
-  hasChemicals() { //push chemical into this.state.chemicals_used if (this.state.[chemical]) === true
-    if (this.state.dichloropropene) {
-      
+  hasChemicals() {
+    //push chemical into this.state.chemicals_used if (this.state.[chemical]) === true
+    if (this.state.glyphosphate) {
+      chemicals.push("Glyphosphate");
     }
+    if (this.state.atrazine) {
+      chemicals.push("Atrazine");
+    }
+    if (this.state.metolachlorS) {
+      chemicals.push("Metolachlor-S");
+    }
+    if (this.state.dichloropropene) {
+      chemicals.push("Dichloropropene");
+    }
+    if (this.state.twoFourD) {
+      chemicals.push("2,4-D");
+    }
+    console.log(chemicals);
+    this.setState({ chemicals_used: chemicals.toString() });
+    console.log(chemicals.toString());
   }
 
   handleChange(event) {
@@ -79,11 +98,11 @@ class CreateProduct extends Component {
     event.preventDefault();
     const newProduct = this.state;
     !newProduct.harvest_date //||
-    // !newProduct.chemicals_used ||
-    // !newProduct.certified_organic
-      ? alert("You must fill in all required fields to create a new product.")
+      ? // !newProduct.chemicals_used ||
+        // !newProduct.certified_organic
+        alert("You must fill in all required fields to create a new product.")
       : console.log("good entry");
-
+    this.hasChemicals();
     API.postProduct(newProduct)
       .then(res => {
         console.log("Product saved! " + JSON.stringify(res.data));
@@ -132,6 +151,15 @@ class CreateProduct extends Component {
               onChange={this.handleChange}
             />
             <br /> */}
+            <p className="form-label">Product Name:</p>
+            <input
+              name="product_name"
+              className="form-control"
+              type="text"
+              value={this.state.product_name}
+              onChange={this.handleChange}
+            />
+            <br />
             <p className="form-label">Harvest Date:</p>
             <input
               name="harvest_date"
@@ -198,16 +226,17 @@ class CreateProduct extends Component {
                 onChange={this.handleChange}
               />
               {"  "}
-              Other (list):{" "} 
+              Other (list):{" "}
               <input
-              id="other"
-              name="other"
-              className="form-control"
-              type="text"
-              value={this.state.other}
-              onChange={this.handleChange}
-            />
-              <br /><br />
+                id="other"
+                name="other"
+                className="form-control"
+                type="text"
+                value={this.state.other}
+                onChange={this.handleChange}
+              />
+              <br />
+              <br />
             </p>
             <p>Is This Product Certified Organic?</p>
             <p>

@@ -49,6 +49,7 @@ module.exports = function(app) {
     console.log("HERE ->>>> /routes/api/product.js line 49: " + JSON.stringify(req.body));
     db.Product.create({
       vendor_id: req.body.vendor_id, // see models/products.js, line 4
+      product_name: req.body.product_name,
       harvest_date: req.body.harvest_date,
       chemicals_used: req.body.chemicals_used,
       certified_organic: req.body.certified_organic,
