@@ -4,9 +4,8 @@ import API from "../utils/api";
 
 const url = window.location.href;
 const urlChunks = url.split("/");
-// console.log(urlChunks);
 const urlPieces = urlChunks[4] ? urlChunks[4].split("sirlinksalot") : [];
-// console.log(urlPieces)
+console.log(urlPieces)
 
 //urlPieces[0] === code_data
 //urlPieces[1] === product_id
@@ -17,6 +16,7 @@ class DisplayCodeDataPage extends Component {
     constructor() {
         super();
         this.state = {
+            product_name: "",
             organic: false,
             chemicals: "",
             harvest: "",
@@ -28,21 +28,21 @@ class DisplayCodeDataPage extends Component {
             link_id: urlPieces.slice(2)
 
         };
-        this.getInfo = this.getInfo.bind(this);
+        this.getProductInfo = this.getProductInfo.bind(this);
+        // this.getLinkInfo = this.getLinkInfo.bind(this);
     }
-    componentDidMount() {
-        // console.log("Line 34: " + JSON.stringify(this.state))
-        this.getInfo();
+    componentWillMount() {
+        this.getProductInfo();
+        // this.getLinkInfo();
     };
 
-    async getInfo() {
-        const linkVendors = [];
-
+    getProductInfo() {
         API.getProduct(this.state.product_id)
             .then(res => {
                 // console.log(res.data)
                 if (res.data) {
                     this.setState({
+                        product_name: res.data.product_name,
                         organic: res.data.certified_organic,
                         chemicals: res.data.chemicals_used,
                         createdAt: res.data.createdAt,
@@ -52,20 +52,6 @@ class DisplayCodeDataPage extends Component {
                     })
                 }
             });
-        // console.log("Line 53 :" + this.state.link_id);
-        this.state.link_id.map(function (value, i) {
-            API.getLink(value)
-                .then(res => {
-                    linkVendors.push(res.data);
-                    // console.log("Line 58: " + JSON.stringify(res.data));
-                    // console.log("Line 60: " + JSON.stringify(linkVendors));
-                    return linkVendors
-                });
-        });
-        // this.setState({ link_id: 'loading...' });
-        // let d = await this.state.link_id.map(function (value, i);
-        // this.setState({ link_id: d })
-        // console.log("Line 64: " + this.state.link_id);
     }
 
     render() {
@@ -73,13 +59,16 @@ class DisplayCodeDataPage extends Component {
             <div>
                 <p className="main">
                     <ul>
-                        <li>{this.state.harvest}</li>
-                        <li>{this.state.grower}</li>
-                        <li>{this.state.organic}</li>
-                        <li>{this.state.chemicals}</li>
-                        {this.state.link_id.map(item => (
-                            <li>{`this ${item.location}`}</li>
-                        ))}
+                        <li>{`Product Name: ${this.state.product_name}`}</li>
+                        <li>{`Harvest Date: ${this.state.harvest}`}</li>
+                        <li>{`Created At: ${this.state.createdAt}`}</li>
+                        <li>{`Grower: ${this.state.grower}`}</li>
+                        <li>{`Organic: ${this.state.organic}`}</li>
+                        <li>{`Chemicals: ${this.state.chemicals}`}</li>
+                        <li>{`Notes: ${this.state.notes}`}</li>
+                        {/* {this.state.link_id.map(item => (
+                            <li>{`Link locations: ${item.location}`}</li>
+                        ))} */}
 
                     </ul>
                 </p>

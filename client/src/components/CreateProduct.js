@@ -49,11 +49,7 @@ class CreateProduct extends Component {
         vendor_id: res.data[0].id,
         code_value: `${UUID()}`
       });
-      console.log(
-        `Got vendor info from the url: ${res.data[0].user_name} - ${
-          this.state.vendor_id
-        }`
-      );
+    console.log(`Got vendor info from the url: ${this.state.vendor_id}`);
     });
   }
 
@@ -82,9 +78,9 @@ class CreateProduct extends Component {
     if (this.state.twoFourD) {
       chemicals.push("2,4-D");
     }
-    console.log(chemicals);
+    console.log("Line 81: " + chemicals);
     this.setState({ chemicals_used: chemicals.toString() });
-    console.log(chemicals.toString());
+    console.log("Line 83: " + chemicals.toString());
   }
 
   handleChange(event) {
@@ -96,13 +92,11 @@ class CreateProduct extends Component {
 
   handleFormSubmit(event) {
     event.preventDefault();
+    this.hasChemicals();
     const newProduct = this.state;
-    !newProduct.harvest_date //||
-      ? // !newProduct.chemicals_used ||
-        // !newProduct.certified_organic
+    !newProduct.harvest_date || !newProduct.product_name || !newProduct.certified_organic ?
         alert("You must fill in all required fields to create a new product.")
       : console.log("good entry");
-    this.hasChemicals();
     API.postProduct(newProduct)
       .then(res => {
         console.log("Product saved! " + JSON.stringify(res.data));
@@ -139,16 +133,6 @@ class CreateProduct extends Component {
         <h1>Create Product</h1>
         <div className="form-group">
           <form onSubmit={this.handleFormSubmit}>
-            {/* <p className="form-label">Vendor ID:</p>
-            <input
-              name="vendor_id"
-              className="form-control"
-              type="text"
-              value={this.state.vendor_id}
-              placeholder="This should auto-populate"
-              onChange={this.handleChange}
-            />
-            <br /> */}
             <p className="form-label">Product Name:</p>
             <input
               name="product_name"
