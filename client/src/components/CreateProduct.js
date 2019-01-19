@@ -46,7 +46,7 @@ class CreateProduct extends Component {
   getVendorInfo() {
     API.getVendorById(userIdFromUrl).then(res => {
       this.setState({
-        vendor_id: res.data[0].id,
+        vendor_id: res.data.id,
         code_value: `${UUID()}`
       });
     console.log(`Got vendor info from the url: ${this.state.vendor_id}`);
@@ -116,7 +116,7 @@ class CreateProduct extends Component {
                 console.log("Link saved! " + JSON.stringify(res.data));
                 this.setState({
                   link_id: res.data.id,
-                  codedUrl: `https://foodchains.herokuapp.com/scan/${newLink.code_value}sirlinksalot${res.data.id}` 
+                  codedUrl: `https://foodchains.herokuapp.com/scan/${newLink.code_value}sirlinksalot${newLink.product_id}sirlinksalot${res.data.id}` 
                 });
                 console.log("New link's id: " + this.state.link_id);
               })

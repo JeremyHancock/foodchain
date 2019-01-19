@@ -29,11 +29,11 @@ class DisplayCodeDataPage extends Component {
 
         };
         this.getProductInfo = this.getProductInfo.bind(this);
-        this.getLinkInfo = this.getLinkInfo.bind(this);
+        // this.getLinkInfo = this.getLinkInfo.bind(this);
     }
-    componentDidMount() {
-        this.getProductInfo();
-        this.getLinkInfo();
+    async componentDidMount() {
+        await this.getProductInfo();
+        // await this.getLinkInfo();
     };
 
     getProductInfo() {
@@ -47,13 +47,11 @@ class DisplayCodeDataPage extends Component {
                         chemicals: res.data.chemicals_used,
                         createdAt: res.data.createdAt,
                         harvest: res.data.harvest_date,
-                        grower: res.data.vendor_id,
                         notes: res.data.vendor_notes
                     })
                 }
             });
-    }
-    getLinkInfo() {
+        // getLinkInfo() {
         const linkArray = [];
         const links = this.state.link_id;
         const vendorArray = [];
@@ -73,15 +71,17 @@ class DisplayCodeDataPage extends Component {
                                     vendorArray.push(res.data);
                                 }
                                 console.log(vendorArray);
+                                this.setState({
+                                    link_id: linkArray,
+                                    vendor_id: vendorArray,
+                                    grower: vendorArray[0].company_name
+                                });
+                                console.log(JSON.stringify(this.state));
                             })
                     }
                 })
         )
-        this.setState({
-            link_id: linkArray,
-            vendor_id: vendorArray
-        });
-        console.log(JSON.stringify(this.state));
+        // }
     }
 
     render() {
@@ -96,8 +96,11 @@ class DisplayCodeDataPage extends Component {
                     <li>{`Chemicals: ${this.state.chemicals}`}</li>
                     <li>{`Notes: ${this.state.notes}`}</li>
                     {this.state.link_id.map(item => (
-                            <li>{`Link locations: ${item.location}`}</li>
-                        ))}
+                        <ul>
+                            <li>{`Link created at: ${item.createdAt}`}</li>
+                            <li>{`by vendor number: ${item.vendor_id}`}</li>
+                        </ul>
+                    ))}
 
                 </ul>
             </div >
