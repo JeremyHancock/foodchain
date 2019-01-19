@@ -62,26 +62,26 @@ class DisplayCodeDataPage extends Component {
                     // console.log(res.data)
                     if (res.data) {
                         linkArray.push(res.data);
-                        console.log(linkArray);
-                        console.log(res.data.vendor_id);
+                        // console.log(linkArray);
+                        // console.log(res.data.vendor_id);
                         const vendor = res.data.vendor_id
                         API.getVendorById(vendor)
                             .then(res => {
                                 if (res.data) {
                                     vendorArray.push(res.data);
                                 }
-                                console.log(vendorArray);
+                                // console.log(vendorArray);
                                 this.setState({
                                     link_id: linkArray,
                                     vendor_id: vendorArray,
                                     grower: vendorArray[0].company_name
                                 });
-                                console.log(JSON.stringify(this.state));
+                                // console.log(JSON.stringify(this.state));
+                                // console.log(JSON.stringify(this.state.link_id));
                             })
                     }
                 })
         )
-        // }
     }
 
     render() {
@@ -96,10 +96,14 @@ class DisplayCodeDataPage extends Component {
                     <li>{`Chemicals: ${this.state.chemicals}`}</li>
                     <li>{`Notes: ${this.state.notes}`}</li>
                     {this.state.link_id.map(item => (
-                        <ul>
-                            <li>{`Link created at: ${item.createdAt}`}</li>
-                            <li>{`by vendor number: ${item.vendor_id}`}</li>
-                        </ul>
+                        <li>{`Link created at: ${item.createdAt}`}</li>
+                    ))}
+                    {this.state.vendor_id.map(item => (
+                        <div>
+                            <li>{`by vendor number: ${item.company_name}`}</li>
+                            <li>{`vendor location: ${item.location}`}</li>
+                            <li>{`vendor website: ${item.website}`}</li>
+                        </div>
                     ))}
 
                 </ul>
