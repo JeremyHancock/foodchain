@@ -20,9 +20,9 @@ module.exports = function(app) {
       });
   });
 
-  // Get route for returning vendors of a specific username
-  app.get("/api/vendors/:user_name", function(req, res) {
-    db.Vendor.findAll({
+  // Get route for returning vendor of a specific username
+  app.get("/api/vendors/user/:user_name", function(req, res) {
+    db.Vendor.findOne({
       where: {
         user_name: req.params.user_name
       }
@@ -32,8 +32,8 @@ module.exports = function(app) {
       });
   });
 
-  // Get route for retrieving a single Vendor
-  app.get("/api/vendors/:id", function(req, res) {
+  // Get route for retrieving a single Vendor by id
+  app.get("/api/vendors/id/:id", function(req, res) {
     db.Vendor.findOne({
       where: {
         id: req.params.id

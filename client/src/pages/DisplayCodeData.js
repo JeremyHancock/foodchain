@@ -29,11 +29,11 @@ class DisplayCodeDataPage extends Component {
 
         };
         this.getProductInfo = this.getProductInfo.bind(this);
-        // this.getLinkInfo = this.getLinkInfo.bind(this);
+        this.getLinkInfo = this.getLinkInfo.bind(this);
     }
-    componentWillMount() {
+    componentDidMount() {
         this.getProductInfo();
-        // this.getLinkInfo();
+        this.getLinkInfo();
     };
 
     getProductInfo() {
@@ -53,25 +53,53 @@ class DisplayCodeDataPage extends Component {
                 }
             });
     }
+    getLinkInfo() {
+        const linkArray = [];
+        const links = this.state.link_id;
+        const vendorArray = [];
+        // console.log(links);
+        links.forEach(link =>
+            API.getLink(link)
+                .then(res => {
+                    // console.log(res.data)
+                    if (res.data) {
+                        linkArray.push(res.data);
+                        console.log(linkArray);
+                        console.log(res.data.vendor_id);
+                        const vendor = res.data.vendor_id
+                        API.getVendorById(vendor)
+                            .then(res => {
+                                if (res.data) {
+                                    vendorArray.push(res.data);
+                                }
+                                console.log(vendorArray);
+                            })
+                    }
+                })
+        )
+        this.setState({
+            link_id: linkArray,
+            vendor_id: vendorArray
+        });
+        console.log(JSON.stringify(this.state));
+    }
 
     render() {
         return (
             <div>
-                <p className="main">
-                    <ul>
-                        <li>{`Product Name: ${this.state.product_name}`}</li>
-                        <li>{`Harvest Date: ${this.state.harvest}`}</li>
-                        <li>{`Created At: ${this.state.createdAt}`}</li>
-                        <li>{`Grower: ${this.state.grower}`}</li>
-                        <li>{`Organic: ${this.state.organic}`}</li>
-                        <li>{`Chemicals: ${this.state.chemicals}`}</li>
-                        <li>{`Notes: ${this.state.notes}`}</li>
-                        {/* {this.state.link_id.map(item => (
+                <ul>
+                    <li>{`Product Name: ${this.state.product_name}`}</li>
+                    <li>{`Harvest Date: ${this.state.harvest}`}</li>
+                    <li>{`Created At: ${this.state.createdAt}`}</li>
+                    <li>{`Grower: ${this.state.grower}`}</li>
+                    <li>{`Organic: ${this.state.organic}`}</li>
+                    <li>{`Chemicals: ${this.state.chemicals}`}</li>
+                    <li>{`Notes: ${this.state.notes}`}</li>
+                    {this.state.link_id.map(item => (
                             <li>{`Link locations: ${item.location}`}</li>
-                        ))} */}
+                        ))}
 
-                    </ul>
-                </p>
+                </ul>
             </div >
         );
     }

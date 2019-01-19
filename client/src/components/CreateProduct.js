@@ -44,7 +44,7 @@ class CreateProduct extends Component {
   }
 
   getVendorInfo() {
-    API.getVendor(userIdFromUrl).then(res => {
+    API.getVendorById(userIdFromUrl).then(res => {
       this.setState({
         vendor_id: res.data[0].id,
         code_value: `${UUID()}`
