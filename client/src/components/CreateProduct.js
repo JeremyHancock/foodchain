@@ -9,7 +9,7 @@ const d = new Date();
 const date = d.toLocaleDateString();
 const url = window.location.href;
 const urlPieces = url.split("/");
-const userIdFromUrl = urlPieces[4];
+const usernameFromUrl = urlPieces[4];
 let chemicals = [];
 
 class CreateProduct extends Component {
@@ -44,7 +44,7 @@ class CreateProduct extends Component {
   }
 
   getVendorInfo() {
-    API.getVendorById(userIdFromUrl).then(res => {
+    API.getVendor(usernameFromUrl).then(res => {
       this.setState({
         vendor_id: res.data.id,
         code_value: `${UUID()}`
