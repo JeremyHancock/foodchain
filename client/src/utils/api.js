@@ -19,8 +19,12 @@ export default {
   },
 
   // Gets the vendor with the given id
-  getVendor: function (id) {
-    return axios.get("/api/vendors/" + id);
+  getVendor: function (user_name) {
+    return axios.get("/api/vendors/user/" + user_name);
+  },
+  // Gets the vendor with the given id
+  getVendorById: function (id) {
+    return axios.get("/api/vendors/id/" + id);
   },
   // Gets all vendors
   getVendors: function () {
@@ -69,20 +73,20 @@ export default {
     return axios.post("/api/links", LinkData);
   },
 
-    // Gets the Code with the given id
-    getCode: function (code_data) {
-      return axios.get("/api/codes/" + code_data);
-    },
-    // Gets all Codes
-    getCodes: function () {
-      return axios.get("/api/codes/");
-    },
-    // Deletes the Code with the given id
-    deleteCode: function (id) {
-      return axios.delete("/api/codes/" + id);
-    },
-    // Saves a Code to the database
-    postCode: function (CodeData) {
-      return axios.post("/api/codes", CodeData);
-    }
+  // Gets the Code with the given id
+  getCode: function (code_data) {
+    return axios.get("/api/codes/" + code_data);
+  },
+  // Gets all Codes
+  getCodes: function () {
+    return axios.get("/api/codes/");
+  },
+  // Deletes the Code with the given id
+  deleteCode: function (id) {
+    return axios.delete("/api/codes/" + id);
+  },
+  // Saves a Code to the database
+  postCode: function (CodeData) {
+    return axios.post("/api/codes", CodeData);
+  }
 };
