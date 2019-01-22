@@ -13,16 +13,18 @@ import Footer from "./components/Footer";
 class App extends Component {
   render() {
     return (
-      <div className="main">
+      <div>
         <Header />
         <Router>
-          <Switch>
-            <Route exact path="/" component={SignInPage} />
-            <Route path="/consumer" component={ConsumerPage} />
-            <Route path="/scan" component={DisplayCodeDataPage} />
-            <Route path="/vendor" component={VendorPage} />
-            <Route component={NoMatch} />
-          </Switch>
+          <div className="main">
+            <Switch>
+              <Route exact path="/" component={SignInPage} />
+              <Route path="/consumer" component={ConsumerPage} />
+              <Route path="/scan" component={DisplayCodeDataPage} />
+              <Route path="/vendor" component={VendorPage} />
+              <Route component={NoMatch} />
+            </Switch>
+          </div>
         </Router>
         <Footer />
       </div>
