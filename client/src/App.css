@@ -82,6 +82,11 @@ button {
   color: white;
 }
 
+.confirm-info{
+  padding: 20px;
+  background-color: #774517e8;
+  width: 100%;
+}
 #map {
   height: 100%;
 }

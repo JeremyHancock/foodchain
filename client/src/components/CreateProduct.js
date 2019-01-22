@@ -1,22 +1,15 @@
 import React, { Component } from "react";
 import API from "../utils/api";
-import UUID from "uuid/v1";
 import CreateCode from "../components/CreateCode";
-
-// import "./style.css"
 
 const d = new Date();
 const date = d.toLocaleDateString();
-const url = window.location.href;
-const urlPieces = url.split("/");
-const usernameFromUrl = urlPieces[4];
 let chemicals = [];
 
 class CreateProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      vendor_id: 1,
       product_id: 1,
       product_name: "",
       link_id: 1,
@@ -29,30 +22,17 @@ class CreateProduct extends Component {
       twoFourD: false,
       certified_organic: false,
       vendor_notes: "",
-      code_value: "",
+      code_value: props.code_value,
       codedUrl: "",
-      location: ""
+      location: "",
+      vendor_id: props.vendor_id,
+
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.getVendorInfo = this.getVendorInfo.bind(this);
     this.isOrganic = this.isOrganic.bind(this);
     this.hasChemicals = this.hasChemicals.bind(this);
   }
-  componentDidMount() {
-    this.getVendorInfo();
-  }
-
-  getVendorInfo() {
-    API.getVendor(usernameFromUrl).then(res => {
-      this.setState({
-        vendor_id: res.data.id,
-        code_value: `${UUID()}`
-      });
-    console.log(`Got vendor info from the url: ${this.state.vendor_id}`);
-    });
-  }
-
   isOrganic() {
     if (this.state.certified_organic) {
       this.setState({ certified_organic: false });
@@ -95,8 +75,8 @@ class CreateProduct extends Component {
     this.hasChemicals();
     const newProduct = this.state;
     !newProduct.harvest_date || !newProduct.product_name || !newProduct.certified_organic ?
-        alert("You must fill in all required fields to create a new product.")
-      : console.log("good entry");
+      alert("You must fill in all required fields to create a new product.")
+      : console.log(this.state);
     API.postProduct(newProduct)
       .then(res => {
         console.log("Product saved! " + JSON.stringify(res.data));
@@ -116,7 +96,10 @@ class CreateProduct extends Component {
                 console.log("Link saved! " + JSON.stringify(res.data));
                 this.setState({
                   link_id: res.data.id,
-                  codedUrl: `https://foodchains.herokuapp.com/scan/${newLink.code_value}sirlinksalot${newLink.product_id}sirlinksalot${res.data.id}` 
+                  // for production
+                  codedUrl: `localhost:3000/scan/${newLink.code_value}sirlinksalot${newLink.product_id}sirlinksalot${res.data.id}`,
+                  // for deployment
+                  // codedUrl: `https://foodchains.herokuapp.com/scan/${newLink.code_value}sirlinksalot${newLink.product_id}sirlinksalot${res.data.id}` 
                 });
                 console.log("New link's id: " + this.state.link_id);
               })
@@ -255,9 +238,9 @@ class CreateProduct extends Component {
         </div>
         <div>
           {/* Render the CreateCode component if codedUrl is truthy (has a value) */}
-          {this.state.codedUrl ? (
+          {this.state.codedUrl ?
             <CreateCode codedUrl={this.state.codedUrl} />
-          ) : null}
+            : null}
         </div>
         <p>{this.state.codedUrl}</p>
       </div>
