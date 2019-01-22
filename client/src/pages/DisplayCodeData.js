@@ -5,7 +5,6 @@ const url = window.location.href;
 const urlChunks = url.split("/");
 const urlPieces = urlChunks[4] ? urlChunks[4].split("sirlinksalot") : [];
 let numberOfLinks = urlPieces.length - 2;
-console.log(numberOfLinks);
 
 let linkLocations = [];
 let linkCreatedAt = [];

@@ -80,6 +80,10 @@ button {
   color: white;
 }
 
+.confirm-info{
+  padding: 20px;
+  background-color: #774517e8;
+}
 #map {
   height: 100%;
 }
