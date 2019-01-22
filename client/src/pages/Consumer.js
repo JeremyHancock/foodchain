@@ -11,7 +11,7 @@ class ConsumerPage extends Component {
 
     handleScan = data => {
         if (data) {
-            const cutUrl = data.split("consumer");
+            const cutUrl = data.split("scan");
             console.log(cutUrl);
             this.setState({
                 result: data,

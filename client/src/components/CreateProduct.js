@@ -75,7 +75,7 @@ class CreateProduct extends Component {
     this.hasChemicals();
     const newProduct = this.state;
     !newProduct.harvest_date || !newProduct.product_name || !newProduct.certified_organic ?
-        alert("You must fill in all required fields to create a new product.")
+      alert("You must fill in all required fields to create a new product.")
       : console.log(this.state);
     API.postProduct(newProduct)
       .then(res => {
@@ -97,7 +97,7 @@ class CreateProduct extends Component {
                 this.setState({
                   link_id: res.data.id,
                   // for production
-                  codedUrl: `localhost:3000/scan/${newLink.code_value}sirlinksalot${newLink.product_id}sirlinksalot${res.data.id}`, 
+                  codedUrl: `localhost:3000/scan/${newLink.code_value}sirlinksalot${newLink.product_id}sirlinksalot${res.data.id}`,
                   // for deployment
                   // codedUrl: `https://foodchains.herokuapp.com/scan/${newLink.code_value}sirlinksalot${newLink.product_id}sirlinksalot${res.data.id}` 
                 });
@@ -238,9 +238,9 @@ class CreateProduct extends Component {
         </div>
         <div>
           {/* Render the CreateCode component if codedUrl is truthy (has a value) */}
-          {this.state.codedUrl ? (
+          {this.state.codedUrl ?
             <CreateCode codedUrl={this.state.codedUrl} />
-          ) : null}
+            : null}
         </div>
         <p>{this.state.codedUrl}</p>
       </div>

@@ -18,7 +18,8 @@ class VendorPage extends Component {
             code_value: UUID(),
             company_name: "",
             location: "",
-            website: ""
+            website: "",
+            product_id: ""
         }
         this.isProduct = this.isProduct.bind(this);
         this.getVendor = this.getVendor.bind(this);
