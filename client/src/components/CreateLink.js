@@ -17,23 +17,21 @@ class CreateLink extends Component {
             product_id: this.props.product_id,
             location: this.props.location,
             link_id: "",
-            codedUrl: ""
+            codedUrl: "",
+            linkCreated: false
+
         }
         this.postLink = this.postLink.bind(this);
     };
 
     postLink() {
-        const newCode = this.state;
-        API.postCode(newCode)
-            .then(res => {
-                console.log("Code saved! " + JSON.stringify(res.data));
-            })
         const newLink = this.state;
         API.postLink(newLink)
             .then(res => {
                 this.setState({
                     link_id: res.data.id,
-                    codedUrl: `${this.state.result}sirlinksalot${res.data.id}`,
+                    codedUrl: `${this.state.result}lki${res.data.id}`,
+                    linkCreated: true
                 });
                 console.log("Link saved! " + JSON.stringify(res.data));
             })
@@ -42,7 +40,7 @@ class CreateLink extends Component {
     handleScan = data => {
         if (data) {
             const urlChunks = data.split("scan");
-            const urlPieces = urlChunks[1].split("sirlinksalot");
+            const urlPieces = urlChunks[1].split("lki");
             console.log(urlPieces);
             this.setState({
                 result: data,
@@ -58,22 +56,30 @@ class CreateLink extends Component {
         return (
             <div className="scanner">
                 {this.state.scannerOn ?
-                    <QrReader
-                        delay={300}
-                        onError={this.handleError}
-                        onScan={this.handleScan}
-                        style={{ width: '100%' }}
-                    />
-                    :
-                    <div className="confirm-info">
-                        <ul>Is this information correct?
-                            <li>Company name: {this.props.company_name}</li>
-                            <li>Location: {this.props.location}</li>
-                            <li>Current time: {date}</li>
-                        </ul>
-                        <button className="btn btn-success" onClick={this.postLink}>Confirm</button>
+                    <div>
+                        <p className="confirm-info">Scan the code with your camera. Use the viewer box below to center it and try to hold it steady.</p>
+                        <QrReader
+                            delay={300}
+                            onError={this.handleError}
+                            onScan={this.handleScan}
+                            style={{ width: '100%' }}
+                        />
                     </div>
-                }
+                    : null}
+                <div className="confirm-info">
+                    {this.state.linkCreated ?
+                        <p>This code needs to be sent with your product so that it can be scanned by the next link in the Foodchain. Please save or print this image.</p>
+                        :
+                        <div>
+                            <ul>Is this information correct?
+                                    <li>Company name: {this.props.company_name}</li>
+                                <li>Location: {this.props.location}</li>
+                                <li>Current time: {date}</li>
+                            </ul>
+                            <button className="btn btn-success" onClick={this.postLink}>Confirm</button>
+                        </div>
+                    }
+                </div>
                 <div>
                     <div>
                         {this.state.codedUrl ?
@@ -84,7 +90,6 @@ class CreateLink extends Component {
                             : null}
                     </div>
                 </div>
-
             </div >
         );
     }

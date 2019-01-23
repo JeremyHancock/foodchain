@@ -90,7 +90,11 @@ button {
 #map {
   height: 100%;
 }
-
+.qr-holder{
+  align-content: center;
+  vertical-align: middle;
+  padding: 5px;
+}
 
 /* Media Queries - I started with the file at the end of this github link: https://gist.github.com/gokulkrishh/242e68d1ee94ad05f488#file-media-query-css */
 

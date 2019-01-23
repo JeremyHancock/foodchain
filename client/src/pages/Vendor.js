@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import CreateProduct from "../components/CreateProduct";
 import CreateLink from "../components/CreateLink";
-import UUID from "uuid/v1";
 import API from "../utils/api";
 
 const url = window.location.href;
@@ -15,7 +14,7 @@ class VendorPage extends Component {
             result: 'Add a new product',
             newProduct: true,
             vendor_id: "",
-            code_value: UUID(),
+            code_value: "cvl",
             company_name: "",
             location: "",
             website: "",

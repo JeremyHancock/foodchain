@@ -84,27 +84,21 @@ class CreateProduct extends Component {
         console.log("New product's id: " + this.state.product_id);
       })
       .then(res => {
-        const newCode = this.state;
-        API.postCode(newCode)
+        const newLink = this.state;
+        API.postLink(newLink)
           .then(res => {
-            console.log("Code saved! " + JSON.stringify(res.data));
+            console.log("Link saved! " + JSON.stringify(res.data));
+            this.setState({
+              link_id: res.data.id,
+              // for production
+              codedUrl: `localhost:3000/scan/${newLink.code_value}lki${newLink.product_id}lki${res.data.id}`,
+              // for deployment
+              // codedUrl: `https://foodchains.herokuapp.com/scan/${newLink.code_value}lki${newLink.product_id}lki${res.data.id}` 
+            });
+            console.log("New link's id: " + this.state.link_id);
           })
-          .then(res => {
-            const newLink = this.state;
-            API.postLink(newLink)
-              .then(res => {
-                console.log("Link saved! " + JSON.stringify(res.data));
-                this.setState({
-                  link_id: res.data.id,
-                  // for production
-                  codedUrl: `localhost:3000/scan/${newLink.code_value}sirlinksalot${newLink.product_id}sirlinksalot${res.data.id}`,
-                  // for deployment
-                  // codedUrl: `https://foodchains.herokuapp.com/scan/${newLink.code_value}sirlinksalot${newLink.product_id}sirlinksalot${res.data.id}` 
-                });
-                console.log("New link's id: " + this.state.link_id);
-              })
-              .catch(err => console.log(err));
-          })
+          //     .catch(err => console.log(err));
+          // })
           .catch(err => console.log(err));
       })
       .catch(err => console.log(err));
@@ -113,136 +107,137 @@ class CreateProduct extends Component {
   render() {
     return (
       <div>
-        <h1>Create Product</h1>
-        <div className="form-group">
-          <form onSubmit={this.handleFormSubmit}>
-            <p className="form-label">Product Name:</p>
-            <input
-              name="product_name"
-              className="form-control"
-              type="text"
-              value={this.state.product_name}
-              onChange={this.handleChange}
-            />
-            <br />
-            <p className="form-label">Harvest Date:</p>
-            <input
-              name="harvest_date"
-              className="form-control"
-              type="text"
-              value={this.state.harvest_date}
-              onChange={this.handleChange}
-            />
-            <br />
-            <p className="form-label">Chemicals Used?</p>
-            <p>
-              <input
-                type="checkbox"
-                name="glyphosphate"
-                checked={this.state.glyphosphate}
-                onChange={this.handleChange}
-              />
-              {"  "}
-              Glyphosphate{"  "}
+        {/* Render the CreateCode component if codedUrl is truthy (has a value) */}
+        {this.state.codedUrl ?
+          <CreateCode codedUrl={this.state.codedUrl} />
+          :
+          <div>
+            <h1>Create Product</h1>
+            <div className="form-group">
+              <form onSubmit={this.handleFormSubmit}>
+                <p className="form-label">Product Name:</p>
+                <input
+                  name="product_name"
+                  className="form-control"
+                  type="text"
+                  value={this.state.product_name}
+                  onChange={this.handleChange}
+                />
+                <br />
+                <p className="form-label">Harvest Date:</p>
+                <input
+                  name="harvest_date"
+                  className="form-control"
+                  type="text"
+                  value={this.state.harvest_date}
+                  onChange={this.handleChange}
+                />
+                <br />
+                <p className="form-label">Chemicals Used?</p>
+                <p>
+                  <input
+                    type="checkbox"
+                    name="glyphosphate"
+                    checked={this.state.glyphosphate}
+                    onChange={this.handleChange}
+                  />
+                  {"  "}
+                  Glyphosphate{"  "}
+                </p>
+                <p>
+                  <input
+                    type="checkbox"
+                    name="atrazine"
+                    checked={this.state.atrazine}
+                    onChange={this.handleChange}
+                  />
+                  {"  "}
+                  Atrazine{"  "}
+                </p>
+                <p>
+                  <input
+                    type="checkbox"
+                    name="metolachlorS"
+                    checked={this.state.metolachlorS}
+                    onChange={this.handleChange}
+                  />
+                  {"  "}
+                  Metolchlor-S{"  "}
+                </p>
+                <p>
+                  <input
+                    type="checkbox"
+                    name="dichloropropene"
+                    checked={this.state.dichloropropene}
+                    onChange={this.handleChange}
+                  />
+                  {"  "}
+                  Dichloropropene{"  "}
+                </p>
+                <p>
+                  <input
+                    type="checkbox"
+                    name="twoFourD"
+                    checked={this.state.twoFourD}
+                    onChange={this.handleChange}
+                  />
+                  {"  "}
+                  2,4-D <br />
+                  <input
+                    type="checkbox"
+                    name="other"
+                    checked={this.state.other}
+                    onChange={this.handleChange}
+                  />
+                  {"  "}
+                  Other (list):{" "}
+                  <input
+                    id="other"
+                    name="other"
+                    className="form-control"
+                    type="text"
+                    value={this.state.other}
+                    onChange={this.handleChange}
+                  />
+                  <br />
+                  <br />
+                </p>
+                <p>Is This Product Certified Organic?</p>
+                <p>
+                  <input
+                    type="radio"
+                    name="certified_organic"
+                    value="true"
+                    checked={this.state.certified_organic === true}
+                    onChange={this.isOrganic}
+                  />
+                  Yes{" "}
+                  <input
+                    type="radio"
+                    name="certified_organic"
+                    value="false"
+                    checked={this.state.certified_organic === false}
+                    onChange={this.isOrganic}
+                  />
+                  {"  "}
+                  No
             </p>
-            <p>
-              <input
-                type="checkbox"
-                name="atrazine"
-                checked={this.state.atrazine}
-                onChange={this.handleChange}
-              />
-              {"  "}
-              Atrazine{"  "}
-            </p>
-            <p>
-              <input
-                type="checkbox"
-                name="metolachlorS"
-                checked={this.state.metolachlorS}
-                onChange={this.handleChange}
-              />
-              {"  "}
-              Metolchlor-S{"  "}
-            </p>
-            <p>
-              <input
-                type="checkbox"
-                name="dichloropropene"
-                checked={this.state.dichloropropene}
-                onChange={this.handleChange}
-              />
-              {"  "}
-              Dichloropropene{"  "}
-            </p>
-            <p>
-              <input
-                type="checkbox"
-                name="twoFourD"
-                checked={this.state.twoFourD}
-                onChange={this.handleChange}
-              />
-              {"  "}
-              2,4-D <br />
-              <input
-                type="checkbox"
-                name="other"
-                checked={this.state.other}
-                onChange={this.handleChange}
-              />
-              {"  "}
-              Other (list):{" "}
-              <input
-                id="other"
-                name="other"
-                className="form-control"
-                type="text"
-                value={this.state.other}
-                onChange={this.handleChange}
-              />
-              <br />
-              <br />
-            </p>
-            <p>Is This Product Certified Organic?</p>
-            <p>
-              <input
-                type="radio"
-                name="certified_organic"
-                value="true"
-                checked={this.state.certified_organic === true}
-                onChange={this.isOrganic}
-              />
-              Yes{" "}
-              <input
-                type="radio"
-                name="certified_organic"
-                value="false"
-                checked={this.state.certified_organic === false}
-                onChange={this.isOrganic}
-              />
-              {"  "}
-              No
-            </p>
-            <p className="form-label">Notes / Comments:</p>
-            <input
-              name="vendor_notes"
-              className="form-control"
-              type="text"
-              value={this.state.vendor_notes}
-              placeholder="Additional details..."
-              onChange={this.handleChange}
-            />
-            <br />
-            <button className="btn btn-success">Submit</button>{" "}
-          </form>
-        </div>
-        <div>
-          {/* Render the CreateCode component if codedUrl is truthy (has a value) */}
-          {this.state.codedUrl ?
-            <CreateCode codedUrl={this.state.codedUrl} />
-            : null}
-        </div>
-        <p>{this.state.codedUrl}</p>
+                <p className="form-label">Notes / Comments:</p>
+                <input
+                  name="vendor_notes"
+                  className="form-control"
+                  type="text"
+                  value={this.state.vendor_notes}
+                  placeholder="Additional details..."
+                  onChange={this.handleChange}
+                />
+                <br />
+                <button className="btn btn-success">Submit</button>{" "}
+              </form>
+            </div>
+          </div>
+        }
+        {/* <p>{this.state.codedUrl}</p> */}
       </div>
     );
   }
