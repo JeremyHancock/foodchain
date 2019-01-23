@@ -44,6 +44,7 @@ DROP TABLE IF EXISTS `foodchain_db`.`Products` ;
 CREATE TABLE IF NOT EXISTS `foodchain_db`.`Products` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `vendor_id` INT NOT NULL,
+  `product_name` VARCHAR(45) NOT NULL,
   `harvest_date` DATE NOT NULL,
   `chemicals_used` VARCHAR(200) NOT NULL,
   `certified_organic` TINYINT NOT NULL,
