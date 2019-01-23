@@ -8,16 +8,25 @@ import { QRCode } from 'react-qr-svg';
 // bgColor: '#FFFFFF',  Color of the bright squares
 // fgColor: '#000000',  Color of the dark squares
 
-function QRMaker(props) {
+function saveImage() {
+    const saveSvg = require('save-svg-as-png');
+    saveSvg.saveSvgAsPng(document.getElementById("qr"), "foodchain.png", {scale: 10});
+}
 
-        return (
-        <QRCode
-            bgColor="#FFFFFF"
-            fgColor="#000000"
-            level="Q"
-            style={{ width: 200 }}
-            value={props.codedUrl}
-        />
-        );
+function QRMaker(props) {
+    return (
+        <div className="qr-holder">
+            <QRCode
+                onClick={saveImage}
+                id="qr"
+                bgColor="#FFFFFF"
+                fgColor="#000000"
+                level="Q"
+                style={{ width: 200 }}
+                value={props.codedUrl}
+            />
+            <button className="btn btn-success" onClick={saveImage}>Save</button>
+        </div>
+    );
 }
 export default QRMaker;

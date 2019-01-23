@@ -71,22 +71,22 @@ export default {
   // Saves a Link to the database
   postLink: function (LinkData) {
     return axios.post("/api/links", LinkData);
-  },
+  // },
 
-  // Gets the Code with the given id
-  getCode: function (code_data) {
-    return axios.get("/api/codes/" + code_data);
-  },
-  // Gets all Codes
-  getCodes: function () {
-    return axios.get("/api/codes/");
-  },
-  // Deletes the Code with the given id
-  deleteCode: function (id) {
-    return axios.delete("/api/codes/" + id);
-  },
-  // Saves a Code to the database
-  postCode: function (CodeData) {
-    return axios.post("/api/codes", CodeData);
+  // // Gets the Code with the given id
+  // getCode: function (code_data) {
+  //   return axios.get("/api/codes/" + code_data);
+  // },
+  // // Gets all Codes
+  // getCodes: function () {
+  //   return axios.get("/api/codes/");
+  // },
+  // // Deletes the Code with the given id
+  // deleteCode: function (id) {
+  //   return axios.delete("/api/codes/" + id);
+  // },
+  // // Saves a Code to the database
+  // postCode: function (CodeData) {
+  //   return axios.post("/api/codes", CodeData);
   }
 };

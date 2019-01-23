@@ -3,7 +3,7 @@ import API from "../utils/api";
 
 const url = window.location.href;
 const urlChunks = url.split("/");
-const urlPieces = urlChunks[4] ? urlChunks[4].split("sirlinksalot") : [];
+const urlPieces = urlChunks[4] ? urlChunks[4].split("lki") : [];
 let numberOfLinks = urlPieces.length - 2;
 console.log(urlPieces);
 let linkLocations = [];
