@@ -74,25 +74,43 @@ button {
 }
 
 .scanner{
-  width: 60%;
   margin: auto;
-  /* border-radius: 8px; */
   padding: 10px;
-  /* background: rgba(255, 255, 255, 0.85); */
-  color: white;
+  background: white;
+  float: left;
+  height: 100%;
+  width: 30%;
 }
 
 .confirm-info{
   padding: 20px;
-  background-color: #774517e8;
+  background-color: #ffffffe8;
   width: 100%;
+}
+.instructions{
+  padding: 40px;
+  background-color: white;
+  font-size: 1em;
+  height: 100%;
+}
+.button-group{
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  height: auto;
+  width: auto;
+  font-size: 90%;
+}
+.new-product-nav{
+  float: right;
+}
+.btn{
+  margin: 1%;
 }
 #map {
   height: 100%;
 }
 .qr-holder{
-  align-content: center;
-  vertical-align: middle;
   padding: 5px;
 }
 
@@ -128,6 +146,9 @@ button {
   #chart_div, #line_chart_div {
     width: 1010px;
   }
+  .scanner {
+    width: 40%
+  }
 }
 
 /* 
@@ -137,6 +158,9 @@ button {
 
 @media (min-width: 768px) and (max-width: 1024px) {
   /* //CSS */
+  .scanner {
+    width: 40%
+  }
 }
 
 /* 
@@ -152,6 +176,9 @@ button {
   }
   #chart_div, #line_chart_div {
     width: 753px;
+  }
+  .scanner {
+    width: 40%
   }
 }
 
@@ -169,6 +196,10 @@ button {
   #chart_div, #line_chart_div {
     width: 767px;
   }
+  .scanner, .btn {
+    width: 100%;
+  }
+
 }
 
 /* 
@@ -176,7 +207,7 @@ button {
   ##Screen = B/w 320px to 479px
 */
 
-@media (min-width: 320px) and (max-width: 480px) {
+@media (min-width: 30px) and (max-width: 480px) {
   /* //CSS */
   body, p, .form-control, .btn {
     /* color: red; /* comment out later */
@@ -185,5 +216,8 @@ button {
 
   #chart_div, #line_chart_div {
     width: 300px;
+  }
+  .scanner, .btn{
+    width: 100%
   }
 }
