@@ -42,41 +42,57 @@ class CreateLink extends Component {
             const urlChunks = data.split("scan");
             const urlPieces = urlChunks[1].split("lki");
             console.log(urlPieces);
-            this.setState({
-                result: data,
-                scannerOn: false,
-                product_id: urlPieces[1],
-                vendor_id: this.props.vendor_id
-            })
+            API.getProduct(urlPieces[1])
+                .then(res => {
+                    this.setState({
+                        result: data,
+                        scannerOn: false,
+                        product_id: urlPieces[1],
+                        vendor_id: this.props.vendor_id,
+                        product_name: res.data.product_name,
+                        linkCreated: true
+                    })
+                    this.postLink();
+                })
         }
     }
     handleError = err => { console.error(err) }
-
     render() {
         return (
-            <div className="scanner">
+            <div>
                 {this.state.scannerOn ?
                     <div>
-                        <p className="confirm-info">Scan the code with your camera. Use the viewer box below to center it and try to hold it steady.</p>
+                        {/* <p className="confirm-info">Scan the code with your camera. Use the viewer box below to center it and try to hold it steady.</p> */}
                         <QrReader
+                            className="scanner"
                             delay={300}
                             onError={this.handleError}
                             onScan={this.handleScan}
-                            style={{ width: '100%' }}
                         />
+                        <div className="instructions">
+                            <p> Please scan the Foodchain code with your camera. Use the viewer box to center the code.</p>
+                            <p>If asked, please allow this application access to your camera.</p>
+                            <div className="button-group">
+                                <button className="btn btn-success" >Scan a code</button>
+                                <button className="btn btn-success" onClick={this.props.isProduct}>Enter a new item</button>
+                            </div>
+                        </div>
                     </div>
                     : null}
                 <div className="confirm-info">
                     {this.state.linkCreated ?
-                        <p>This code needs to be sent with your product so that it can be scanned by the next link in the Foodchain. Please save or print this image.</p>
+                        <div>
+                            <p>Success! You scanned a {this.state.product_name}.</p>
+                            <p>You have created a new link in the Foodchain! This code needs to be sent with your product so that it can be scanned by the next link in the Foodchain.</p>
+                            <p>Please save or print this image. It can be included with invoices, shipping manifests, or printed and displayed on shelf labels.</p>
+                            <p>The code you just scanned can be discarded. This code now contains all the information about this {this.state.product_name}.</p>
+                        </div>
                         :
                         <div>
-                            <ul>Is this information correct?
+                            <ul>Your information
                                     <li>Company name: {this.props.company_name}</li>
                                 <li>Location: {this.props.location}</li>
-                                <li>Current time: {date}</li>
                             </ul>
-                            <button className="btn btn-success" onClick={this.postLink}>Confirm</button>
                         </div>
                     }
                 </div>
@@ -85,7 +101,10 @@ class CreateLink extends Component {
                         {this.state.codedUrl ?
                             <div>
                                 <CreateCode codedUrl={this.state.codedUrl} />
-                                <p className="confirm-info">{this.state.codedUrl}</p>
+                                <div className="button-group">
+                                    <button className="btn btn-success" onClick={this.props.windowReset}>Scan a code</button>
+                                    <button className="btn btn-success" onClick={this.props.isProduct}>Enter a new item</button>
+                                </div>
                             </div>
                             : null}
                     </div>

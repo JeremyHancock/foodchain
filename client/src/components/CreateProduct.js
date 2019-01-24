@@ -25,7 +25,7 @@ class CreateProduct extends Component {
       code_value: props.code_value,
       codedUrl: "",
       location: "",
-      vendor_id: props.vendor_id,
+      vendor_id: props.vendor_id
 
     };
     this.handleChange = this.handleChange.bind(this);
@@ -109,9 +109,22 @@ class CreateProduct extends Component {
       <div>
         {/* Render the CreateCode component if codedUrl is truthy (has a value) */}
         {this.state.codedUrl ?
-          <CreateCode codedUrl={this.state.codedUrl} />
+          <div>
+            <CreateCode codedUrl={this.state.codedUrl} />
+            <div>
+              <p>Success! You scanned a {this.state.product_name}.</p>
+              <p>You have created the first link in a Foodchain! This code needs to be sent with your product so that it can be scanned by the next link in the Foodchain.</p>
+              <p>Please save or print this image. It can be included with invoices, shipping manifests, or printed and displayed on shelf labels.</p>
+            </div>
+            <div className="button-group">
+              <button className="btn btn-success" onClick={this.props.windowReset}>Scan a code</button>
+              <button className="btn btn-success" onClick={this.props.isProduct}>Enter a new item</button>
+            </div>
+          </div>
+
           :
           <div>
+            <button className="btn btn-success new-product-nav" onClick={this.props.isProduct}>Scan a code</button>
             <h1>Create Product</h1>
             <div className="form-group">
               <form onSubmit={this.handleFormSubmit}>
@@ -237,7 +250,6 @@ class CreateProduct extends Component {
             </div>
           </div>
         }
-        {/* <p>{this.state.codedUrl}</p> */}
       </div>
     );
   }
