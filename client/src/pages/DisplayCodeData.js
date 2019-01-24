@@ -100,26 +100,26 @@ class DisplayCodeDataPage extends Component {
       this.state.link_createdAt.length
     );
 
-    console.log("Array as state " + this.state.vendor_locations.slice(
-      1,
-      this.state.vendor_locations.length
-    ));
-    console.log("Array as var " + lastLocs);
+    // console.log("Array as state " + this.state.vendor_locations.slice(
+    //   1,
+    //   this.state.vendor_locations.length
+    // ));
+    // console.log("Array as var " + lastLocs);
 
     // text for company names after product origin
-    // const companies = lastNames.map(company => {
-    //   return <p> {company} </p>;
-    // });
+    const companies = lastNames.map(company => {
+      return <span>From there, it arrived at {company} </span>;
+    });
 
-    // // text tags for company locations after product origin
-    // const locations = lastLocs.map(location => {
-    //   return <p> {location} </p>;
-    // });
+    // text tags for company locations after product origin
+    const locations = lastLocs.map(location => {
+      return <span>in {location} </span>;
+    });
 
-    // // text tags for stop times after product origin
-    // const times = lastLinks.map(time => {
-    //   return <p> {time} </p>;
-    // });
+    // text tags for stop times after product origin
+    const times = lastLinks.map(time => {
+      return <span>on {time}.</span>;
+    });
 
     // const chain = () => {
     //   for (var p = 0; p < lastLocs.length; p++) {
@@ -127,22 +127,22 @@ class DisplayCodeDataPage extends Component {
     //   }
     // };
 
-    let chainText;
+    // let chainText;
 
-    const chain = () => {
-      console.log("length of array outside of loop: " + lastLocs.length);
-      for (var p = 0; p < lastLocs.length; p++) {
-        console.log("length of array inside loop: " + lastLocs.length);
-        chainText = document.createTextNode(
-          `From there, it arrived at ${lastNames[p]} in ${lastLocs[p]} on ${
-            lastLinks[p]
-          }`
-        );
-        let chainP = document.createElement("p");
-        chainP.appendChild(chainText);
-        document.getElementById("chain-div").appendChild(chainP);
-      }
-    };
+    // const chain = () => {
+    //   console.log("length of array outside of loop: " + lastLocs.length);
+    //   for (var p = 0; p < lastLocs.length; p++) {
+    //     console.log("length of array inside loop: " + lastLocs.length);
+    //     chainText = document.createTextNode(
+    //       `From there, it arrived at ${lastNames[p]} in ${lastLocs[p]} on ${
+    //         lastLinks[p]
+    //       }`
+    //     );
+    //     let chainP = document.createElement("p");
+    //     chainP.appendChild(chainText);
+    //     document.getElementById("chain-div").appendChild(chainP);
+    //   }
+    // };
 
     return (
       <div>
@@ -207,10 +207,9 @@ class DisplayCodeDataPage extends Component {
                 this.state.vendor_notes
               }"`}
             </p>
-            {/* <p>
-              From there, it arrived at {companies} in {locations} on {times}
-            </p> */}
-            <div id="chain-div"> {chain()} </div>
+            <p>{companies}{locations}{times}
+            </p>
+            {/* <div id="chain-div"> {chain()} </div> */}
           </div>
         ) : (
           <div>Loading ... </div>
