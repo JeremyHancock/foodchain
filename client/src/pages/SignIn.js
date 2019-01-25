@@ -31,6 +31,10 @@ class SignInPage extends Component {
     this.isNew = this.isNew.bind(this);
     this.handleNewVendorSubmit = this.handleNewVendorSubmit.bind(this);
     this.handleNewConsumerSubmit = this.handleNewConsumerSubmit.bind(this);
+    this.isGuest = this.isGuest.bind(this);
+  }
+  isGuest() {
+    window.location.pathname = `/consumer/guest`
   }
 
   isVendor() {
@@ -199,6 +203,7 @@ class SignInPage extends Component {
             handleConsumerFormSubmit={this.handleConsumerFormSubmit}
             isVendor={this.isVendor}
             isNew={this.isNew}
+            isGuest={this.isGuest}
           />
         ) : null}
         {this.state.isNew && !this.state.isVendor ? (
