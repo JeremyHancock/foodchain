@@ -12,9 +12,9 @@ module.exports = function(sequelize, DataTypes) {
         // validate: {
         //     len: [1]
         //   }
-      // },
-      // code_value: {
-      //   type: DataTypes.STRING,
+      },
+      link_date: {
+        type: DataTypes.STRING,
         // validate: {
         //     len: [1]
         //   }
