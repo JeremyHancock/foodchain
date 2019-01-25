@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import Geocode from "react-geocode";
 
-Geocode.setApiKey("AIzaSyChnsvVv_ttcAq-b2AqSRpVOnJYyH6-yTQ");
+Geocode.setApiKey("xxxxxxxxxxxxxxxxxxxxxxxx");
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 class SimpleMap extends Component {
@@ -49,7 +49,7 @@ class SimpleMap extends Component {
             // Important! Always set the container height explicitly
             <div style={{ height: '50vh', width: '100%' }}>
                 <GoogleMapReact
-                    bootstrapURLKeys={{ key: 'AIzaSyChnsvVv_ttcAq-b2AqSRpVOnJYyH6-yTQ' }}
+                    bootstrapURLKeys={{ key: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxx' }}
                     defaultCenter={this.props.center}
                     defaultZoom={this.props.zoom}
                 >
