@@ -5,6 +5,9 @@
 // *** Dependencies
 // =============================================================
 var express = require("express");
+var dotENV = require("dotenv");
+var keys = dotENV.load();
+console.log(keys);
 
 // Sets up the Express App
 // =============================================================
