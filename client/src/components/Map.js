@@ -1,8 +1,8 @@
-import React from 'react';
+// import React from 'react';
 
-function Map(props) {
-  return (
+// function Map(props) {
+//   return (
     
-  )
+//   )
 
-}
+// }
