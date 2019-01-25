@@ -50,7 +50,7 @@ module.exports = function(app) {
     db.Link.create({
       product_id: req.body.product_id,
       vendor_id: req.body.vendor_id,
-      // code_value: req.body.code_value,
+      link_date: req.body.link_date,
       location: req.body.location
     })
       .then(function(dbLink) {

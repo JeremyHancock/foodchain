@@ -91,9 +91,9 @@ class CreateProduct extends Component {
             this.setState({
               link_id: res.data.id,
               // for production
-              codedUrl: `localhost:3000/scan/${newLink.code_value}lki${newLink.product_id}lki${res.data.id}`,
+              // codedUrl: `localhost:3000/scan/${newLink.code_value}lki${newLink.product_id}lki${res.data.id}`,
               // for deployment
-              // codedUrl: `https://foodchains.herokuapp.com/scan/${newLink.code_value}lki${newLink.product_id}lki${res.data.id}` 
+              codedUrl: `https://foodchains.herokuapp.com/scan/${newLink.code_value}lki${newLink.product_id}lki${res.data.id}` 
             });
             console.log("New link's id: " + this.state.link_id);
           })

@@ -13,7 +13,7 @@ class CreateLink extends Component {
             result: "",
             scannerOn: true,
             vendor_id: this.props.vendor_id,
-            code_value: this.props.code_value,
+            link_date: date,
             product_id: this.props.product_id,
             location: this.props.location,
             link_id: "",
