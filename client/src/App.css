@@ -1,3 +1,5 @@
+html { font-size: calc(1em + 1vw) }
+
 body {
   background-image: url("images/produce.jpg");
   background-repeat: no-repeat;
@@ -8,16 +10,20 @@ body {
 }
 
 .navbar {
-  background-color: #774517e8;
+  background-color: #774517;
   padding: 0px;
   text-align: center;
   align-content: center;
+  top: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
 }
 
 .navbar-brand {
   color: white;
   font-family: 'Righteous', cursive;
-  font-size: 250%;
+  font-size: 200%;
   /* text-align: center;
   align-content: center; */
   /* margin-left: 12.5%; */
@@ -57,7 +63,7 @@ button {
 }
 
 .footer {
-  background-color: #774517e8;
+  background-color: #774517;
   padding: 10px;
   margin-top: 10px;
   color: white;
@@ -106,6 +112,7 @@ button {
 }
 .btn{
   margin: 1%;
+  width: 100%;
 }
 #map {
   height: 100%;
@@ -116,6 +123,7 @@ button {
 
 /* Media Queries - I started with the file at the end of this github link: https://gist.github.com/gokulkrishh/242e68d1ee94ad05f488#file-media-query-css */
 
+
 /* 
   ##Device = Desktops
   ##Screen = 1281px to higher resolution desktops
@@ -125,8 +133,17 @@ button {
   /* //CSS */
   body, p, .form-control, .btn {
     /* color: orange;  */
-    font-size: 155%;
+    /* font-size: 155%; */
   }
+
+  .navbar-brand {
+    font-size: 1.5em;
+  }
+
+  .footer-text {
+    font-size: 0.85em;
+  }
+
   #chart_div, #line_chart_div {
     width: 1266px;
   }
@@ -141,8 +158,17 @@ button {
   /* //CSS */
   body, p, .form-control, .btn {
     /* color: green;  */
-    font-size: 135%;
+    /* font-size: 135%; */
   }
+
+  .navbar-brand {
+    font-size: 1.25em;
+  }
+
+  .footer-text {
+    font-size: 0.75em;
+  }
+
   #chart_div, #line_chart_div {
     width: 1010px;
   }
@@ -163,6 +189,14 @@ button {
   }
 }
 
+.navbar-brand {
+  font-size: 1.25em;
+}
+
+.footer-text {
+  font-size: 0.75em;
+}
+
 /* 
   ##Device = Tablets, Ipads (landscape)
   ##Screen = B/w 768px to 1024px
@@ -172,8 +206,17 @@ button {
   /* //CSS */
   body, p, .form-control, .btn {
     /* color: purple; /* comment out later */
-    font-size: 145%;
+    /* font-size: 145%; */
   }
+
+  .navbar-brand {
+    font-size: 1.25em;
+  }
+
+  .footer-text {
+    font-size: 0.75em;
+  }
+
   #chart_div, #line_chart_div {
     width: 753px;
   }
@@ -191,8 +234,17 @@ button {
   /* //CSS */
   body, p, .form-control, .btn {
     /* color: blue; /* comment out later */
-    font-size: 145%;
+    /* font-size: 145%; */
   }
+
+  .navbar-brand {
+    font-size: 1.25em;
+  }
+
+  .footer-text {
+    font-size: 0.75em;
+  }
+
   #chart_div, #line_chart_div {
     width: 767px;
   }
@@ -211,7 +263,15 @@ button {
   /* //CSS */
   body, p, .form-control, .btn {
     /* color: red; /* comment out later */
-    font-size: 138%;
+    /* font-size: 138%; */
+  }
+
+  .navbar-brand {
+    font-size: 1.25em;
+  }
+
+  .footer-text {
+    font-size: 0.75em;
   }
 
   #chart_div, #line_chart_div {

@@ -81,7 +81,6 @@ class DisplayCodeDataPage extends Component {
           websites: websites,
           vendor_locations: vendorLocations
         });
-
       });
   }
 
@@ -100,102 +99,31 @@ class DisplayCodeDataPage extends Component {
       this.state.link_createdAt.length
     );
 
-    // console.log("Array as state " + this.state.vendor_locations.slice(
-    //   1,
-    //   this.state.vendor_locations.length
-    // ));
-    // console.log("Array as var " + lastLocs);
 
-    // text for company names after product origin
-    const companies = lastNames.map(company => {
-      return <span>From there, it arrived at {company} </span>;
+    // Declare an array to hold text strings to describe each stop
+    let chainStrings = [];
+    let newStop;
+    
+    // chain uses the modified arrays to construct a text string for each stop
+    const chain = () => {
+      console.log(lastLocs.length);
+      for (var p = 0; p < lastLocs.length; p++) {
+        newStop = `From there, it arrived at ${lastNames[p]} in ${lastLocs[p]} on ${lastLinks[p]}`;
+        chainStrings.push(newStop);
+      }
+    };
+
+    // call the chain function
+    chain();
+    
+    // map the array to create a <p> tag for each stop
+    const stops = chainStrings.map(stop => {
+      return <p> {stop} </p>;
     });
-
-    // text tags for company locations after product origin
-    const locations = lastLocs.map(location => {
-      return <span>in {location} </span>;
-    });
-
-    // text tags for stop times after product origin
-    const times = lastLinks.map(time => {
-      return <span>on {time}.</span>;
-    });
-
-    // const chain = () => {
-    //   for (var p = 0; p < lastLocs.length; p++) {
-    //     return <p>{`From there, it arrived at ${lastNames[p]} in ${lastLocs[p]} on ${lastLinks[p]}`}</p>;
-    //   }
-    // };
-
-    // let chainText;
-
-    // const chain = () => {
-    //   console.log("length of array outside of loop: " + lastLocs.length);
-    //   for (var p = 0; p < lastLocs.length; p++) {
-    //     console.log("length of array inside loop: " + lastLocs.length);
-    //     chainText = document.createTextNode(
-    //       `From there, it arrived at ${lastNames[p]} in ${lastLocs[p]} on ${
-    //         lastLinks[p]
-    //       }`
-    //     );
-    //     let chainP = document.createElement("p");
-    //     chainP.appendChild(chainText);
-    //     document.getElementById("chain-div").appendChild(chainP);
-    //   }
-    // };
 
     return (
       <div>
         {!this.state.loading ? (
-          // <div>
-          //   <p>
-          //     {`This ${this.state.product_name} started out at ${
-          //       this.state.company_names[0]
-          //     }
-          //       in ${
-          //         this.state.vendor_locations[0]
-          //       }. They wanted us to tell you this: "${
-          //       this.state.vendor_notes
-          //     }". `}
-          //   </p>
-          //   <p>{`It was harvested on ${this.state.harvest_date}
-          //       and then travelled to ${this.state.company_names[1]} in ${
-          //     this.state.vendor_locations[1]
-          //   } on ${this.state.link_createdAt[1]}.
-          //       `}</p>
-          //   {numberOfLinks > 2 ? (
-          //     <p>{`From there, it arrived at ${
-          //       this.state.company_names[2]
-          //     } in ${this.state.vendor_locations[2]} on ${
-          //       this.state.link_createdAt[2]
-          //     }.`}</p>
-          //   ) : null}
-          //   {numberOfLinks > 3 ? (
-          //     <p>{`From there, it arrived at ${
-          //       this.state.company_names[3]
-          //     } in ${this.state.vendor_locations[3]} on ${
-          //       this.state.link_createdAt[3]
-          //     }.`}</p>
-          //   ) : null}
-          //   {numberOfLinks > 4 ? (
-          //     <p>{`From there, it arrived at ${
-          //       this.state.company_names[4]
-          //     } in ${this.state.vendor_locations[4]} on ${
-          //       this.state.link_createdAt[4]
-          //     }.`}</p>
-          //   ) : null}
-          //   {numberOfLinks > 5 ? (
-          //     <p>{`From there, it arrived at ${
-          //       this.state.company_names[5]
-          //     } in ${this.state.vendor_locations[5]} on ${
-          //       this.state.link_createdAt[5]
-          //     }.`}</p>
-          //   ) : null}
-
-          //   <p>{`And now, this ${
-          //     this.state.product_name
-          //   } is here with you! It says, "hi".`}</p>
-          // </div>
           <div>
             <p>
               {`This ${this.state.product_name} started out at ${
@@ -207,9 +135,7 @@ class DisplayCodeDataPage extends Component {
                 this.state.vendor_notes
               }"`}
             </p>
-            <p>{companies}{locations}{times}
-            </p>
-            {/* <div id="chain-div"> {chain()} </div> */}
+            <div>{stops}</div>
           </div>
         ) : (
           <div>Loading ... </div>

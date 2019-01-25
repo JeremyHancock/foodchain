@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <nav className="bg-primary footer">
+    <nav className="footer">
       <div className="footer-text">
         Food Chain is a farm-to-table app to track how food travels from growers
         to consumers.
