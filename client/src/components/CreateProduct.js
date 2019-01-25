@@ -13,6 +13,7 @@ class CreateProduct extends Component {
       product_id: 1,
       product_name: "",
       link_id: 1,
+      link_date: date,
       harvest_date: date,
       chemicals_used: "",
       glyphosphate: false,
