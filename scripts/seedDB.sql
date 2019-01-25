@@ -1,7 +1,7 @@
 USE foodchain_db;
 
 INSERT INTO
-vendors (user_name, user_password, company_name, email, phone_number, websites, location)
+vendors (user_name, user_password, company_name, email, phone_number, website, location)
 values("grower1", "1234", "Deer Run Farms", "me@deerrun.com", "1231231234", "https://deerrunfarmofamelia.com/", "Amelia, VA, USA"),
 ("grower2", "1234", "Carter Mountain Orchard", "me@cartermountain.com", "1231231234", "https://chilesfamilyorchards.com/orchards/carter-mountain-orchard/", "Charlottesville, VA, USA"),
 ("grower3", "1234", "Holly Fork Farm", "me@hollyforkfarm.com", "1231231234", "http://www.hollyforkfarm.com/", "Barhamsville, VA, USA"),
@@ -25,16 +25,16 @@ values("honey crisp apple", 2, "1/23/2019", "none", 1, "Best. Apples. Ever. Seri
 ("potato", 3, "1/2/2019", "none", 0, "This potato had a better life than many folks. Please remember to serve your local community. You can be the change you want to see."),
 ("butternut squash", 4, "1/12/2019", "none", 0, "There are a ton of amazing recipes for butternut squash. If you have only used it one way I would say check Google for recipes. So yummy!"),
 ("watermelon", 3, "1/18/2019", "none", 1, "Best. Melons. Ever"),
-("kale", 4, "1/24/2019", "none", 1, "This kale was raised on our family farm. We hope you love it as much as we did!")
+("kale", 4, "1/24/2019", "none", 1, "This kale was raised on our family farm. We hope you love it as much as we did!"),
 ("ground beef", 1, "12/06/2018", "none", 1, "All of our beef comes from grass-fed cows freely roaming 30 acres of beautiful grazing land that has been in our family for three generations.");
 
 INSERT INTO
-links (product_id, vendor_id, link_date)
-values(1, 2, "1/23/2019"), (1, 5, "1/26/2019"), (1, 7, "1/28/2019"),
-(2, 1, "1/18/2019"), (2, 8, "1/26/2019"),
-(3, 3, "1/18/2019"), (3, 6, "1/22/2019"), (3, 8, "1/26/2019"),
-(4, 3, "1/18/2019"), (4, 6, "1/22/2019"), (4, 8, "1/26/2019"),
-(5, 4, "1/12/2019"), (5, 5, "1/16/2019"), (5, 8, "1/20/2019"),
-(6, 3, "1/18/2019"), (6, 6, "1/22/2019"), (6, 8, "1/26/2019"),
-(7, 4, "1/12/2019"), (7, 5, "1/16/2019"), (7, 8, "1/20/2019"),
-(8, 1, "1/18/2019"), (8, 8, "1/26/2019");
+links (product_id, vendor_id, link_date, location)
+values(1, 2, "1/23/2019", "Charlottesville, VA, USA"), (1, 5, "1/26/2019", "Ashland, VA, USA"), (1, 7, "1/28/2019", "Richmond, VA, USA"),
+(2, 1, "1/18/2019", "Amelia, VA, USA"), (2, 8, "1/26/2019", "Richmond, VA, USA"),
+(3, 3, "1/18/2019", "Barhamsville, VA, USA"), (3, 6, "1/22/2019", "Richmond, VA, USA"), (3, 8, "1/26/2019", "Richmond, VA, USA"),
+(4, 3, "1/18/2019", "Barhamsville, VA, USA"), (4, 6, "1/22/2019", "Richmond, VA, USA"), (4, 8, "1/26/2019", "Richmond, VA, USA"),
+(5, 4, "1/12/2019", "Bacon, VA, USA"), (5, 5, "1/16/2019", "Ashland, VA, USA"), (5, 8, "1/20/2019", "Richmond, VA, USA"),
+(6, 3, "1/18/2019", "Barhamsville, VA, USA"), (6, 6, "1/22/2019", "Richmond, VA, USA"), (6, 8, "1/26/2019", "Richmond, VA, USA"),
+(7, 4, "1/12/2019", "Bacon, VA, USA"), (7, 5, "1/16/2019", "Ashland, VA, USA"), (7, 8, "1/20/2019", "Richmond, VA, USA"),
+(8, 1, "1/18/2019", "Amelia, VA, USA"), (8, 8, "1/26/2019", "Richmond, VA, USA");
