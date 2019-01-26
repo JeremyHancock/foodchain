@@ -9,6 +9,9 @@ body {
   font-family: 'Questrial', 'Arial', 'Helvetica', sans-serif;
 }
 
+.fas {
+  font-size: 20px;
+}
 .navbar {
   background-color: #774517;
   padding: 0px;

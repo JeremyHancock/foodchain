@@ -7,6 +7,7 @@ function ConsumerSignIn(props) {
     <div>
       <h2>Customer Sign In</h2>
       <p onClick={props.isNew}>Or Sign Up</p>
+      <p onClick={props.isGuest}>Continue as guest</p>
       <div className="form-group">
         <form onSubmit={props.handleConsumerFormSubmit}>
           <p className="form-label">User Name:</p>

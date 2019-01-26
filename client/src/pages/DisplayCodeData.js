@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import API from "../utils/api";
-import { join } from "upath";
+// import { join } from "upath";
+import SimpleMap from "../components/GoogleMap";
 
 const url = window.location.href;
 const urlChunks = url.split("/");
 const urlPieces = urlChunks[4] ? urlChunks[4].split("lki") : [];
-let numberOfLinks = urlPieces.length - 2;
-console.log(urlPieces);
+// let numberOfLinks = urlPieces.length - 2;
+// console.log(urlPieces);
 let linkLocations = [];
 let linkCreatedAt = [];
 let companyNames = [];
@@ -47,7 +48,7 @@ class DisplayCodeDataPage extends Component {
         links.forEach(link =>
           API.getLink(link).then(res => {
             // console.log("Link info: " + JSON.stringify(res.data));
-            linkCreatedAt.push(res.data.createdAt);
+            linkCreatedAt.push(res.data.link_date);
             linkLocations.push(res.data.location);
             this.getVendorInfo(res.data.vendor_id);
           })
@@ -98,27 +99,31 @@ class DisplayCodeDataPage extends Component {
       1,
       this.state.link_createdAt.length
     );
+    const lastWebs = this.state.websites.slice(
+      1,
+      this.state.websites.length
+    );
 
 
     // Declare an array to hold text strings to describe each stop
     let chainStrings = [];
     let newStop;
-    
+
     // chain uses the modified arrays to construct a text string for each stop
     const chain = () => {
-      console.log(lastLocs.length);
+      // console.log(lastLocs.length);
       for (var p = 0; p < lastLocs.length; p++) {
-        newStop = `From there, it arrived at ${lastNames[p]} in ${lastLocs[p]} on ${lastLinks[p]}`;
+        newStop = <p>From there, it arrived at <a href={lastWebs[p]}>{lastNames[p]}</a> in {lastLocs[p]} on {lastLinks[p]}</p>;
         chainStrings.push(newStop);
       }
     };
 
     // call the chain function
     chain();
-    
+    // console.log(this.state.websites)
     // map the array to create a <p> tag for each stop
     const stops = chainStrings.map(stop => {
-      return <p> {stop} </p>;
+      return stop ;
     });
 
     return (
@@ -126,20 +131,17 @@ class DisplayCodeDataPage extends Component {
         {!this.state.loading ? (
           <div>
             <p>
-              {`This ${this.state.product_name} started out at ${
-                this.state.company_names[0]
-              } 
-                in ${
-                  this.state.vendor_locations[0]
-                }. They wanted us to tell you this: "${
-                this.state.vendor_notes
-              }"`}
+              This {this.state.product_name} started out at <a href={this.state.websites[0]}>{this.state.company_names[0]}</a> in {this.state.vendor_locations[0]} on {this.state.harvest_date}. They wanted us to tell you this: "{this.state.vendor_notes}"`
             </p>
             <div>{stops}</div>
+            <p>{`And now this ${this.state.product_name} is here with you. It says, "hi".`}</p>
+            <SimpleMap
+            {...this.state}
+            />
           </div>
         ) : (
-          <div>Loading ... </div>
-        )}
+            <div>Loading ... </div>
+          )}
       </div>
     );
   }
