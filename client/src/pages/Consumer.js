@@ -5,7 +5,7 @@ import QrReader from 'react-qr-reader'
 
 class ConsumerPage extends Component {
     state = {
-        result: 'Please scan a product',
+        result: "",
         scannerOn: true,
     }
 
@@ -25,6 +25,7 @@ class ConsumerPage extends Component {
     render() {
         return (
             <div>
+                <p>Scan a Foodchain code to see the links between you and your food's source</p>
                 <div className="scanner">
                     <QrReader
                         delay={300}
@@ -33,7 +34,6 @@ class ConsumerPage extends Component {
                         style={{ width: '100%' }}
                     />
                 </div>
-                <p>{this.state.result}</p>
             </div>
         )
     }

@@ -5,9 +5,9 @@ import React from "react";
 function ConsumerSignIn(props) {
   return (
     <div>
-      <h2>Customer Sign In</h2>
-      <p onClick={props.isNew}>Or Sign Up</p>
-      <p onClick={props.isGuest}>Continue as guest</p>
+      <h2 className="pointer" >Customer Sign In</h2>
+      <p className="pointer" onClick={props.isNew}>Or Sign Up</p>
+      <p className="pointer as-guest" onClick={props.isGuest}>Continue as guest</p>
       <div className="form-group">
         <form onSubmit={props.handleConsumerFormSubmit}>
           <p className="form-label">User Name:</p>
@@ -31,6 +31,7 @@ function ConsumerSignIn(props) {
           />
           <br />
           <button className="btn btn-success">Submit</button>
+          <br></br>
         </form>
       </div>
     </div >

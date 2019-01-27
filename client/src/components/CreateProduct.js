@@ -114,7 +114,7 @@ class CreateProduct extends Component {
             <CreateCode codedUrl={this.state.codedUrl} />
             <div>
               <p>Success! You scanned a {this.state.product_name}.</p>
-              <p>You have created the first link in a Foodchain! This code needs to be sent with your product so that it can be scanned by the next link in the Foodchain.</p>
+              <p>You have created the first link in a Foodchain! The code above needs to be sent with your product so that it can be scanned by the next link in the Foodchain.</p>
               <p>Please save or print this image. It can be included with invoices, shipping manifests, or printed and displayed on shelf labels.</p>
             </div>
             <div className="button-group">
@@ -247,6 +247,7 @@ class CreateProduct extends Component {
                 />
                 <br />
                 <button className="btn btn-success">Submit</button>{" "}
+                <br></br>
               </form>
             </div>
           </div>

@@ -10,7 +10,7 @@ body {
 }
 
 .fas {
-  font-size: 20px;
+  font-size: 25px;
 }
 .navbar {
   background-color: #774517;
@@ -48,7 +48,9 @@ body {
   padding: 20px;
   background: rgba(255, 255, 255, 0.85);
 }
-
+.pointer{
+  cursor: pointer;
+}
 .form-group {
   padding-bottom: 20px;
 }
@@ -124,7 +126,9 @@ button {
 .qr-holder{
   padding: 5px;
 }
-
+.as-guest{
+  font-size: 1em
+}
 /* Media Queries - I started with the file at the end of this github link: https://gist.github.com/gokulkrishh/242e68d1ee94ad05f488#file-media-query-css */
 
 

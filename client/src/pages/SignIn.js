@@ -77,8 +77,8 @@ class SignInPage extends Component {
         this.state.isLoggedIn
           ? (window.location.pathname = `/consumer/${this.state.user_name}`)
           : alert(
-              "Username or password is incorrect. Please try again or sign up."
-            );
+            "Username or password is incorrect. Please try again or sign up."
+          );
       })
       .catch(err => console.log(err));
   }
@@ -104,8 +104,8 @@ class SignInPage extends Component {
         this.state.isLoggedIn
           ? (window.location.pathname = `/vendor/${this.state.user_name}`)
           : alert(
-              "Username or password is incorrect. Please try again or sign up."
-            );
+            "Username or password is incorrect. Please try again or sign up."
+          );
       })
       .catch(err => console.log(err));
   }
@@ -116,17 +116,17 @@ class SignInPage extends Component {
       res.data.map(vendor =>
         vendor.user_name === newVendor.user_name
           ? alert(
-              "That username is already in use. Please select something else."
-            )
+            "That username is already in use. Please select something else."
+          )
           : console.log("not a match")
       );
     });
     !newVendor.company_name ||
-    !newVendor.email ||
-    !newVendor.phone_number ||
-    !newVendor.user_password ||
-    !newVendor.location ||
-    !newVendor.user_name
+      !newVendor.email ||
+      !newVendor.phone_number ||
+      !newVendor.user_password ||
+      !newVendor.location ||
+      !newVendor.user_name
       ? alert("You must fill in all fields to create a profile.")
       : console.log("good entry");
     API.postVendor(newVendor)
@@ -143,16 +143,16 @@ class SignInPage extends Component {
       res.data.map(consumer =>
         consumer.user_name === newConsumer.user_name
           ? alert(
-              "That user name is already in use. Please select something else."
-            )
+            "That user name is already in use. Please select something else."
+          )
           : console.log("Unique!")
       );
     });
     !newConsumer.user_name ||
-    !newConsumer.email ||
-    !newConsumer.phone_number ||
-    !newConsumer.user_password ||
-    !newConsumer.person_name
+      !newConsumer.email ||
+      !newConsumer.phone_number ||
+      !newConsumer.user_password ||
+      !newConsumer.person_name
       ? alert("You must fill in all fields to create a profile.")
       : console.log("All fields found!");
 
@@ -170,6 +170,7 @@ class SignInPage extends Component {
           <form>
             <h3>I am a{"  "}
               <input
+                className="pointer"
                 type="radio"
                 name="isConsumer"
                 value="consumer"
@@ -177,12 +178,13 @@ class SignInPage extends Component {
                 onChange={this.isVendor}
               /> Consumer{"  "}
               <input
+                className="pointer"
                 type="radio"
                 name="isVendor"
                 value="vendor"
                 checked={this.state.isVendor}
                 onChange={this.isVendor}
-              /> Producer 
+              /> Producer
             </h3>
           </form>
         </div>

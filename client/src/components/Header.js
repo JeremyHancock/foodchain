@@ -4,7 +4,7 @@ function Header() {
   return (
     <nav className="navbar navbar-dark navbar-fixed-top">
       <a className="navbar-brand mx-auto navbar-text" href="/">
-        FOODCHAIN
+        F<i className="fas fa-link"></i>DCHAIN
       </a>
     </nav>
   );

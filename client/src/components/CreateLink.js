@@ -83,7 +83,7 @@ class CreateLink extends Component {
                     {this.state.linkCreated ?
                         <div>
                             <p>Success! You scanned a {this.state.product_name}.</p>
-                            <p>You have created a new link in the Foodchain! This code needs to be sent with your product so that it can be scanned by the next link in the Foodchain.</p>
+                            <p>You have created a new link in the Foodchain! The code below needs to be sent with your product so that it can be scanned by the next link in the Foodchain.</p>
                             <p>Please save or print this image. It can be included with invoices, shipping manifests, or printed and displayed on shelf labels.</p>
                             <p>The code you just scanned can be discarded. This code now contains all the information about this {this.state.product_name}.</p>
                         </div>
@@ -101,9 +101,13 @@ class CreateLink extends Component {
                         {this.state.codedUrl ?
                             <div>
                                 <CreateCode codedUrl={this.state.codedUrl} />
+                                <br></br>
                                 <div className="button-group">
+                                    <br></br>
                                     <button className="btn btn-success" onClick={this.props.windowReset}>Scan a code</button>
-                                    <button className="btn btn-success" onClick={this.props.isProduct}>Enter a new item</button>
+                                    <br>
+                                    </br><button className="btn btn-success" onClick={this.props.isProduct}>Enter a new item</button>
+                                    <br></br>
                                 </div>
                             </div>
                             : null}

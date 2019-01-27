@@ -5,8 +5,8 @@ import React from "react";
 function VendorSignIn(props) {
   return (
     <div>
-      <h2>Vendor Sign In</h2>
-      <p onClick={props.isNew}>Or Sign Up</p>
+      <h2 className="pointer" >Vendor Sign In</h2>
+      <p className="pointer" onClick={props.isNew}>Or Sign Up</p>
       <div className="form-group">
         <form onSubmit={props.handleVendorFormSubmit}>
           <p className="form-label">User Name:</p>
@@ -30,6 +30,8 @@ function VendorSignIn(props) {
           />
           <br />
             <button className="btn btn-success">Submit</button>
+            <br></br>
+
         </form>
       </div>
     </div>
