@@ -2,14 +2,14 @@ USE foodchain_db;
 
 INSERT INTO
 vendors (user_name, user_password, company_name, email, phone_number, website, location)
-values("grower1", "1234", "Deer Run Farms", "me@deerrun.com", "1231231234", "https://deerrunfarmofamelia.com/", "Amelia, VA, USA"),
-("grower2", "1234", "Carter Mountain Orchard", "me@cartermountain.com", "1231231234", "https://chilesfamilyorchards.com/orchards/carter-mountain-orchard/", "Charlottesville, VA, USA"),
-("grower3", "1234", "Holly Fork Farm", "me@hollyforkfarm.com", "1231231234", "http://www.hollyforkfarm.com/", "Barhamsville, VA, USA"),
-("grower4", "1234", "Old Crowe Farm", "me@oldcrowefarm.com", "1231231234", "https://oldcrowefarm.com/", "Bacon, VA, USA"),
-("dist1", "1234", "Produce Source Partners", "me@producesource.com", "1231231234", "https://producesourcepartners.com/", "Ashland, VA, USA"),
-("dist2", "1234", "Tom's Meats & Produce", "me@tomsmeats.com", "1231231234", "http://www.tomsmeatsandproduce.com/", "Richmond, VA, USA" ),
-("retail1", "1234", "Ellwood Thompson's", "me@ellwoodthompsons.com", "1231231234", "https://ellwoodthompsons.com/", "Richmond, VA, USA"),
-("retail2", "1234", "Libbie Market", "me@libbiemarket.com", "1231231234", "http://www.libbiemarket.com/", "Richmond, VA, USA");
+values("grower1", "1234", "Deer Run Farms", "me@deerrun.com", "1231231234", "https://deerrunfarmofamelia.com/", "9903 Bevils Bridge Rd, Amelia, VA 23002"),
+("grower2", "1234", "Carter Mountain Orchard", "me@cartermountain.com", "1231231234", "https://chilesfamilyorchards.com/orchards/carter-mountain-orchard/", "1435 Carters Mountain Trail, Charlottesville, VA 22901"),
+("grower3", "1234", "Holly Fork Farm", "me@hollyforkfarm.com", "1231231234", "http://www.hollyforkfarm.com/", "4901 Holly Fork Road, Barhamsville, Virginia 23011"),
+("grower4", "1234", "Old Crowe Farm", "me@oldcrowefarm.com", "1231231234", "https://oldcrowefarm.com/", "815 Little Retreat Road, Red Oak, Virginia 23964"),
+("dist1", "1234", "Produce Source Partners", "me@producesource.com", "1231231234", "https://producesourcepartners.com/", "13167 Telcourt Road, Ashland, VA 23005"),
+("dist2", "1234", "Tom's Meats & Produce", "me@tomsmeats.com", "1231231234", "http://www.tomsmeatsandproduce.com/", "2410 Magnolia Court, Richmond, VA 23223" ),
+("retail1", "1234", "Ellwood Thompson's", "me@ellwoodthompsons.com", "1231231234", "https://ellwoodthompsons.com/", "4 N. Thompson St, Richmond VA 23221"),
+("retail2", "1234", "Libbie Market", "me@libbiemarket.com", "1231231234", "http://www.libbiemarket.com/", "400 Libbie Avenue, Richmond, VA 23226");
 INSERT INTO
 consumers (user_name, user_password, person_name, email, phone_number)
 values("jeremy", "1234", "Jeremy", "me@me.com", "1231231234"),

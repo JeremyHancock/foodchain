@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import API from "../utils/api";
-// import { join } from "upath";
 import SimpleMap from "../components/GoogleMap";
+import Geocode from "react-geocode";
 
 const url = window.location.href;
 const urlChunks = url.split("/");
 const urlPieces = urlChunks[4] ? urlChunks[4].split("lki") : [];
-// let numberOfLinks = urlPieces.length - 2;
-// console.log(urlPieces);
 let linkLocations = [];
 let linkCreatedAt = [];
 let companyNames = [];
 let vendorLocations = [];
 let websites = [];
 let productData = [];
+let vendorCoordinates = [];
+
 class DisplayCodeDataPage extends Component {
   constructor() {
     super();
@@ -33,21 +33,21 @@ class DisplayCodeDataPage extends Component {
       code_data: urlPieces[0],
       product_id: urlPieces[1],
       link_id: urlPieces.slice(2),
-      loading: true
+      loading: true,
+      map_ready: false,     
+      coordinates: []
     };
     this.getVendorInfo = this.getVendorInfo.bind(this);
   }
   componentDidMount() {
     API.getProduct(this.state.product_id)
       .then(res => {
-        // console.log("Product info: " + JSON.stringify(res.data));
         productData.push(res.data);
       })
       .then(() => {
         const links = this.state.link_id;
         links.forEach(link =>
           API.getLink(link).then(res => {
-            // console.log("Link info: " + JSON.stringify(res.data));
             linkCreatedAt.push(res.data.link_date);
             linkLocations.push(res.data.location);
             this.getVendorInfo(res.data.vendor_id);
@@ -61,10 +61,20 @@ class DisplayCodeDataPage extends Component {
     API.getVendorById(vendor)
       .then(res => {
         if (res.data) {
-          // console.log("Vendor info: " + JSON.stringify(res.data));
           companyNames.push(res.data.company_name);
           vendorLocations.push(res.data.location);
           websites.push(res.data.website);
+          Geocode.fromAddress(res.data.location)
+            .then(
+              response => {
+                const { lat, lng } = response.results[0].geometry.location;
+                let coordinate = { lat, lng };
+                vendorCoordinates.push(coordinate);
+              },
+              error => {
+                console.error(error);
+              }
+            );
         }
       })
       .then(() => {
@@ -80,7 +90,9 @@ class DisplayCodeDataPage extends Component {
           link_createdAt: linkCreatedAt,
           company_names: companyNames,
           websites: websites,
-          vendor_locations: vendorLocations
+          vendor_locations: vendorLocations,
+          coordinates: vendorCoordinates
+
         });
       });
   }
@@ -91,9 +103,9 @@ class DisplayCodeDataPage extends Component {
       1,
       this.state.company_names.length
     );
-    const lastLocs = this.state.vendor_locations.slice(
+    const lastLocs = this.state.link_locations.slice(
       1,
-      this.state.vendor_locations.length
+      this.state.link_locations.length
     );
     const lastLinks = this.state.link_createdAt.slice(
       1,
@@ -104,14 +116,12 @@ class DisplayCodeDataPage extends Component {
       this.state.websites.length
     );
 
-
     // Declare an array to hold text strings to describe each stop
     let chainStrings = [];
     let newStop;
 
     // chain uses the modified arrays to construct a text string for each stop
     const chain = () => {
-      // console.log(lastLocs.length);
       for (var p = 0; p < lastLocs.length; p++) {
         newStop = <p>From there, it arrived at <a href={lastWebs[p]}>{lastNames[p]}</a> in {lastLocs[p]} on {lastLinks[p]}</p>;
         chainStrings.push(newStop);
@@ -120,24 +130,29 @@ class DisplayCodeDataPage extends Component {
 
     // call the chain function
     chain();
-    // console.log(this.state.websites)
     // map the array to create a <p> tag for each stop
     const stops = chainStrings.map(stop => {
-      return stop ;
+      return stop;
     });
-
+const mapOn = () => {
+  this.setState({map_ready: true})
+}
     return (
       <div>
         {!this.state.loading ? (
           <div>
+            <h3>Check out the links in your Foodchain!</h3>
             <p>
-              This {this.state.product_name} started out at <a href={this.state.websites[0]}>{this.state.company_names[0]}</a> in {this.state.vendor_locations[0]} on {this.state.harvest_date}. They wanted us to tell you this: "{this.state.vendor_notes}"`
+              This {this.state.product_name} started out at <a href={this.state.websites[0]}>{this.state.company_names[0]}</a> in {this.state.link_locations[0]} on {this.state.harvest_date}. They wanted us to tell you this: "{this.state.vendor_notes}"`
             </p>
             <div>{stops}</div>
             <p>{`And now this ${this.state.product_name} is here with you. It says, "hi".`}</p>
+            {this.state.map_ready? 
             <SimpleMap
-            {...this.state}
+              {...this.state}
             />
+            :
+            <button className="btn btn-success" onClick={mapOn}>See map</button> }
           </div>
         ) : (
             <div>Loading ... </div>
