@@ -6,8 +6,8 @@ function ConsumerSignup(props) {
 
     return (
       <div>
-        <h1>Customer Signup</h1>
-        <p onClick={props.isNew}>Or Sign In</p>
+        <h1 className="pointer" >Customer Signup</h1>
+        <p className="pointer" onClick={props.isNew}>Or Sign In</p>
         <div className="form-group">
           <form onSubmit={props.handleNewConsumerSubmit}>
             <p className="form-label">Name:</p>
@@ -61,6 +61,8 @@ function ConsumerSignup(props) {
             />
             <br />
             <button className="btn btn-success">Submit</button>
+            <br></br>
+
           </form>
         </div>
       </div>

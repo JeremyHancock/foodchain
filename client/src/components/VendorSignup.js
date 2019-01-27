@@ -5,8 +5,8 @@ function VendorSignup (props) {
 
     return (
       <div>
-        <h1>Vendor Signup</h1>
-        <p onClick={props.isNew}>Or Sign In</p>
+        <h1 className="pointer">Vendor Signup</h1>
+        <p className="pointer" onClick={props.isNew}>Or Sign In</p>
         <div className="form-group">
           <form onSubmit={props.handleNewVendorSubmit}>
             <p className="form-label">Company Name:</p>
@@ -80,6 +80,8 @@ function VendorSignup (props) {
             />
             <br />
             <button className="btn btn-success">Submit</button>
+            <br></br>
+
           </form>
         </div>
       </div>

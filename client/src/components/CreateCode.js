@@ -26,6 +26,8 @@ function QRMaker(props) {
                 value={props.codedUrl}
             />
             <button className="btn btn-success" onClick={saveImage}>Save</button>
+            <br></br>
+
         </div>
     );
 }

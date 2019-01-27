@@ -35,7 +35,7 @@ class DisplayCodeDataPage extends Component {
       product_id: urlPieces[1],
       link_id: urlPieces.slice(2),
       loading: true,
-      map_ready: false,     
+      map_ready: false,
       coordinates: []
     };
     this.getVendorInfo = this.getVendorInfo.bind(this);
@@ -122,8 +122,8 @@ class DisplayCodeDataPage extends Component {
       for (var p = 0; p < lastLocs.length; p++) {
         newStop = (
           <p>
-            From there, it arrived at <a href={lastWebs[p]}>{lastNames[p]}</a>{" "}
-            in {lastLocs[p]} on {lastLinks[p]}
+            <i className="fas fa-link"></i> {lastLinks[p]} - <a href={lastWebs[p]}>{lastNames[p]}</a>{" "}
+            in {lastLocs[p]}
           </p>
         );
         chainStrings.push(newStop);
@@ -137,9 +137,12 @@ class DisplayCodeDataPage extends Component {
       return stop;
     });
 
-const mapOn = () => {
-  this.setState({map_ready: true})
-}
+    const mapOn = () => {
+      this.setState({ map_ready: true })
+    }
+    const scanAgain = () => {
+      window.location.pathname = `consumer`
+    }
 
     return (
       <div>
@@ -147,21 +150,25 @@ const mapOn = () => {
           <div>
             <h3>Check out the links in your Foodchain!</h3>
             <p>
-              This {this.state.product_name} started out at <a href={this.state.websites[0]}>{this.state.company_names[0]}</a> in {this.state.link_locations[0]} on {this.state.harvest_date}. They wanted us to tell you this: "{this.state.vendor_notes}"`
+              <i className="fas fa-tractor"></i> {this.state.harvest_date} - <a href={this.state.websites[0]}>{this.state.company_names[0]}</a> in {this.state.link_locations[0]}`
             </p>
             <div>{stops}</div>
-            <p>{`And now this ${this.state.product_name} is here with you. It says, "hi".`}</p>
-            {this.state.map_ready? 
-            <SimpleMap
-              {...this.state}
-            />
-            :
-            <button className="btn btn-success" onClick={mapOn}>See map</button> }
-            <br /><br />
+            <p>
+              <i className="fas fa-utensils"></i>{` And now this ${this.state.product_name} is here with you. It says, "hi".`}</p>
+            {this.state.map_ready ?
+              <SimpleMap
+                {...this.state}
+              />
+              :
+              <button className="btn btn-success" onClick={mapOn}>See map</button>}
+              <br></br><br></br>
+              <button className="btn btn-success" onClick={scanAgain}>Scan another code</button>
+              <br></br><br></br>
+
           </div>
         ) : (
-          <div>Loading ... </div>
-        )}
+            <div>Loading ... </div>
+          )}
       </div>
     );
   }
