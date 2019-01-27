@@ -1,5 +1,7 @@
+
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
+
 import Geocode from "react-geocode";
 
 Geocode.setApiKey("AIzaSyChnsvVv_ttcAq-b2AqSRpVOnJYyH6-yTQ");
@@ -42,6 +44,7 @@ class SimpleMap extends Component {
             </div >
         );
     }
+
 }
 
 export default SimpleMap;

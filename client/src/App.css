@@ -86,9 +86,9 @@ button {
   margin: auto;
   padding: 10px;
   background: white;
-  float: left;
+  /* float: left; */
   height: 100%;
-  width: 30%;
+  width: 100%;
 }
 
 .confirm-info{
@@ -113,9 +113,10 @@ button {
 .new-product-nav{
   float: right;
 }
-.btn{
-  margin: 1%;
+.btn {
+  /* margin: 1%; */
   width: 100%;
+  /* padding: 15px; */
 }
 #map {
   height: 100%;
@@ -136,7 +137,7 @@ button {
   /* //CSS */
   body, p, .form-control, .btn {
     /* color: orange;  */
-    /* font-size: 155%; */
+    font-size: 1.45em;
   }
 
   .navbar-brand {
@@ -161,7 +162,7 @@ button {
   /* //CSS */
   body, p, .form-control, .btn {
     /* color: green;  */
-    /* font-size: 135%; */
+    font-size: 1.35em;
   }
 
   .navbar-brand {
@@ -209,15 +210,15 @@ button {
   /* //CSS */
   body, p, .form-control, .btn {
     /* color: purple; /* comment out later */
-    /* font-size: 145%; */
-  }
-
-  .navbar-brand {
     font-size: 1.25em;
   }
 
+  .navbar-brand {
+    font-size: 1.45em;
+  }
+
   .footer-text {
-    font-size: 0.75em;
+    font-size: 0.95em;
   }
 
   #chart_div, #line_chart_div {
@@ -237,11 +238,11 @@ button {
   /* //CSS */
   body, p, .form-control, .btn {
     /* color: blue; /* comment out later */
-    /* font-size: 145%; */
+    font-size: 1.20em;
   }
 
   .navbar-brand {
-    font-size: 1.25em;
+    font-size: 1.65em;
   }
 
   .footer-text {
@@ -266,20 +267,17 @@ button {
   /* //CSS */
   body, p, .form-control, .btn {
     /* color: red; /* comment out later */
-    /* font-size: 138%; */
+    font-size: 1.15em;
   }
 
   .navbar-brand {
-    font-size: 1.25em;
+    font-size: 1.75em;
   }
 
   .footer-text {
-    font-size: 0.75em;
+    font-size: 0.8em;
   }
 
-  #chart_div, #line_chart_div {
-    width: 300px;
-  }
   .scanner, .btn{
     width: 100%
   }
