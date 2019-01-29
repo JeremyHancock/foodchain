@@ -116,7 +116,8 @@ button {
   float: right;
 }
 .btn {
-  /* margin: 1%; */
+  margin-left: 5px;
+  margin-right: 5px;
   width: 100%;
   /* padding: 15px; */
 }
@@ -125,6 +126,7 @@ button {
 }
 .qr-holder{
   padding: 5px;
+  margin: auto;
 }
 .as-guest{
   font-size: 1em

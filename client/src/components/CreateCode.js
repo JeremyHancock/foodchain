@@ -16,6 +16,7 @@ function saveImage() {
 function QRMaker(props) {
     return (
         <div className="qr-holder">
+        <div className='col-sm-12'>
             <QRCode
                 onClick={saveImage}
                 id="qr"
@@ -25,9 +26,8 @@ function QRMaker(props) {
                 style={{ width: 200 }}
                 value={props.codedUrl}
             />
+        </div>
             <button className="btn btn-success" onClick={saveImage}>Save</button>
-            <br></br>
-
         </div>
     );
 }

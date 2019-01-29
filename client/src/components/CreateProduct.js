@@ -27,7 +27,6 @@ class CreateProduct extends Component {
       codedUrl: "",
       location: "",
       vendor_id: props.vendor_id
-
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -75,8 +74,10 @@ class CreateProduct extends Component {
     event.preventDefault();
     this.hasChemicals();
     const newProduct = this.state;
-    !newProduct.harvest_date || !newProduct.product_name || !newProduct.certified_organic ?
-      alert("You must fill in all required fields to create a new product.")
+    !newProduct.harvest_date ||
+    !newProduct.product_name ||
+    !newProduct.certified_organic
+      ? alert("You must fill in all required fields to create a new product.")
       : console.log(this.state);
     API.postProduct(newProduct)
       .then(res => {
@@ -94,7 +95,9 @@ class CreateProduct extends Component {
               // for production
               // codedUrl: `localhost:3000/scan/${newLink.code_value}lki${newLink.product_id}lki${res.data.id}`,
               // for deployment
-              codedUrl: `https://foodchains.herokuapp.com/scan/${newLink.code_value}lki${newLink.product_id}lki${res.data.id}` 
+              codedUrl: `https://foodchains.herokuapp.com/scan/${
+                newLink.code_value
+              }lki${newLink.product_id}lki${res.data.id}`
             });
             console.log("New link's id: " + this.state.link_id);
           })
@@ -109,23 +112,45 @@ class CreateProduct extends Component {
     return (
       <div>
         {/* Render the CreateCode component if codedUrl is truthy (has a value) */}
-        {this.state.codedUrl ?
+        {this.state.codedUrl ? (
           <div>
             <CreateCode codedUrl={this.state.codedUrl} />
             <div>
               <p>Success! You scanned a {this.state.product_name}.</p>
-              <p>You have created the first link in a Foodchain! The code above needs to be sent with your product so that it can be scanned by the next link in the Foodchain.</p>
-              <p>Please save or print this image. It can be included with invoices, shipping manifests, or printed and displayed on shelf labels.</p>
+              <p>
+                You have created the first link in a Foodchain! The code above
+                needs to be sent with your product so that it can be scanned by
+                the next link in the Foodchain.
+              </p>
+              <p>
+                Please save or print this image. It can be included with
+                invoices, shipping manifests, or printed and displayed on shelf
+                labels.
+              </p>
             </div>
             <div className="button-group">
-              <button className="btn btn-success" onClick={this.props.windowReset}>Scan a code</button>
-              <button className="btn btn-success" onClick={this.props.isProduct}>Enter a new item</button>
+              <button
+                className="btn btn-success"
+                onClick={this.props.windowReset}
+              >
+                Scan a code
+              </button>
+              <button
+                className="btn btn-success"
+                onClick={this.props.isProduct}
+              >
+                Enter a new item
+              </button>
             </div>
           </div>
-
-          :
+        ) : (
           <div>
-            <button className="btn btn-success new-product-nav" onClick={this.props.isProduct}>Scan a code</button>
+            <button
+              className="btn btn-success new-product-nav"
+              onClick={this.props.isProduct}
+            >
+              Scan a code
+            </button>
             <h1>Create Product</h1>
             <div className="form-group">
               <form onSubmit={this.handleFormSubmit}>
@@ -196,14 +221,15 @@ class CreateProduct extends Component {
                     onChange={this.handleChange}
                   />
                   {"  "}
-                  2,4-D <br />
+                  2,4-D
+                </p>
+                <p>
                   <input
                     type="checkbox"
                     name="other"
                     checked={this.state.other}
                     onChange={this.handleChange}
                   />
-                  {"  "}
                   Other (list):{" "}
                   <input
                     id="other"
@@ -213,9 +239,9 @@ class CreateProduct extends Component {
                     value={this.state.other}
                     onChange={this.handleChange}
                   />
-                  <br />
-                  <br />
                 </p>
+                <br />
+                <br />
                 <p>Is This Product Certified Organic?</p>
                 <p>
                   <input
@@ -235,7 +261,7 @@ class CreateProduct extends Component {
                   />
                   {"  "}
                   No
-            </p>
+                </p>
                 <p className="form-label">Notes / Comments:</p>
                 <input
                   name="vendor_notes"
@@ -246,12 +272,11 @@ class CreateProduct extends Component {
                   onChange={this.handleChange}
                 />
                 <br />
-                <button className="btn btn-success">Submit</button>{" "}
-                <br></br>
+                <button className="btn btn-success">Submit</button> <br />
               </form>
             </div>
           </div>
-        }
+        )}
       </div>
     );
   }
