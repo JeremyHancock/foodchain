@@ -25,7 +25,7 @@ function VendorSignup (props) {
               className="form-control"
               type="text"
               value={props.location}
-              placeholder="City, State/Province, Country"
+              placeholder="123 Main St, City, ST"
               onChange={props.handleChange}
             />
             <br />

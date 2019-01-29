@@ -24,6 +24,7 @@ class CreateLink extends Component {
   }
 
   postLink() {
+    console.log("Line 27 of CreateLink.js: " + JSON.stringify(this.state));
     const newLink = this.state;
     API.postLink(newLink)
       .then(res => {
@@ -38,6 +39,7 @@ class CreateLink extends Component {
   }
   handleScan = data => {
     if (data) {
+      this.setState({ scannerOn: false });
       const urlChunks = data.split("scan");
       const urlPieces = urlChunks[1].split("lki");
       console.log(urlPieces);
@@ -47,6 +49,7 @@ class CreateLink extends Component {
           scannerOn: false,
           product_id: urlPieces[1],
           vendor_id: this.props.vendor_id,
+          location: this.props.location,
           product_name: res.data.product_name,
           linkCreated: true
         });
@@ -62,7 +65,6 @@ class CreateLink extends Component {
       <div>
         {this.state.scannerOn ? (
           <div>
-            {/* <p className="confirm-info">Scan the code with your camera. Use the viewer box below to center it and try to hold it steady.</p> */}
             <QrReader
               className="scanner"
               delay={300}
@@ -111,14 +113,14 @@ class CreateLink extends Component {
               </p>
             </div>
           ) : (
-            <div>
-              <ul>
-                Your information
+              <div>
+                <ul>
+                  Your information
                 <li>Company name: {this.props.company_name}</li>
-                <li>Location: {this.props.location}</li>
-              </ul>
-            </div>
-          )}
+                  <li>Location: {this.props.location}</li>
+                </ul>
+              </div>
+            )}
         </div>
         <div>
           <div>
@@ -126,7 +128,6 @@ class CreateLink extends Component {
               <div>
                 <CreateCode codedUrl={this.state.codedUrl} />
                 <br />
-                {/* <div className="button-group"> */}
                 <br />
                 <button
                   className="btn btn-success"
@@ -145,8 +146,7 @@ class CreateLink extends Component {
                 <br />
                 <br />
               </div>
-            ) : // </div>
-            null}
+            ) : null}
           </div>
         </div>
       </div>

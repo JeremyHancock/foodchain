@@ -109,6 +109,7 @@ class CreateProduct extends Component {
   }
 
   render() {
+    window.scrollTo(0, 0)
     return (
       <div>
         {/* Render the CreateCode component if codedUrl is truthy (has a value) */}
