@@ -39,7 +39,7 @@
     "react-qr-svg": "^2.1.0",
     "react-router-dom": "^4.3.1",
     "save-svg-as-png": "^1.4.7",
-    "sequelize": "^4.42.0",
+    "sequelize": "^5.15.1",
     "uuid": "^3.3.2",
     "xmlserializer": "^0.6.1"
   }
